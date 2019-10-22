@@ -1,40 +1,40 @@
 library(xtable)
 
-kcde_predictions_ph_1 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-ph_1.rds")
-kcde_predictions_ph_2 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-ph_2.rds")
-kcde_predictions_ph_3 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-ph_3.rds")
-kcde_predictions_ph_4 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-ph_4.rds")
+kcde_predictions_ph_1 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_1.rds")
+kcde_predictions_ph_2 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_2.rds")
+kcde_predictions_ph_3 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_3.rds")
+kcde_predictions_ph_4 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_4.rds")
 kcde_prediction <- rbind(kcde_predictions_ph_1,kcde_predictions_ph_2,kcde_predictions_ph_3,kcde_predictions_ph_4)
 
 
 kcde_time_fit_ph_1 <- 
-  readRDS("./Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
 kcde_time_fit_ph_2 <- 
-  readRDS("./Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
 kcde_time_fit_ph_3 <- 
-  readRDS("./Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
 kcde_time_fit_ph_4 <- 
-  readRDS("./Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
 kcde_time_fit <- sum(kcde_time_fit_ph_1[3],kcde_time_fit_ph_2[3],kcde_time_fit_ph_3[3],kcde_time_fit_ph_4[4])
 
-kcde_predictions_time_ph_1 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_1.rds")
-kcde_predictions_time_ph_2 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_2.rds")
-kcde_predictions_time_ph_3 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_3.rds")
-kcde_predictions_time_ph_4 <- readRDS("./Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_4.rds")
+kcde_predictions_time_ph_1 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_1.rds")
+kcde_predictions_time_ph_2 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_2.rds")
+kcde_predictions_time_ph_3 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_3.rds")
+kcde_predictions_time_ph_4 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_4.rds")
 kcde_time_prediction <- sum(kcde_predictions_time_ph_1[3],kcde_predictions_time_ph_2[3],
                             kcde_predictions_time_ph_3[3],kcde_predictions_time_ph_4[3])
 
 kcde_time <- kcde_time_fit + kcde_time_prediction
 
-ARIMA <- readRDS(file = "./Forecast_ph1-4/ArimaResults.rds")
-SARIMA <- readRDS(file = "./Forecast_ph1-4/SARIMAResults.rds")
+ARIMA <- readRDS(file = "./Results/Forecast_ph1-4/ArimaResults.rds")
+SARIMA <- readRDS(file = "./Results/Forecast_ph1-4/SARIMAResults.rds")
 
-Beta <- readRDS(file = "./Forecast_ph1-4/Beta.rds")
-Beta_lag4 <- readRDS(file = "./Forecast_ph1-4/Beta_lag4.rds")
+Beta <- readRDS(file = "./Results/Forecast_ph1-4/Beta.rds")
+Beta_lag4 <- readRDS(file = "./Results/Forecast_ph1-4/Beta_lag4.rds")
 
 
-ProphetResults <- readRDS(file = "./Forecast_ph1-4/ProphetResults.rds")
-NaiveResults <- readRDS(file = "./Forecast_ph1-4/NaiveResults.rds")
+ProphetResults <- readRDS(file = "./Results/Forecast_ph1-4/ProphetResults.rds")
+NaiveResults <- readRDS(file = "./Results/Forecast_ph1-4/NaiveResults.rds")
 
 Model_name <- c("Beta(1)",
                 "Beta(4)",
@@ -177,7 +177,7 @@ res_ph1_4 <- data.frame(Model = Model_name,
                         ph4__DSS = gsub("-","--",c(DSS_ph4, DSS_ph4_sub)))
 
 
-saveRDS(res_ph1_4, file = "./Forecast_ph1-4/res_ph1_4.rds")
+saveRDS(res_ph1_4, file = "./Results/Forecast_ph1-4/res_ph1_4.rds")
 
 npar <- c(19,20,28,16,3, 50,106)
 
@@ -216,104 +216,104 @@ res_ph1_4_2 <- data.frame(Model = Model_name,
                           Time = c(total_time, rep(NA, length(Model_name))),
                           npar = c(npar, rep(NA, length(Model_name))))
 
-saveRDS(res_ph1_4_2, file = "./Forecast_ph1-4/res_ph1_4_2.rds")
-################# fanplots
-# General setting 
-library("surveillance")
-library("HIDDA.forecasting")
-pal <- colorRampPalette(c("darkgreen", "gray93"))
-obs_data <- data[data$train == FALSE,]
-width <- 14
-height <- 7
-ylimi <- c(0,9)
-
-# KCDE
-kcde_quantile <- readRDS("./Forecast_ph1-4/KCDEresults/quantile_matrix.rds")
-means <- kcde_predictions_ph_1$pt_pred
-y <- obs_data$weighted_ili
-probs <- (1:99)/100
-quantiles <- kcde_quantile
-
-pdf(file = "./Forecast_ph1-4/kcde_fan.pdf",width = width,height = height)
-osaplot(
-  quantiles = quantiles, probs = 1:99/100,
-  observed = y, scores = cbind( logs = -kcde_predictions_ph_1$log_score,
-                                DSS = kcde_predictions_ph_1$DS_score),
-  ylim = ylimi,xlab = "Week",ylab = "wILI", cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
-  fan.args = list(ln = c(0.1,0.9), rlab = NULL),
-  scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
-  legend.args = list(cex = 0.8, legend = c("LS","DSS")),
-  key.args = list(space = 1),
-  las = TRUE
-)
-abline(v = 2.2)
-dev.off()
-
-# ARIMA
-ARIMA_quantile <- ARIMA$quantile_matrix
-means <- ARIMA$result$pt_pred[ARIMA$result$prediction_horizon == 1]
-y <- obs_data$weighted_ili
-probs <- (1:99)/100
-quantiles <- ARIMA_quantile
-
-pdf(file = "./Forecast_ph1-4/ARIMA_fan.pdf",width = 14,height = 7)
-osaplot(
-  quantiles = quantiles, probs = 1:99/100,
-  observed = y, scores = cbind( logs = -ARIMA$result$log_score[ARIMA$result$prediction_horizon ==1],
-                                DSS = ARIMA$result$DS_score[ARIMA$result$prediction_horizon ==1]),
-  ylim = ylimi,xlab = "Week",ylab = "wILI", cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
-  fan.args = list(ln = c(0.1,0.9), rlab = NULL),
-  scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
-  legend.args = list(cex = 0.8, legend = c("LS","DSS")),
-  key.args = list(space = 1),
-  las = TRUE
-)
-
-dev.off()
-
-# Beta
-Beta_quantile <- Beta$quantile_matrix
-means <- Beta$result$pt_pred[Beta$result$prediction_horizon == 1]
-y <- obs_data$weighted_ili
-probs <- (1:99)/100
-quantiles <- Beta_quantile
-
-pdf(file = "./Forecast_ph1-4/Beta_fan.pdf",width = 14,height = 7)
-par(mar =  c(5.1, 5.1, 4.1, 2.1))
-osaplot(
-  quantiles = quantiles, probs = 1:99/100,
-  observed = y, scores = cbind( logs = -Beta$result$log_score[Beta$result$prediction_horizon == 1],
-                                DSS = Beta$result$DS_score[Beta$result$prediction_horizon == 1]),
-  xlab = "Week", ylim = ylimi,ylab = "wILI",cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
-  fan.args = list(ln = c(0.1,0.9), rlab = NULL),
-  scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
-  legend.args = list(cex = 0.8, legend = c("LS","DSS")),
-  key.args = list(space = 1),
-  las = TRUE
-)
-
-dev.off()
-
-# Beta
-Beta_quantile <- Beta_lag4$quantile_matrix
-means <- Beta_lag4$result$pt_pred[Beta_lag4$result$prediction_horizon == 1]
-y <- obs_data$weighted_ili
-probs <- (1:99)/100
-quantiles <- Beta_quantile
-ylimi <- c(0,9)
-pdf(file = "./Forecast_ph1-4/Beta_lag_fan.pdf",width = 14,height = 7)
-par(mar =  c(5.1, 5.1, 4.1, 2.1))
-osaplot(
-  quantiles = quantiles, probs = 1:99/100,
-  observed = y, scores = cbind( logs = -Beta$result$log_score[Beta$result$prediction_horizon == 1],
-                                DSS = Beta$result$DS_score[Beta$result$prediction_horizon == 1]),
-  xlab = "Week", ylim = ylimi,ylab = "wILI",cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
-  fan.args = list(ln = c(0.1,0.9), rlab = NULL),
-  scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
-  legend.args = list(cex = 0.8, legend = c("LS","DSS")),
-  key.args = list(space = 1),
-  las = TRUE
-)
-
-dev.off()
-
+saveRDS(res_ph1_4_2, file = "./Results/Forecast_ph1-4/res_ph1_4_2.rds")
+# ################# fanplots
+# # General setting 
+# library("surveillance")
+# library("HIDDA.forecasting")
+# pal <- colorRampPalette(c("darkgreen", "gray93"))
+# obs_data <- data[data$train == FALSE,]
+# width <- 14
+# height <- 7
+# ylimi <- c(0,9)
+# 
+# # KCDE
+# kcde_quantile <- readRDS("./Forecast_ph1-4/KCDEresults/quantile_matrix.rds")
+# means <- kcde_predictions_ph_1$pt_pred
+# y <- obs_data$weighted_ili
+# probs <- (1:99)/100
+# quantiles <- kcde_quantile
+# 
+# pdf(file = "./Forecast_ph1-4/kcde_fan.pdf",width = width,height = height)
+# osaplot(
+#   quantiles = quantiles, probs = 1:99/100,
+#   observed = y, scores = cbind( logs = -kcde_predictions_ph_1$log_score,
+#                                 DSS = kcde_predictions_ph_1$DS_score),
+#   ylim = ylimi,xlab = "Week",ylab = "wILI", cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
+#   fan.args = list(ln = c(0.1,0.9), rlab = NULL),
+#   scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
+#   legend.args = list(cex = 0.8, legend = c("LS","DSS")),
+#   key.args = list(space = 1),
+#   las = TRUE
+# )
+# abline(v = 2.2)
+# dev.off()
+# 
+# # ARIMA
+# ARIMA_quantile <- ARIMA$quantile_matrix
+# means <- ARIMA$result$pt_pred[ARIMA$result$prediction_horizon == 1]
+# y <- obs_data$weighted_ili
+# probs <- (1:99)/100
+# quantiles <- ARIMA_quantile
+# 
+# pdf(file = "./Forecast_ph1-4/ARIMA_fan.pdf",width = 14,height = 7)
+# osaplot(
+#   quantiles = quantiles, probs = 1:99/100,
+#   observed = y, scores = cbind( logs = -ARIMA$result$log_score[ARIMA$result$prediction_horizon ==1],
+#                                 DSS = ARIMA$result$DS_score[ARIMA$result$prediction_horizon ==1]),
+#   ylim = ylimi,xlab = "Week",ylab = "wILI", cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
+#   fan.args = list(ln = c(0.1,0.9), rlab = NULL),
+#   scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
+#   legend.args = list(cex = 0.8, legend = c("LS","DSS")),
+#   key.args = list(space = 1),
+#   las = TRUE
+# )
+# 
+# dev.off()
+# 
+# # Beta
+# Beta_quantile <- Beta$quantile_matrix
+# means <- Beta$result$pt_pred[Beta$result$prediction_horizon == 1]
+# y <- obs_data$weighted_ili
+# probs <- (1:99)/100
+# quantiles <- Beta_quantile
+# 
+# pdf(file = "./Forecast_ph1-4/Beta_fan.pdf",width = 14,height = 7)
+# par(mar =  c(5.1, 5.1, 4.1, 2.1))
+# osaplot(
+#   quantiles = quantiles, probs = 1:99/100,
+#   observed = y, scores = cbind( logs = -Beta$result$log_score[Beta$result$prediction_horizon == 1],
+#                                 DSS = Beta$result$DS_score[Beta$result$prediction_horizon == 1]),
+#   xlab = "Week", ylim = ylimi,ylab = "wILI",cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
+#   fan.args = list(ln = c(0.1,0.9), rlab = NULL),
+#   scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
+#   legend.args = list(cex = 0.8, legend = c("LS","DSS")),
+#   key.args = list(space = 1),
+#   las = TRUE
+# )
+# 
+# dev.off()
+# 
+# # Beta
+# Beta_quantile <- Beta_lag4$quantile_matrix
+# means <- Beta_lag4$result$pt_pred[Beta_lag4$result$prediction_horizon == 1]
+# y <- obs_data$weighted_ili
+# probs <- (1:99)/100
+# quantiles <- Beta_quantile
+# ylimi <- c(0,9)
+# pdf(file = "./Forecast_ph1-4/Beta_lag_fan.pdf",width = 14,height = 7)
+# par(mar =  c(5.1, 5.1, 4.1, 2.1))
+# osaplot(
+#   quantiles = quantiles, probs = 1:99/100,
+#   observed = y, scores = cbind( logs = -Beta$result$log_score[Beta$result$prediction_horizon == 1],
+#                                 DSS = Beta$result$DS_score[Beta$result$prediction_horizon == 1]),
+#   xlab = "Week", ylim = ylimi,ylab = "wILI",cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2,
+#   fan.args = list(ln = c(0.1,0.9), rlab = NULL),
+#   scores.args = list(ylim = c(-6, 3), cex.lab=2,  cex.main=2, cex.sub=2, cex.axis=2, las = TRUE),
+#   legend.args = list(cex = 0.8, legend = c("LS","DSS")),
+#   key.args = list(space = 1),
+#   las = TRUE
+# )
+# 
+# dev.off()
+# 

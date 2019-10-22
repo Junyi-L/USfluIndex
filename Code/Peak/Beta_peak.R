@@ -7,12 +7,12 @@ library(reshape)
 library(mvtnorm)
 library(doMC)
 
-source(file = "./Beta_forecast_p.r")
-load(file = "./data_holidays.RData")
+source(file = "./Code/Beta_forecast_p.r")
+load(file = "./Data/data_holidays.RData")
 
 data <- data.table(data)
 n_sims <- 10000
-prediction_save_path <- file.path("./Peak/")
+prediction_save_path <- file.path("./Results/Peak/")
 
 lags <- 1
 for (i in 1 : lags){

@@ -7,7 +7,7 @@ library(mvtnorm)
 library(doMC)
 set.seed(1)
 
-load(file = "./data_holidays.RData")
+load(file = "./Data/data_holidays.RData")
 
 data <- data.table(data)
 holidaytab <- data[(x + y) > 0, ]
@@ -29,7 +29,7 @@ logit_prediction_target <- logit_FUN(data[, prediction_target_var])
 time_target <- data[, "time"]
 
 n_sims <- 10000
-prediction_save_path <- file.path("./Peak/")
+prediction_save_path <- file.path("./Results/Peak/")
 
 prophetfit_control <- prophet(
   yearly.seasonality = TRUE, weekly.seasonality = FALSE, daily.seasonality = FALSE,

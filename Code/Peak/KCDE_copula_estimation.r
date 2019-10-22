@@ -261,8 +261,8 @@ setMethod("dCopula", signature("numeric", "normalCopula"),dnormalCopula)
 data_set <- "ili_national"
 
 
-save_path <- file.path("./Peak/copula-estimation-results")
-estimation_results_path <- file.path("./Forecast_ph1-4/KCDEresults")
+save_path <- file.path("./Results/Peak/copula-estimation-results")
+estimation_results_path <- file.path("./Results/Forecast_ph1-4/KCDEresults")
 
 
 all_max_lags <- as.character(c(1L)) # use incidence at times t^* and t^* - 1 to predict incidence after t^*
@@ -300,7 +300,7 @@ for(sim_family in all_sim_families) {
                                                   ".rds")
                   
                   if(identical(data_set, "ili_national")) {
-                    load(file = "./data_holidays.RData")
+                    load(file = "./Data/data_holidays.RData")
                     data <- data[data$train == TRUE, ]
  
                     prediction_target_var <- "weighted_ili"

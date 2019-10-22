@@ -83,9 +83,9 @@ junk <- foreach(case_row_ind = seq_len(nrow(case_definitions)),
                   n_sims <- 10000
                   
                   
-                  copula_save_path <- file.path("./Peak/copula-estimation-results")
-                  estimation_save_path <- file.path("./Forecast_ph1-4/KCDEresults")
-                  prediction_save_path <- file.path("./Peak")
+                  copula_save_path <- file.path("./Results/Peak/copula-estimation-results")
+                  estimation_save_path <- file.path("./Results/Forecast_ph1-4/KCDEresults")
+                  prediction_save_path <- file.path("./Results/Peak")
                   
                   case_descriptor <- paste0(
                     data_set,
@@ -192,7 +192,7 @@ junk <- foreach(case_row_ind = seq_len(nrow(case_definitions)),
                   
                   
                   
-                  load(file = "./data_holidays.RData")
+                  load(file = "./Data/data_holidays.RData")
                   
                   orig_prediction_target_var <- "weighted_ili"
                   prediction_target_var <- "weighted_ili"

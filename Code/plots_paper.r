@@ -68,6 +68,9 @@ for(i in 1 : length(seasons)) {
   observed_peak_week[i] <- data$season_week[observed_peak_week_ind]
 }
 peak_points <- data.frame(time = observed_peak_week, value = observed_peak_height, season = seasons)
+test_label <- data.frame(week = peak_points$time[15 : 18],
+                         value = peak_points$value[15 : 18] + 0.15,
+                         label = c("14/15", "15/16","16/17","17/18"))
 
 library(ggplot2)
 
@@ -81,56 +84,57 @@ ggplot() +
   ylab("wILI (%)") +
   theme_bw() +
   theme(legend.position = "none") + 
-  geom_point(data = peak_points, aes(x = time, y = value), shape=18, size=1)
+  geom_point(data = peak_points, aes(x = time, y = value), shape=18, size=1) + 
+  geom_text(data = test_label, aes(x = week, y = value, label = label), size = 4) 
 
 dev.off()
 # short-term scatter plots-------------------------------------------------------------------------
-source(file = "./Code/summary_ph1-4.r")
-
-Beta_lag_res <- Beta_lag4$result
-Beta_res <- Beta$result
-KCDE_res <- kcde_prediction
-arima_res <- ARIMA$result
-
-shade_l <- as.Date(c("2014-09-28", "2015-10-04", "2016-10-02", "2017-10-01"))
-shade_r <- as.Date( c("2015-05-17", "2016-05-15", "2017-05-14", "2018-05-13"))
-
-library(ggplot2)
-library(colorspace)
-col_list <- qualitative_hcl(4, palette = "Dark3")
-
-l <- length(Beta_lag_res$data_set.week)
-# in result table log score is loglik, here take difference to make that positive value indicate Beta(4) is better.
-LS_diff_T <- data.frame(diff = c( - Beta_res$log_score - (- Beta_lag_res$log_score) ,
-                                  - KCDE_res$log_score - (- Beta_lag_res$log_score),
-                                  - arima_res$log_score - (- Beta_lag_res$log_score)),
-                        week = Beta_lag_res$data_set.week,
-                        time = Beta_lag_res$data_set.time,
-                        ph = Beta_lag_res$prediction_horizon,
-                        season = Beta_lag_res$data_set.season,
-                        model = c(rep("Beta(1)",l), rep("KCDE",l), rep("ARIMA",l)))
-
-LS_diff_T$phT <- paste("ph", LS_diff_T$ph)
-LS_diff_T$ph <- as.factor(LS_diff_T$ph)
-
-pdf("./Results/plots/STline.pdf", height = 6, width = 8)
-p <- ggplot(LS_diff_T, aes(x=time, y=diff, color = ph, linetype = ph)) + 
-  geom_line() +
-  scale_color_manual(values = col_list) +
-  scale_linetype_manual(values=c("solid", "dashed","twodash", "longdash")) +
-  xlab("Time") +
-  ylab("Log score difference") +
-  annotate("rect", xmin = shade_l[1], xmax = shade_r[1], ymin = -Inf, ymax = Inf,
-           alpha = .2) + 
-  annotate("rect", xmin = shade_l[2], xmax = shade_r[2], ymin = -Inf, ymax = Inf,
-           alpha = .2) + 
-  annotate("rect", xmin = shade_l[3], xmax = shade_r[3], ymin = -Inf, ymax = Inf,
-           alpha = .2) + 
-  annotate("rect", xmin = shade_l[4], xmax = shade_r[4], ymin = -Inf, ymax = Inf,
-           alpha = .2) +
-  theme_bw()
-p + facet_wrap( ~  model, scales="free_x", shrink = TRUE, ncol = 1)
-dev.off()
+# source(file = "./Code/summary_ph1-4.r")
+# 
+# Beta_lag_res <- Beta_lag4$result
+# Beta_res <- Beta$result
+# KCDE_res <- kcde_prediction
+# arima_res <- ARIMA$result
+# 
+# shade_l <- as.Date(c("2014-09-28", "2015-10-04", "2016-10-02", "2017-10-01"))
+# shade_r <- as.Date( c("2015-05-17", "2016-05-15", "2017-05-14", "2018-05-13"))
+# 
+# library(ggplot2)
+# library(colorspace)
+# col_list <- qualitative_hcl(4, palette = "Dark3")
+# 
+# l <- length(Beta_lag_res$data_set.week)
+# # in result table log score is loglik, here take difference to make that positive value indicate Beta(4) is better.
+# LS_diff_T <- data.frame(diff = c( - Beta_res$log_score - (- Beta_lag_res$log_score) ,
+#                                   - KCDE_res$log_score - (- Beta_lag_res$log_score),
+#                                   - arima_res$log_score - (- Beta_lag_res$log_score)),
+#                         week = Beta_lag_res$data_set.week,
+#                         time = Beta_lag_res$data_set.time,
+#                         ph = Beta_lag_res$prediction_horizon,
+#                         season = Beta_lag_res$data_set.season,
+#                         model = c(rep("Beta(1)",l), rep("KCDE",l), rep("ARIMA",l)))
+# 
+# LS_diff_T$phT <- paste("ph", LS_diff_T$ph)
+# LS_diff_T$ph <- as.factor(LS_diff_T$ph)
+# 
+# pdf("./Results/plots/STline.pdf", height = 6, width = 8)
+# p <- ggplot(LS_diff_T, aes(x=time, y=diff, color = ph, linetype = ph)) + 
+#   geom_line() +
+#   scale_color_manual(values = col_list) +
+#   scale_linetype_manual(values=c("solid", "dashed","twodash", "longdash")) +
+#   xlab("Time") +
+#   ylab("Log score difference") +
+#   annotate("rect", xmin = shade_l[1], xmax = shade_r[1], ymin = -Inf, ymax = Inf,
+#            alpha = .2) + 
+#   annotate("rect", xmin = shade_l[2], xmax = shade_r[2], ymin = -Inf, ymax = Inf,
+#            alpha = .2) + 
+#   annotate("rect", xmin = shade_l[3], xmax = shade_r[3], ymin = -Inf, ymax = Inf,
+#            alpha = .2) + 
+#   annotate("rect", xmin = shade_l[4], xmax = shade_r[4], ymin = -Inf, ymax = Inf,
+#            alpha = .2) +
+#   theme_bw()
+# p + facet_wrap( ~  model, scales="free_x", shrink = TRUE, ncol = 1)
+# dev.off()
 # short term box plot --------------------------------------------------------------------------
 library(ggplot2)
 library(colorspace)

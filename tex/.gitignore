@@ -1,0 +1,11 @@
+/cdcflu*.tex
+/cdcflu*.pdf
+/figure/
+/*.aux
+/*.bbl
+/*.blg
+/*.log
+/*.out
+/*.synctex.gz
+/*-concordance.tex
+/*.bib.bak

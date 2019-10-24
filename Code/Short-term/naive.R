@@ -1,4 +1,5 @@
 load(file = "./Data/data_holidays.RData")
+library(logitnorm)
 logit_FUN <- function(x){
   qlogis(x/100)
 }

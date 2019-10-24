@@ -1,7 +1,7 @@
 library(prophet)
 library(data.table)
 library(lubridate)
-
+library(logitnorm)
 set.seed(1)
 
 load(file = "./Data/data_holidays.RData")

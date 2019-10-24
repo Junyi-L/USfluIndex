@@ -1,7 +1,7 @@
 library(lubridate)
 library(forecast)
 library(data.table)
-
+library(logitnorm)
 
 load(file = "./Data/data_holidays.RData")
 data <- data.table(data)

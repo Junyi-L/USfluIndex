@@ -1,40 +1,41 @@
 library(xtable)
+library(here)
 
-kcde_predictions_ph_1 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_1.rds")
-kcde_predictions_ph_2 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_2.rds")
-kcde_predictions_ph_3 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_3.rds")
-kcde_predictions_ph_4 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_4.rds")
+kcde_predictions_ph_1 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_1.rds"))
+kcde_predictions_ph_2 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_2.rds"))
+kcde_predictions_ph_3 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_3.rds"))
+kcde_predictions_ph_4 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_4.rds"))
 kcde_prediction <- rbind(kcde_predictions_ph_1,kcde_predictions_ph_2,kcde_predictions_ph_3,kcde_predictions_ph_4)
 
 
 kcde_time_fit_ph_1 <- 
-  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
 kcde_time_fit_ph_2 <- 
-  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
 kcde_time_fit_ph_3 <- 
-  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
 kcde_time_fit_ph_4 <- 
-  readRDS("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds")
+  readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
 kcde_time_fit <- sum(kcde_time_fit_ph_1[3],kcde_time_fit_ph_2[3],kcde_time_fit_ph_3[3],kcde_time_fit_ph_4[4])
 
-kcde_predictions_time_ph_1 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_1.rds")
-kcde_predictions_time_ph_2 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_2.rds")
-kcde_predictions_time_ph_3 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_3.rds")
-kcde_predictions_time_ph_4 <- readRDS("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_4.rds")
+kcde_predictions_time_ph_1 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_1.rds"))
+kcde_predictions_time_ph_2 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_2.rds"))
+kcde_predictions_time_ph_3 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_3.rds"))
+kcde_predictions_time_ph_4 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-time-ph_4.rds"))
 kcde_time_prediction <- sum(kcde_predictions_time_ph_1[3],kcde_predictions_time_ph_2[3],
                             kcde_predictions_time_ph_3[3],kcde_predictions_time_ph_4[3])
 
 kcde_time <- kcde_time_fit + kcde_time_prediction
 
-ARIMA <- readRDS(file = "./Results/Forecast_ph1-4/ArimaResults.rds")
-SARIMA <- readRDS(file = "./Results/Forecast_ph1-4/SARIMAResults.rds")
+ARIMA <- readRDS(file = here("./Results/Forecast_ph1-4/ArimaResults.rds"))
+SARIMA <- readRDS(file = here("./Results/Forecast_ph1-4/SARIMAResults.rds"))
 
-Beta <- readRDS(file = "./Results/Forecast_ph1-4/Beta.rds")
-Beta_lag4 <- readRDS(file = "./Results/Forecast_ph1-4/Beta_lag4.rds")
+Beta <- readRDS(file = here("./Results/Forecast_ph1-4/Beta.rds"))
+Beta_lag4 <- readRDS(file = here("./Results/Forecast_ph1-4/Beta_lag4.rds"))
 
 
-ProphetResults <- readRDS(file = "./Results/Forecast_ph1-4/ProphetResults.rds")
-NaiveResults <- readRDS(file = "./Results/Forecast_ph1-4/NaiveResults.rds")
+ProphetResults <- readRDS(file = here("./Results/Forecast_ph1-4/ProphetResults.rds"))
+NaiveResults <- readRDS(file = here("./Results/Forecast_ph1-4/NaiveResults.rds"))
 
 Model_name <- c("Beta(1)",
                 "Beta(4)",
@@ -177,7 +178,7 @@ res_ph1_4 <- data.frame(Model = Model_name,
                         ph4__DSS = gsub("-","--",c(DSS_ph4, DSS_ph4_sub)))
 
 
-saveRDS(res_ph1_4, file = "./Results/Forecast_ph1-4/res_ph1_4.rds")
+saveRDS(res_ph1_4, file = here("./Results/Forecast_ph1-4/res_ph1_4.rds"))
 
 npar <- c(19,20,28,16,3, 50,106)
 
@@ -216,7 +217,7 @@ res_ph1_4_2 <- data.frame(Model = Model_name,
                           Time = c(total_time, rep(NA, length(Model_name))),
                           npar = c(npar, rep(NA, length(Model_name))))
 
-saveRDS(res_ph1_4_2, file = "./Results/Forecast_ph1-4/res_ph1_4_2.rds")
+saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # ################# fanplots
 # # General setting 
 # library("surveillance")

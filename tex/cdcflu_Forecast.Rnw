@@ -24,7 +24,7 @@
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \usepackage{bm}
-\graphicspath{{../plots/}}
+\graphicspath{{../Results/plots/}}
 %=================================================================
 % Full title of the paper (Capitalized)
 \Title{Forecasting Flu Activity in the United States: Benchmarking an Endemic-Epidemic Beta Model}
@@ -103,9 +103,9 @@ knitr::opts_chunk$set(echo = FALSE, tidy = FALSE, results = 'markup',
                       fig.align = "center", fig.scap = NA, out.width = NULL,
                       cache = FALSE, error = FALSE, warning = FALSE, message = FALSE)
 
-code_path <- "../"
-short_path <- "../Forecast_ph1-4/"
-peak_path <- "../Peak/"
+code_path <- "../Code/"
+short_path <- "../Results/Forecast_ph1-4/"
+peak_path <- "../Results/Peak/"
 
 library(xtable)
 two_functions = function(x){

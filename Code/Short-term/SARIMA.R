@@ -2,7 +2,9 @@
 library(lubridate)
 library(forecast)
 library(logitnorm)
-load(file = "./Data/data_holidays.RData")
+library(here)
+
+load(file = here("./Data/data_holidays.RData"))
 
 logit_FUN <- function(x){
   qlogis(x/100)
@@ -28,7 +30,7 @@ sarima_fit <-
   auto.arima(logit_prediction_target_train,trace = TRUE, allowdrift = TRUE)
 
 # Save fit result for peak week prediction.
-saveRDS(sarima_fit,file = "./Results/Peak/sarima_fit.rds")
+saveRDS(sarima_fit,file = here("./Results/Peak/sarima_fit.rds"))
 model_order <- sarima_fit$arma[c(1, 6, 2, 3, 7, 4, 5)]
 
 # check whether Arima return same fitting with auto.arima
@@ -196,6 +198,6 @@ SARIMA_Result <- list(count_error = count_error,
                       run_time = run_time,
                       quantile_matrix= quantile_matrix)
 
-saveRDS(SARIMA_Result,file = "./Results/Forecast_ph1-4/SARIMAResults.rds")
+saveRDS(SARIMA_Result,file = here("./Results/Forecast_ph1-4/SARIMAResults.rds"))
 
 ####################################################################

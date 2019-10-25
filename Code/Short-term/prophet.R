@@ -2,9 +2,10 @@ library(prophet)
 library(data.table)
 library(lubridate)
 library(logitnorm)
+library(here)
 set.seed(1)
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 logit_FUN <- function(x){
   qlogis(x/100)
 }
@@ -160,4 +161,4 @@ ProphetResults <- list(result = data_set_results,
                        run_time = run_time, 
                        last_fit = prophetfit)
 
-saveRDS(ProphetResults, file = "./Results/Forecast_ph1-4/ProphetResults.rds")
+saveRDS(ProphetResults, file = here("./Results/Forecast_ph1-4/ProphetResults.rds"))

@@ -1,7 +1,7 @@
 library(cdcfluview)
 library(lubridate)
 library(dplyr)
-
+library(here)
 
 MMWRweekday <- function(date) {
   factor(strftime(as.Date(date), "%w"), # Sunday is 0
@@ -53,6 +53,6 @@ data <- data[data$year <= 2018,]
 data <- data.frame(data)
 
 
-save(data,file = "./Data/usflu.RData")
+save(data,file = here("./Data/usflu.RData"))
 
 

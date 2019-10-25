@@ -1,7 +1,9 @@
 # wili for all years-------------------------------------------
-load(file =  "./Data/usflu.RData")
 library(ggplot2)
 library(data.table)
+library(here)
+load(file =  here("./Data/usflu.RData"))
+
 data$season <- ifelse(
   data$week <= 30,
   paste0(data$year - 1, "/", data$year),
@@ -29,7 +31,7 @@ data <- data.frame(data)
 shade_l <- as.Date(c("1999-05-21","2000-05-20","2001-05-21","2002-05-21"))
 shade_r <- as.Date(c("1999-09-24","2000-09-23","2001-09-24","2002-09-24"))
 
-pdf(file = "./Results/plots/wILI.pdf", width = 8, height = 2)
+pdf(file = here("./Results/plots/wILI.pdf"), width = 8, height = 2)
 data$group <- as.factor(data$group)
 ggplot(data = data, aes(x=time, y=weighted_ili, group = group)) +
   geom_line(aes(color = group)) +
@@ -50,7 +52,7 @@ ggplot(data = data, aes(x=time, y=weighted_ili, group = group)) +
 
 dev.off()
 # wili plots for each season --------------------------------------------------------------------
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 data <- data[is.na(data$weighted_ili) == FALSE & data$season_week %in% 10 : 42, ]
 
 seasons <- unique(data$season)
@@ -74,7 +76,7 @@ test_label <- data.frame(week = peak_points$time[15 : 18],
 
 library(ggplot2)
 
-pdf(file = "./Results/plots/wILIholiday.pdf", width = 8, height = 4)
+pdf(file = here("./Results/plots/wILIholiday.pdf"), width = 8, height = 4)
 ggplot() +
   geom_vline(xintercept = 22, linetype="dashed", color = "gray", size = 1) +
   geom_line(data = data, aes(x=season_week, y=weighted_ili, group = season, color = train, linetype=train)) +
@@ -88,58 +90,12 @@ ggplot() +
   geom_text(data = test_label, aes(x = week, y = value, label = label), size = 4) 
 
 dev.off()
-# short-term scatter plots-------------------------------------------------------------------------
-# source(file = "./Code/summary_ph1-4.r")
-# 
-# Beta_lag_res <- Beta_lag4$result
-# Beta_res <- Beta$result
-# KCDE_res <- kcde_prediction
-# arima_res <- ARIMA$result
-# 
-# shade_l <- as.Date(c("2014-09-28", "2015-10-04", "2016-10-02", "2017-10-01"))
-# shade_r <- as.Date( c("2015-05-17", "2016-05-15", "2017-05-14", "2018-05-13"))
-# 
-# library(ggplot2)
-# library(colorspace)
-# col_list <- qualitative_hcl(4, palette = "Dark3")
-# 
-# l <- length(Beta_lag_res$data_set.week)
-# # in result table log score is loglik, here take difference to make that positive value indicate Beta(4) is better.
-# LS_diff_T <- data.frame(diff = c( - Beta_res$log_score - (- Beta_lag_res$log_score) ,
-#                                   - KCDE_res$log_score - (- Beta_lag_res$log_score),
-#                                   - arima_res$log_score - (- Beta_lag_res$log_score)),
-#                         week = Beta_lag_res$data_set.week,
-#                         time = Beta_lag_res$data_set.time,
-#                         ph = Beta_lag_res$prediction_horizon,
-#                         season = Beta_lag_res$data_set.season,
-#                         model = c(rep("Beta(1)",l), rep("KCDE",l), rep("ARIMA",l)))
-# 
-# LS_diff_T$phT <- paste("ph", LS_diff_T$ph)
-# LS_diff_T$ph <- as.factor(LS_diff_T$ph)
-# 
-# pdf("./Results/plots/STline.pdf", height = 6, width = 8)
-# p <- ggplot(LS_diff_T, aes(x=time, y=diff, color = ph, linetype = ph)) + 
-#   geom_line() +
-#   scale_color_manual(values = col_list) +
-#   scale_linetype_manual(values=c("solid", "dashed","twodash", "longdash")) +
-#   xlab("Time") +
-#   ylab("Log score difference") +
-#   annotate("rect", xmin = shade_l[1], xmax = shade_r[1], ymin = -Inf, ymax = Inf,
-#            alpha = .2) + 
-#   annotate("rect", xmin = shade_l[2], xmax = shade_r[2], ymin = -Inf, ymax = Inf,
-#            alpha = .2) + 
-#   annotate("rect", xmin = shade_l[3], xmax = shade_r[3], ymin = -Inf, ymax = Inf,
-#            alpha = .2) + 
-#   annotate("rect", xmin = shade_l[4], xmax = shade_r[4], ymin = -Inf, ymax = Inf,
-#            alpha = .2) +
-#   theme_bw()
-# p + facet_wrap( ~  model, scales="free_x", shrink = TRUE, ncol = 1)
-# dev.off()
+
 # short term box plot --------------------------------------------------------------------------
 library(ggplot2)
 library(colorspace)
 col_list <- sequential_hcl(4, palette = "Sunset")
-pdf(file = "./Results/plots/STbox.pdf", height = 6, width = 8)
+pdf(file = here("./Results/plots/STbox.pdf"), height = 6, width = 8)
 p <- ggplot(data = LS_diff_T[ LS_diff_T$week %in% c(40:53, 1:20),], aes(x=model, y=diff, fill = season)) + 
   geom_hline(aes(yintercept = 0), linetype = "dashed") +
   geom_boxplot(aes(fill = season), outlier.shape = NA) +
@@ -154,13 +110,13 @@ p + facet_wrap( ~  phT, scales="free_x", shrink = TRUE) + xlab("Model and predic
 dev.off()
 
 # peak box plot before peak --------------------------------------------------------------------------------
-peak_arima <- readRDS(file = "./Results/Peak/peak-week-arima.rds")
-peak_sarima <- readRDS(file = "./Results/Peak/peak-week-sarima.rds")
-peak_Beta <- readRDS(file = "./Results/Peak/peak-week-beta3-4.rds")
-peak_Beta_lags <- readRDS(file = "./Results/Peak/peak-week-beta-lags.rds")
-peak_prophet <- readRDS(file = "./Results/Peak/peak-week-prophet.rds")
-peak_naive <- readRDS(file = "./Results/Peak/peak-week-naive.rds")
-peak_KCDE <- readRDS(file = "./Results/Peak/peak-week-KCDE.rds")
+peak_arima <- readRDS(file = here("./Results/Peak/peak-week-arima.rds"))
+peak_sarima <- readRDS(file = here("./Results/Peak/peak-week-sarima.rds"))
+peak_Beta <- readRDS(file = here("./Results/Peak/peak-week-beta3-4.rds"))
+peak_Beta_lags <- readRDS(file = here("./Results/Peak/peak-week-beta-lags.rds"))
+peak_prophet <- readRDS(file = here("./Results/Peak/peak-week-prophet.rds"))
+peak_naive <- readRDS(file = here("./Results/Peak/peak-week-naive.rds"))
+peak_KCDE <- readRDS(file = here("./Results/Peak/peak-week-KCDE.rds"))
 
 result_table <- list(peak_Beta,
                      peak_Beta_lags,
@@ -188,7 +144,7 @@ for (i in 1 : length(result_table)){
                                              "peak_height_log_score")]
 }
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 
 analysis_seasons <- c("2014/2015","2015/2016", "2016/2017", "2017/2018")
 observed_peak_week <- numeric(length(analysis_seasons))
@@ -236,7 +192,7 @@ PT_table <- data.frame(season = season_list,
 
 library(ggplot2)
 library(gridExtra)
-pdf(file = "./Results/plots/Peakbox.pdf", height = 6, width = 8)
+pdf(file = here("./Results/plots/Peakbox.pdf"), height = 6, width = 8)
 
 p <- ggplot(data = PT_table, aes(x = Model, y = LS_diff)) + 
   geom_hline(aes(yintercept = 0), linetype = "dashed") +

@@ -1,13 +1,14 @@
+library(here)
 #------------------------------------------------------------
-peak_arima <- readRDS(file = "./Results/Peak/peak-week-arima.rds")
-peak_sarima <- readRDS(file = "./Results/Peak/peak-week-sarima.rds")
-peak_Beta <- readRDS(file = "./Results/Peak/peak-week-beta3-4.rds")
-peak_Beta_lags <- readRDS(file = "./Results/Peak/peak-week-beta-lags.rds")
+peak_arima <- readRDS(file = here("./Results/Peak/peak-week-arima.rds"))
+peak_sarima <- readRDS(file = here("./Results/Peak/peak-week-sarima.rds"))
+peak_Beta <- readRDS(file = here("./Results/Peak/peak-week-beta3-4.rds"))
+peak_Beta_lags <- readRDS(file = here("./Results/Peak/peak-week-beta-lags.rds"))
 
 # 
-peak_prophet <- readRDS(file = "./Results/Peak/peak-week-prophet.rds")
-peak_naive <- readRDS(file = "./Results/Peak/peak-week-naive.rds")
-peak_KCDE <- readRDS(file = "./Results/Peak/peak-week-KCDE.rds")
+peak_prophet <- readRDS(file = here("./Results/Peak/peak-week-prophet.rds"))
+peak_naive <- readRDS(file = here("./Results/Peak/peak-week-naive.rds"))
+peak_KCDE <- readRDS(file = here("./Results/Peak/peak-week-KCDE.rds"))
 
 
 result_table <- list(peak_Beta,
@@ -52,7 +53,7 @@ analysis_seasons <- c("2014/2015","2015/2016", "2016/2017", "2017/2018")
 observed_peak_week <- numeric(length(analysis_seasons))
 observed_peak_height <- numeric(length(analysis_seasons))
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 
 
 first_analysis_time_season_week <- 10 # == week 40 of year
@@ -152,5 +153,5 @@ colnames(res_peak)[4] <- "Peak intensity__maxLS"
 
 colnames(res_peak)[5] <- "Peak timing__LS"
 colnames(res_peak)[6] <- "Peak timing__maxLS"
-saveRDS(res_peak, file = "./Results/Peak/res_peak.rds")
+saveRDS(res_peak, file = here("./Results/Peak/res_peak.rds"))
 

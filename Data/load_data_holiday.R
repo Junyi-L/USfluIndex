@@ -1,5 +1,5 @@
-load(file = "./Data/usflu.RData")
-
+load(file = here("./Data/usflu.RData"))
+library(here)
 library(data.table)
 data$season <- ifelse(
   data$week <= 30,
@@ -98,4 +98,4 @@ logit_FUN <- function(x){
 data[, weighted_ili_org := weighted_ili/100]
 # data is data.frame
 data <- data.frame(data)
-save(data, file = "./Data/data_holidays.RData")
+save(data, file = here("./Data/data_holidays.RData"))

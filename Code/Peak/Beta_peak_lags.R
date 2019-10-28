@@ -6,9 +6,9 @@ library(dplyr)
 library(reshape)
 library(mvtnorm)
 library(doMC)
-
-source(file = "./Code/Beta_forecast_p.r")
-load(file = "./Data/data_holidays.RData")
+library(here)
+source(file = here("./Code/Beta_forecast_p.R"))
+load(file = here("./Data/data_holidays.RData"))
 
 data <- data.table(data)
 lags <- 4
@@ -17,7 +17,7 @@ for (i in 1 : lags){
 }
 
 n_sims <- 10000
-prediction_save_path <- file.path("./Results/Peak/")
+prediction_save_path <- file.path(here("./Results/Peak/"))
 
 
 analysis_seasons <- c("2014/2015","2015/2016", "2016/2017", "2017/2018")

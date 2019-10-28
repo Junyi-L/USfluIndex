@@ -5,12 +5,13 @@ library(reshape)
 library(forecast)
 library(mvtnorm)
 library(doMC)
+library(here)
 
 set.seed(1)
 
 n_sims <- 10000
 
-prediction_save_path <- file.path("./Results/Peak/")
+prediction_save_path <- file.path(here("./Results/Peak/"))
 logit_FUN <- function(x){
   qlogis(x/100)
 }
@@ -33,7 +34,7 @@ sample_predictive_trajectories_arima <- function (object, h = ifelse(object$arma
   return(sim)
 }
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 
 data <- data.table(data)
 sarima_cov_total <- data[, .(sin_InPeriod1, 
@@ -61,7 +62,7 @@ ili_incidence_bins <- data.frame(
   lower = seq(from = 0, to = 13, by = 0.5),
   upper = c(seq(from = 0.5, to = 13, by = 0.5), Inf))
 
-arima_fit <- readRDS(file = "./Results/Peak/arima.rds")
+arima_fit <- readRDS(file = here("./Results/Peak/arima.rds"))
 model_order <- arima_fit$arma[c(1, 6, 2, 3, 7, 4, 5)]
 
 results <- cbind(

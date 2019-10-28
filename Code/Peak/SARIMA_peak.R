@@ -5,12 +5,13 @@ library(reshape)
 library(forecast)
 library(mvtnorm)
 library(doMC)
+library(here)
 
 set.seed(1)
 
 n_sims <- 10000
 
-prediction_save_path <- file.path("./Results/Peak/")
+prediction_save_path <- file.path(here("./Results/Peak/"))
 
 logit_FUN <- function(x){
   qlogis(x/100)
@@ -35,7 +36,7 @@ sample_predictive_trajectories_arima <- function (object, h = ifelse(object$arma
 }
 
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 
 analysis_seasons <- c("2014/2015", "2015/2016", "2016/2017", "2017/2018")
 first_analysis_time_season_week <- 10 # == week 40 of year
@@ -53,7 +54,7 @@ seasonally_prediction_target <-
   ts(logit_prediction_target,
      frequency = 52)
 
-sarima_fit <- readRDS(file = "./Results/Peak/sarima_fit.rds")
+sarima_fit <- readRDS(file = here("./Results/Peak/sarima_fit.rds"))
 
 model <- sarima_fit$arma[c(1, 6, 2, 3, 7, 4, 5)]
 

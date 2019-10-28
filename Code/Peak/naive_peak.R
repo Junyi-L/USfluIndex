@@ -5,6 +5,7 @@ library(dplyr)
 library(reshape)
 library(mvtnorm)
 library(doMC)
+library(here)
 set.seed(1)
 
 logit_FUN <- function(x){
@@ -15,12 +16,12 @@ logistic_FUN <- function(x){
   plogis(x) * 100
 }
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 prediction_target_var <- "weighted_ili"
 prediction_target <- data[, prediction_target_var]
 week_target <- data[, "week"]
 n_sims <- 10000
-prediction_save_path <- file.path("./Results/Peak/")
+prediction_save_path <- file.path(here("./Results/Peak/"))
 
 analysis_seasons <- c("2014/2015","2015/2016", "2016/2017", "2017/2018")
 first_analysis_time_season_week <- 10 # == week 40 of year

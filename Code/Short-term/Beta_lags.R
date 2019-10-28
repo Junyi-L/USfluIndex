@@ -1,9 +1,10 @@
 library(betareg)
 library(data.table)
 library(lubridate)
+library(here)
 
-load(file = "./Data/data_holidays.RData")
-source(file = "./Code/Beta_forecast_p.r")
+load(file = here("./Data/data_holidays.RData"))
+source(file = here("./Code/Beta_forecast_p.R"))
 
 lags <- 5
 data <- data.table(data)
@@ -249,8 +250,8 @@ run_time <- proc.time() - ptm
 BetaRegression <- list(result = data_set_results,
                        run_time = run_time,
                        quantile_matrix = quantile_matrix)
-saveRDS(BetaRegression,
-        file = paste0("./Results/Forecast_ph1-4/Beta_lag", lags, ".rds"))
+saveRDS(BetaRegression, 
+        file = here("./Results/Forecast_ph1-4/Beta_lag.rds"))
 
 
 

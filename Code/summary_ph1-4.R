@@ -31,7 +31,7 @@ ARIMA <- readRDS(file = here("./Results/Forecast_ph1-4/ArimaResults.rds"))
 SARIMA <- readRDS(file = here("./Results/Forecast_ph1-4/SARIMAResults.rds"))
 
 Beta <- readRDS(file = here("./Results/Forecast_ph1-4/Beta.rds"))
-Beta_lag4 <- readRDS(file = here("./Results/Forecast_ph1-4/Beta_lag4.rds"))
+Beta_lag4 <- readRDS(file = here("./Results/Forecast_ph1-4/Beta_lag.rds"))
 
 
 ProphetResults <- readRDS(file = here("./Results/Forecast_ph1-4/ProphetResults.rds"))

@@ -102,10 +102,10 @@ We apply these models to make prediction for short-term and long-term targets, w
 knitr::opts_chunk$set(echo = FALSE, tidy = FALSE, results = 'markup',
                       fig.align = "center", fig.scap = NA, out.width = NULL,
                       cache = FALSE, error = FALSE, warning = FALSE, message = FALSE)
-
-code_path <- "../Code/"
-short_path <- "../Results/Forecast_ph1-4/"
-peak_path <- "../Results/Peak/"
+library(here)
+code_path <- here("./Code/")
+short_path <- here("./Results/Forecast_ph1-4/")
+peak_path <- here("./Results/Peak/")
 
 library(xtable)
 two_functions = function(x){
@@ -300,7 +300,7 @@ print(xtable(res_ph1_4_2, align = "ccc|rrrrrr",
 
 <<xtable, results="asis", echo = FALSE>>=
 res_ph1_4 <- readRDS(paste0(short_path,"res_ph1_4.rds"))
-source(file = paste0(code_path, "print_2heading_xtable.r"))
+source(file = paste0(code_path, "print_2heading_xtable.R"))
 print_2heading_xtable(res_ph1_4,
                       separator = "__",
                       xtable.digits = 2,
@@ -334,7 +334,7 @@ In season 2015/2016, the peak intensity was lower and the peak occurred later th
 
 <<results="asis", echo = FALSE>>=
 res_peak <- readRDS(paste0(peak_path,"res_peak.rds"))
-source(file = paste0(code_path, "print_2heading_xtable.r"))
+source(file = paste0(code_path, "print_2heading_xtable.R"))
 print_2heading_xtable(res_peak,
                       separator = "__",
                       xtable.digits = 2,

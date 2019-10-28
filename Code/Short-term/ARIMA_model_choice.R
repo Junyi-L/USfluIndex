@@ -2,8 +2,9 @@ library(data.table)
 library(xtable)
 library(lubridate)
 library(forecast)
+library(here)
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 logit_FUN <- function(x){
   qlogis(x/100)
 }

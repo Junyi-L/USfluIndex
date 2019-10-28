@@ -4,6 +4,7 @@ library(dplyr)
 library(reshape)
 library(kcde)
 library(doMC)
+library(here)
 
 ### Get command line arguments
 args <- commandArgs(trailingOnly=TRUE)
@@ -56,11 +57,11 @@ differencing <- FALSE
 seasonality <- TRUE
 bw_parameterization <- "full"
 #bw_parameterization <- "diagonal"
-save_path <- "./Results/Forecast_ph1-4/KCDEresults/"
+save_path <- here( "./Results/Forecast_ph1-4/KCDEresults/")
 
 
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 
 data <- data[data$train == TRUE,]
 

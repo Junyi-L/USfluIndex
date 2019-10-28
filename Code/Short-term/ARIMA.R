@@ -2,8 +2,9 @@ library(lubridate)
 library(forecast)
 library(data.table)
 library(logitnorm)
+library(here)
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 data <- data.table(data)
 logit_FUN <- function(x){
   qlogis(x/100)
@@ -38,7 +39,7 @@ sarima_cov <- sarima_cov_total[data$train == TRUE, , drop = FALSE]
 arima_fit <-
   auto.arima(logit_prediction_target_train, xreg = as.matrix(sarima_cov), seasonal = FALSE, trace = TRUE)
 # Save fit result for peak week prediction.
-saveRDS(arima_fit, file = "./Results/Peak/arima.rds")
+saveRDS(arima_fit, file = here("./Results/Peak/arima.rds"))
 
 model_order <- arima_fit$arma[c(1, 6, 2, 3, 7, 4, 5)]
 
@@ -188,5 +189,5 @@ ARIMA_sin_cos <- list(count_error = count_error,
                       run_time = run_time,
                       quantile_matrix = quantile_matrix)
 
-saveRDS(ARIMA_sin_cos, file = "./Results/Forecast_ph1-4/ArimaResults.rds")
+saveRDS(ARIMA_sin_cos, file = here("./Results/Forecast_ph1-4/ArimaResults.rds"))
 

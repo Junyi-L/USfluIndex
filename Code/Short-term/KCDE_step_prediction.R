@@ -4,6 +4,7 @@ library(plyr)
 library(dplyr)
 library(lubridate)
 library(doMC)
+library(here)
 
 #options(error = recover)
 
@@ -22,9 +23,9 @@ all_bw_parameterizations <-  "full" # specifications with diagonal and full band
 num_cores <- 3L
 registerDoMC(cores = num_cores)
 results_path <- file.path(
-  "./Results/Forecast_ph1-4/KCDEresults")
+ here( "./Results/Forecast_ph1-4/KCDEresults"))
 
-load(file = "./Data/data_holidays.RData")
+load(file = here("./Data/data_holidays.RData"))
 
 
 ## Row indices in data corresponding to times at which we want to make a prediction
@@ -282,13 +283,13 @@ for(prediction_horizon in all_prediction_horizons){
   run_time <- proc.time() - ptm
   
   saveRDS(ph_results, file = file.path(
-    "./Results/Forecast_ph1-4/KCDEresults",
+   here( "./Results/Forecast_ph1-4/KCDEresults"),
     paste0("kcde-predictions-ph_", prediction_horizon, ".rds")))
   saveRDS(run_time, file = file.path(
-    "./Results/Forecast_ph1-4/KCDEresults",
+    here("./Results/Forecast_ph1-4/KCDEresults"),
     paste0("kcde-predictions-time-ph_", prediction_horizon, ".rds")))
   
 } # prediction_horizon 
 
-saveRDS(quantile_matrix,file = "./Results/Forecast_ph1-4/KCDEresults/quantile_matrix.rds")
+saveRDS(quantile_matrix,file = here("./Results/Forecast_ph1-4/KCDEresults/quantile_matrix.rds"))
 

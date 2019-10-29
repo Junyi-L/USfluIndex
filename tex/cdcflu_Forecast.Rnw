@@ -149,28 +149,28 @@ We use CDC's weekly wILI from season 1998/1999 to season 2017/2018 (Figure \ref{
 
 
 
-\subsection{Endemic-epidemic modelling}
-Inspired by the branching process with immigration, Held et al. \cite{held.etal2005} proposed a modeling framework for infectious disease surveillance counts, the so-called HHH framework, which doesn't require information on the number of disease susceptibles. In its simple form for univariate time series, given the past observations, the number of new cases $Y_t$ in time period $t$ is assumed to follow a negative binomial distribution with mean $\mu_t$ and overdispersion parameter $\phi$
-
-\begin{equation}
-Y_t|\mathcal{F}_{t-1} \sim \operatorname{NB}(\mu_t,\phi),
-\end{equation}
-\begin{equation}
-\mu_t = v_t + \lambda Y_{t-1},
-\end{equation}
-where $\mathcal{F}_{t-1} = \sigma(Y_1,\dots,Y_{t-1})$ represents the information up to time $t - 1$, $v_t > 0$, $\lambda > 0$, and $v_t$ is a log-linear predictor with
-
-\begin{equation}
-\log(v_t) = \alpha + \bm{\beta}^T\bm{z}_t.
-\end{equation}
-
-The expected disease incidence $\mu_t$ is decomposed into an endemic part $v_t$ and an epidemic part $\lambda Y_{t-1}$. The endemic part $v_t$ may capture seasonality and time trends via e.g. $\bm{z}_t = (t, \sin(\omega s), \cos(\omega s), \dots, \sin(S \cdot \omega s), \cos(S \cdot \omega s))^T$ \cite{held.paul2012}\cite{Salmon2016}, where $S$ is called the number of harmonics, $s$ is the corresponding week of week $t$ in the season, and $\omega = \frac{2 \pi}{s_0}$ is frequency, with $s_0$ being the total number of weeks in the season.
-The epidemic part $\lambda Y_{t-1}$ is an autoregression on the number of cases in the previous time period and reflects disease spread from the previous time period.
+% \subsection{Endemic-epidemic modelling}
+% Inspired by the branching process with immigration, Held et al. \cite{held.etal2005} proposed a modeling framework for infectious disease surveillance counts, the so-called HHH framework, which doesn't require information on the number of disease susceptibles. In its simple form for univariate time series, given the past observations, the number of new cases $Y_t$ in time period $t$ is assumed to follow a negative binomial distribution with mean $\mu_t$ and overdispersion parameter $\phi$
+% 
+% \begin{equation}
+% Y_t|\mathcal{F}_{t-1} \sim \operatorname{NB}(\mu_t,\phi),
+% \end{equation}
+% \begin{equation}
+% \mu_t = v_t + \lambda Y_{t-1},
+% \end{equation}
+% where $\mathcal{F}_{t-1} = \sigma(Y_1,\dots,Y_{t-1})$ represents the information up to time $t - 1$, $v_t > 0$, $\lambda > 0$, and $v_t$ is a log-linear predictor with
+% 
+% \begin{equation}
+% \log(v_t) = \alpha + \bm{\beta}^T\bm{z}_t.
+% \end{equation}
+% 
+% The expected disease incidence $\mu_t$ is decomposed into an endemic part $v_t$ and an epidemic part $\lambda Y_{t-1}$. The endemic part $v_t$ may capture seasonality and time trends via e.g. $\bm{z}_t = (t, \sin(\omega s), \cos(\omega s), \dots, \sin(S \cdot \omega s), \cos(S \cdot \omega s))^T$ \cite{held.paul2012}\cite{Salmon2016}, where $S$ is called the number of harmonics, $s$ is the corresponding week of week $t$ in the season, and $\omega = \frac{2 \pi}{s_0}$ is frequency, with $s_0$ being the total number of weeks in the season.
+% The epidemic part $\lambda Y_{t-1}$ is an autoregression on the number of cases in the previous time period and reflects disease spread from the previous time period.
 
 
 \subsection{Endemic-epidemic Beta model}
 \label{subsec:beta}
-Lu and Meyer \cite{beta:theory} propose an endemic-epidemic model for time series of proportions. For time periods $t = 1,...,T$, $X_t$ is the proportion of newly infected individuals by a certain disease in time period $t$ and is assumed to follow a beta distribution with mean $\mu_t$ and precision $\phi_t$ given past observations,
+Lu and Meyer \cite{beta:theory} propose an extension of the HHH framework for infectious disease proportions, by using the beta distribution. For time periods $t = 1,...,T$, $X_t$ is the proportion of newly infected individuals by a certain disease in time period $t$ and is assumed to follow a beta distribution with mean $\mu_t$ and precision $\phi_t$ given past observations,
 
 \begin{equation}\label{eq:Beta1}
 X_t|\mathcal{F}_{t-1} \sim \operatorname{Beta}(\mu_t,\phi_t),
@@ -179,12 +179,12 @@ X_t|\mathcal{F}_{t-1} \sim \operatorname{Beta}(\mu_t,\phi_t),
 \begin{equation}\label{eq:Betamu1}
 g_{\mu}(\mu_t)= v_t + \sum_{k = 1}^p \beta_k g_{\mu}(X_{t-k}),
 \end{equation}
-where $g_{\mu}(x) = \log(\frac{x}{1 - x})$ is the logit link function, $\mathcal{F}_{t-1} = \sigma(X_1,\dots,X_{t-1})$. The endemic component $v_t$ is modeled as a linear predictor,
+where $g_{\mu}(x) = \log(\frac{x}{1 - x})$ is the logit link function, $\mathcal{F}_{t-1} = \sigma(X_1,\dots,X_{t-1})$. The transformed conditional mean $\mu_t$ can be decomposed into an endemic component $v_t$ and an epidemic component $\sum_{k = 1}^p \beta_k g_{\mu}(X_{t-k})$.
+The endemic component is modeled as a linear predictor,
 
 \begin{equation}
 v_t = \alpha^{(v)} + \bm{\beta}^{(v)^T}\bm{z}_t^{(v)}.
 \end{equation}
-
 
 The precision parameter $\phi_t$ is also time-varying with
 
@@ -193,7 +193,7 @@ The precision parameter $\phi_t$ is also time-varying with
 \end{equation}
 where $g_{\phi}(\cdot)$ is the log link function for the precision parameter $\phi_t$.
 
-The endemic component $v_t$ and the precision parameter $\phi_t$ could be modeled by harmonic regression plus time trends and potential holiday effects via dummy variables \cite{held.paul2012}. The parameters $\bm{\beta}^{(v)}$ can be interpreted in terms of odds ratio as in beta regression.
+The endemic component $v_t$ and the precision parameter $\phi_t$ could be modeled by harmonic regression plus time trends and potential holiday effects via dummy variables \cite{held.paul2012}. The parameters $\bm{\beta}^{(v)}$ and $\beta_k$ can be interpreted in terms of odds ratio \cite{beta:theory}.
 
 This extended model is denoted by Beta($p$), where $p$ is the maximum order of the autoregressive terms. Parameter estimation can be carried out by (conditional) maximum likelihood using the R package \texttt{betareg} \cite{cribari-neto.zeileis2010}.
 

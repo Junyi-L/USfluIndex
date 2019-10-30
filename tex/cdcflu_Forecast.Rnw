@@ -271,7 +271,9 @@ We use the \emph{auto.arima} function from the R package \texttt{forecast} \cite
 
 
 We implemented the Beta model and baseline models in Section \ref{subsec:baselne} to compare the quality of forecast provided by different models. For Beta and (S)ARIMA, training data are used to determine the structure of the model (e.g. order of AR and MA terms, number of harmonics). In the testing period, parameters are reestimated given the observations until the specified time point in testing data while the structure of model is kept. For KCDE, we implement the approach provided by Ray et.al \cite{ray.etal2017}, which does not perform reestimation. It's cumbersome to reestimate parameters for KCDE since it takes around 4 hours to estimate parameters.
-The structure and parameters of the Prophet model are updated during the testing period because Prophet needs to updates its change points when there are more observations available.
+The structure and parameters of the Prophet model are updated during the testing period because Prophet needs to updates its change points when there are more observations available. 
+
+All source code and data are available on GitHub \cite{code}.
 
 \subsection{Short-term targets}%------------------------------------------------------
 
@@ -330,7 +332,16 @@ For peak intensity prediction, KCDE has the best performance in terms of mean lo
 For peak timing prediction, KCDE has the best mean log score for all predictions in the test period. Then follows ARIMA, Prophet, Naive approach and Beta(4). The Beta(1) model has worse performance than other models except the equal bin approach.
 The ARIMA model has the best predictive performance for predictions in weeks before the actual peak. Then follows KCDE, Prophet, Naive approach and Beta(4).
 
-In season 2015/2016, the peak intensity was lower and the peak occurred later than in other seasons (Figure \ref{fig:Peakbox}). For peak timing prediction, only the KCDE model shows better predictive performance than the equal bin approach in this season. Furthermore, simple approach such as Prophet and the naive approach show worse predictive performance than the equal bin approach in this season. For all test seasons, only KCDE has consistently better predictive performance than the equal bin approach.
+In season 2014/2015, the peak intensity is normal and the peak timing week is relatively early in comparison to the training seasons (Figure \ref{fig:wILIholiday} and Figure \ref{fig:Peakbox}), while there are still many seasons in the training seasons have peaks on that week. All models show better predictive performance than the equal bin approach in both peak intensity and peak timing prediction. The Prophet model has the best peak intensity prediction, and the SARIMA model has the best peak timing prediction.
+
+In season 2015/2016, the peak intensity was lower and the peak occurred later than the most training seasons. For peak timing prediction, only the KCDE model shows better predictive performance than the equal bin approach in this season. Furthermore, for peak intensity prediction non-dynamic approaches such as Prophet and the naive approach show worse predictive performance than the equal bin approach in this season. The other five dynamic models have better peak intensity prediction than equal bin. 
+
+Season 2016/2017 is a relatively normal season. Both non-dynamic models have better predictions for both long-term targets than dynamic models. All models have better prediction than equal bin. 
+
+Season 2017/2018 has a relativly high peak intensity among all training seasons. All models but KCDE has no better prediction performance than equal bin. The peak timing of this season is normal, and all models have better prediction than equal bin in peak timing prediction, while SARIMA is worse than other models.
+
+
+For all testing seasons, only KCDE has consistently better predictive performance than the equal bin approach.
 
 <<results="asis", echo = FALSE>>=
 res_peak <- readRDS(paste0(peak_path,"res_peak.rds"))
@@ -359,7 +370,10 @@ print_2heading_xtable(res_peak,
 %----------------------------------------------------
 \section{Discussion}
 In this work, the predictive performance for both short-term and long-term targets of Beta(4) is compared with some commonly used models and a competitive model, the KCDE model.
-In short-term prediction for both subsets, Beta(4) model has the best one-week ahead forecast performance in terms of mean log score and Dawid-Sebastiani score. The KCDE model has the best model performance for higher prediction horizons and Beta(4) is the second best, while KCDE has higher model complexity and around 93 times higher run time than Beta(4) model. For long-term targets, KCDE is the only model which is consistently better than the equal bin approach. The Beta(4) and Beta(1) models don't show any advantages over other models for long-term targets.
+
+In short-term prediction for both subsets, Beta(4) model has the best one-week ahead forecast performance in terms of mean log score and Dawid-Sebastiani score. The KCDE model has the best model performance for higher prediction horizons and Beta(4) is the second best, while KCDE has higher model complexity and around 93 times higher run time than Beta(4) model. 
+
+For long-term targets, all models have better prediction performance than equal bin on average in terms of mean log score. The non-dynamic models, Prophet and naive, show particularly good prediction performance when the prediction targets are relatively normal in comparison with training seasons, such as for peak intensity prediction in season 2014/2015, and for both targets in season 2016/2017. In a season which has unusual peak timing or peak intensity, non-dynamic models will have worse prediction performance than the equal bin approach, such as for both targets in season 2015/2016 and for peak intensity prediction in season 2017/2018. Some dynamic models show competence in those seasons with relatively abnormal targets, such as all five dynamic models in season 2015/2016 for peak intensity prediction and the KCDE model in season 2016/2016 for peak timing prediction. KCDE is the only model which is consistently better than the equal bin approach across all testing seasons and for both targets. The Beta(4) and Beta(1) models don't show any advantages over other models for long-term targets.
 
 We only choose well-documented models and KCDE in our model comparison. There are some other competitive models during the influnza challenge, such as the delta density method \cite{brooks.etal2018}, the empirical Bayes framework \cite{Brooks2015}, the dynamic Baysian model \cite{osthus.etal2019}, augmentation of model with internet-based nowcast \cite{osthus.etal2019a}, etc. Some time series models for proportions can also be used in flu forecast, such as the $\beta$ARMA model \cite{rocha.cribari-neto2008} and the marginal beta regression time series model \cite{Guolo2014}. Makridakis et.al. \cite{makridakis.etal2018} evaluate the performance of statistical and machine learning forecasting methods using a large subset of 1045 monthly time series and observe that machine learning methods are dominated by classical statistical methods for both long-term and short-term forecasts. Thus we don't include machine learning methods in our comparison. Multi-model ensemble, such as \cite{Reich2019}, could improve forecast accuracy.
 

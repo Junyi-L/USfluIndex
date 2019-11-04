@@ -95,7 +95,9 @@ However, when measuring and forecasting the flu activity, the proportion of outp
 
 
 The endemic-epidemic beta model is a relatively simple and fast approach to forecast proportions, which allows for standard likelihood inference as implemented in the R package \texttt{betareg} \cite{cribari-neto.zeileis2010}. We consider some alternative methods with well-documented implementations and available R package, and compare their predictive performance with the beta model using the wILI index from 1998 to 2018 provided by CDC. These methods are seasonal autoregressive integrated moving average (SARIMA) model \cite{hyndman.khandakar2008}, harmonic regression with ARIMA errors \cite{hyndman.khandakar2008} and Prophet model by Facebook \cite{Taylor2018}. Furthermore, the kernel conditional density estimation (KCDE) method \cite{ray.etal2017}, which is a successful competitor in the flu activity forecast challenge organized by CDC, is included in comparison.
-We apply these models to make prediction for short-term and long-term targets, which are also forecast targets in the flu activity forecast challenge and relevant to public health. The short-term targets consist of one- to four-week-ahead forecasts, and the long-term targets are peak intensity and peak week timing prediction. For short-term targets, both point forecasts and probabilistic forecasts are made, and for long-term targets, probabilistic forecasts are made. The absolute error is used to evaluate point forecasts. For probabilistic forecasts, proper scoring rules, such as the log score and the Dawid-Sebastiani score, are used.
+We apply these models to make prediction for short-term and long-term targets, which are also forecast targets in the flu activity forecast challenge and relevant to public health. The short-term targets consist of one- to four-weeks-ahead forecasts, and the long-term targets are peak intensity and peak week timing prediction. Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that "probabilistic forecasts serve to quantify the uncertainty in a prediction, and they are an essential ingredient of optimal decision making". In this paper, probabilistic forecasts are made for short-term and long-term targets, and are evaluated by proper scoring rules, such as the log score and the Dawid-Sebastiani score.
+
+
 
 
 <<setup, include=FALSE>>=
@@ -131,7 +133,7 @@ The Centers for Disease Control and Prevention (CDC) in the U.S. collect weekly 
 
 The Morbidity and Mortality Weekly Report (MMWR) week is used by the CDC to report disease incidence \cite{MMWR}. The MMWR week ranges from 1 to 52, sometimes to 53. The MMWR week 1 corresponds to the first week in the year, sometimes the last week in the last year. In most years flu activity begins to increase at the beginning of October, peaks between December and February, and lasts until May. Historically, flu activity in MMWR week 40 to MMWR week 20 in the next year is of interest for the disease control purpose. The MMWR week 40 is roughly at the end of September or at the beginning of October. The MMWR week 20 corresponds roughly the second or third week in May. In this paper, we index seasons from MMWR week 31 to MMWR week 30 in the next year. So, season week one corresponds to MMWR week 31.
 
-We use CDC's weekly wILI from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}). The data can be esaily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. The last four seasons are used as test data to assess the forecast performance. Since we are focused on seasonal influenza, the two H1N1 pandemic seasons, 2008/2009 and 2009/2010 are excluded in our analysis.
+We use CDC's weekly wILI index data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}). The data can be esaily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. The last four seasons are used as test data to assess the forecast performance. Since we are focused on seasonal influenza, the two H1N1 pandemic seasons, 2008/2009 and 2009/2010 are excluded in our analysis.
 
 
 
@@ -139,7 +141,7 @@ We use CDC's weekly wILI from season 1998/1999 to season 2017/2018 (Figure \ref{
 
 \includegraphics[width=\textwidth]{wILI.pdf}
 \centering
-\caption{Weekly flu activity in the USA measured by the wILI index. In early years of data collection, low-season incidence was not recorded. These missing data are indicated with vertical gray bars. The wILI data during the excluded pandemic seasons (2008/2009 and 2009/2010) are in grey. The last four seasons (2014/2015 to 2017/2018) are held out as test data. This cutoff is indicated with a vertical dashed line.}
+\caption{Weekly wILI index in the USA. In early years of data collection, low-season incidence was not recorded. These missing data are indicated with vertical gray bars. The wILI index data during the excluded pandemic seasons (2008/2009 and 2009/2010) are in grey. The last four seasons (2014/2015 to 2017/2018) are held out as test data. This cutoff is indicated with a vertical dashed line.}
 \label{fig:wILI}
 \end{figure}
 

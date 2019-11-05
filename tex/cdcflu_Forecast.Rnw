@@ -66,7 +66,7 @@ Erlangen, Germany}
   beta model with four autoregressive lags or by more involved kernel
   condition density estimation (KCDE), but none of the models consistently
   outperformed another throughout all four test seasons.
-  For seasonal peak prediction, no model consistently outperformed the 
+  For seasonal peak prediction, only KCDE consistently outperformed the 
   equal bin appoach which assigns equal probablity to each possible outcomes.
   Non-dynamic Prophet ranked better for seasonal than for short-term
   targets, but not as good as ARIMA.
@@ -330,22 +330,19 @@ print_2heading_xtable(res_ph1_4,
 
 
 \subsection{Long-term targets}
+
+For long-term targets, we summarize the model performance for two subsets: all weeks and before week. The "all week" group summarizes the mean log score and maximum log score for all predictions in the test period. The "before peak" group summarizes the mean log score and maximum log score for predictions in weeks before the actual peak for the given season. In the FluSight challenges the forecast performance of the "all week" group is considered, while in practice accurate prediction of peak timing and peak intensity before the actual peak occurs is more relevant to health officials \cite{ray.reich2018}.
+
 The model performance for long-term targets is summarized in Table \ref{tab:res_peak}. In terms of mean log score, the equal bin approach has the worst predictive performance for both long-term targets and two different subsets.
-For peak intensity prediction, KCDE has the best performance in terms of mean log score for all predictions in the test period and predictions in weeks before the actual peak for the given season. Beta(1) and naive approach have the second best performance. Then follow Beta(4), SARIMA, ARIMA and Prophet.
+For peak intensity prediction, KCDE has the best performance in terms of mean log score for all predictions in the test period. The naive approach have the second best performance. Then follow Beta(1), Beta(4), SARIMA, ARIMA and Prophet. The rank of models is the same for the "before peak" subset.
+For peak timing prediction, KCDE has the best mean log score for the "all weeks" subset. Then follows Prophet, ARIMA, naive, Beta(4) and Beta(1). The ARIMA model has the best predictive performance for the "before peak" subset. Then follows KCDE, Prophet, naive approach and Beta(4).
 
-For peak timing prediction, KCDE has the best mean log score for all predictions in the test period. Then follows ARIMA, Prophet, naive approach and Beta(4). The Beta(1) model has worse performance than other models except the equal bin approach.
-The ARIMA model has the best predictive performance for predictions in weeks before the actual peak. Then follows KCDE, Prophet, naive approach and Beta(4).
-
+We now focus on the prediction performance for the subset "before peak" for each test seasons.
 In season 2014/2015, the peak intensity is normal and the peak timing week is relatively early in comparison to the training seasons (Figure \ref{fig:wILIholiday} and Figure \ref{fig:Peakbox}), while there are still many seasons in the training seasons have peaks on that week. All models show better predictive performance than the equal bin approach in both peak intensity and peak timing prediction. The Prophet model has the best peak intensity prediction, and the SARIMA model has the best peak timing prediction.
-
 In season 2015/2016, the peak intensity was lower and the peak occurred later than the most training seasons. For peak timing prediction, only the KCDE model shows better predictive performance than the equal bin approach in this season. Furthermore, for peak intensity prediction Prophet and the naive approach show worse predictive performance than the equal bin approach in this season. The other five dynamic models have better peak intensity prediction than equal bin. 
-
 Season 2016/2017 is a relatively normal season. Both non-dynamic models, Prophet and naive, have better predictions for both long-term targets than dynamic models. All models have better prediction than equal bin. 
-
 Season 2017/2018 has a relativly high peak intensity among all training seasons. All models but KCDE has no better prediction performance than equal bin. The peak timing of this season is normal, and all models have better prediction than equal bin in peak timing prediction, while SARIMA is worse than other models.
-
-
-For all testing seasons and both long-term targets, only KCDE has consistently better predictive performance than the equal bin approach.
+For all testing seasons and both long-term targets, only KCDE has consistently better predictive performance than the equal bin approach. The naive approach has better mean log score than the equal bin approach, but it has worse median log score than the equal bin approach in season 2015/2016 for both long-term targets. No model is consistently better than naive. 
 
 <<results="asis", echo = FALSE>>=
 res_peak <- readRDS(paste0(peak_path,"res_peak.rds"))
@@ -354,7 +351,7 @@ print_2heading_xtable(res_peak,
                       separator = "__",
                       xtable.digits = 2,
                       xtable.align = "ccc|ll|ll",
-                      xtable.caption = 'Summaries of model performance for predictions of peak week intensity and peak week timing. The "All weeks" group summarizes the log score and maximum of log score for all predictions in the test period. The "Before peak" group summarizes the log score and maximum of log score for predictions in weeks before the actual peak for the given season.',
+                      xtable.caption = 'Summaries of model performance for predictions of peak week intensity and peak week timing. The "all weeks" group summarizes the mean log score and maximum log score for all predictions in the test period. The "before peak" group summarizes the mean log score and maximum log score for predictions in weeks before the actual peak for the given season.',
                       xtable.label = "tab:res_peak",
                       hline.after = c(-1, 0, 8, 16)
 )

@@ -280,11 +280,13 @@ All source code and data are available on GitHub \cite{code}.
 
 \subsection{Short-term targets}%------------------------------------------------------
 
-The overall short-term performance is summarized in Table \ref{tab:res_ph1_4_2}. Averaging over all short-term forecasts in the testing period, KCDE has the best Dawid-Sebastiani score, the lowest maximum log score and the lowest absolute error. The Beta(4) model has the best mean of log score, and has second best forecast performance in terms of maximum log score, absolute error and Dawid-Sebastiani score. Forecasting with Beta(4) is considerably faster than with KCDE and has fewer parameters to estimate. Then follows Beta(1), ARIMA and SARIMA. The Prophet model and naive approach have the worst short-term forecast performance. When averaging scores only over the MMWR weeks 40-20, it results very similar rankings. The Beta(4) model has better mean log score on average than the Beta(1) model for both week subsets.
+The overall short-term performance is summarized in Table \ref{tab:res_ph1_4_2}. We consider two kinds of subsets in short-term forecast performance comparison. The "all weeks" subset summarizes the mean log score and the mean Dawid-Sebastiani score over all weeks in the test period. The "MMWR week 40 - 20" subset summarizes the mean the log score and mean the Dawid-Sebastiani score where the week to be forecast in the test period is in the MMWR week 40 - 20, which are of more interest for the disease control purpose. 
 
-The forecast performance of Beta(4) decreases over prediction horizons (Table \ref{tab:res_ph1_4}). For one-week-ahead forecasts, Beta(4) outperforms all other models in terms of mean log score and Dawid-Sebastiani score in forecast for all weeks in the testing period and MMWR week 40-20. For higher prediction horizons, KCDE has the best or close to the best mean log score and Dawid-Sebatiani score, while Beta(4) is always the second best, except that for two-weeks ahead forecast Beta(4) has the best mean log score for both subsets.
+For the "all weeks" subset KCDE has the best Dawid-Sebastiani score, the lowest maximum log score and the lowest absolute error. The Beta(4) model has the best mean log score, and has second best forecast performance in terms of maximum log score, absolute error and Dawid-Sebastiani score. Forecasting with Beta(4) is considerably faster than with KCDE and has fewer parameters to estimate. Then follows Beta(1), ARIMA and SARIMA. The Prophet model and naive approach have the worst short-term forecast performance. When considering scores only over the MMWR weeks 40-20, it results very similar rankings. The Beta(4) model has better mean log score on average than the Beta(1) model for both week subsets.
 
-Seasonal summaries of the log score difference between Beta(4) and Beta(1), KCDE or ARIMA respectively in one- to four-weeks-ahead forecast for MMWR week 40-20 are shown in Figure \ref{fig:STbox}. 
+The forecast performance of Beta(4) decreases over prediction horizons (Table \ref{tab:res_ph1_4}). For one-week-ahead forecasts, Beta(4) outperforms all other models in terms of mean log score and Dawid-Sebastiani score for both subsets. For higher prediction horizons and both subsets, KCDE has the best or close to the best mean log score and Dawid-Sebatiani score, while Beta(4) is always the second best, except that for two-weeks ahead forecast Beta(4) has the best mean log score.
+
+Seasonal summaries of the log score difference between Beta(4) and Beta(1), KCDE or ARIMA respectively in one- to four-weeks-ahead forecasts for subset "MMWR week 40 - 20" are shown in Figure \ref{fig:STbox}. 
 For higher prediction horizons, KCDE outperforms Beta(4) in all but the last season.
 
 
@@ -294,7 +296,7 @@ For higher prediction horizons, KCDE outperforms Beta(4) in all but the last sea
 res_ph1_4_2 <- readRDS(paste0(short_path,"res_ph1_4_2.rds"))
 
 print(xtable(res_ph1_4_2, align = "ccc|rrrrrr",
-             caption = 'Summaries of model performance over one-week, two-week, three-week and four-week ahead forecast. Ranks are shown in bracket. The "All weeks" group summarizes the mean of the log score (LS) and the Dawid-Sebastiani score (DSS) over all weeks in the test period. The "MMWR week 40 - 20" group summarizes the mean of the log score (LS) and the Dawid-Sebastiani score (DSS) where the week to be forecast in the test period is in the MMWR week 40 - 20, which are of more interest for the disease control purpose. The total run time for estimation, reestimation at all test weeks and forecasting for all prediction horizons is given in minutes. For KCDE, the total run time does not include reestimation.',
+             caption = 'Summaries of model performance over one-week, two-week, three-week and four-week ahead forecast. Ranks are shown in bracket. The "all weeks" group summarizes the mean log score (LS) and the mean Dawid-Sebastiani score (DSS) over all weeks in the test period. The "MMWR week 40 - 20" group summarizes the mean log score (LS) and the mean Dawid-Sebastiani score (DSS) where the week to be forecast in the test period is in the MMWR week 40 - 20, which are of more interest for the disease control purpose. The total run time for estimation, reestimation at all test weeks and forecasting for all prediction horizons is given in minutes. For KCDE, the total run time does not include reestimation.',
              digits = c(0,0,0,2,2,2,2,0,0),
              label = "tab:res_ph1_4_2"),
       type = "latex",
@@ -311,7 +313,7 @@ print_2heading_xtable(res_ph1_4,
                       separator = "__",
                       xtable.digits = 2,
                       xtable.align = "ccc|rr|rr|rr|rr",
-                      xtable.caption = 'Summaries of model performance for one-week, two-week, three-week and four-week ahead forecast. Ranks are shown in bracket. The "All weeks" group summarizes the mean of the log score (LS) and the Dawid-Sebastiani score (DSS) over all weeks in the test period. The "MMWR week 40 - 20" group summarizes the mean of the log score (LS) and the Dawid-Sebastiani score (DSS) where the week to be forecast in the test period is in the MMWR week 40 - 20, which are of more interest for the disease control purpose.',
+                      xtable.caption = 'Summaries of model performance for one-week, two-week, three-week and four-week ahead forecast. Ranks are shown in bracket. The "all weeks" group summarizes the mean log score (LS) and the mean Dawid-Sebastiani score (DSS) over all weeks in the test period. The "MMWR week 40 - 20" group summarizes the mean log score (LS) and the mean Dawid-Sebastiani score (DSS) where the week to be forecast in the test period is in the MMWR week 40 - 20, which are of more interest for the disease control purpose.',
                       xtable.label = "tab:res_ph1_4",
                       hline.after = c(-1, 0, 7, 14),
                       scalebox='0.9'

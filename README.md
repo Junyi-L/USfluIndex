@@ -23,13 +23,13 @@ Two kinds of prediction targets are scored,
 
 * Short-term forecast for prediction horizon 1-4,
 
-* Peak prediction, including Peak intensity and peak timing prediction. 
+* Peak prediction, including peak intensity and peak timing prediction. 
 
 ## This repository is organized as follows:
 
 * Data/ contains code to load data and the loaded data.
 
-    * Data/load_data.R loads wILI data through the R package [**cdcfluview**](https://cran.r-project.org/web/packages/cdcfluview/index.html). Details about this wILI data please see http://www.cdc.gov/flu/weekly/. Note that when ILINet members provide revisions or backfil reports for past weeks, the wILI data will be updated accordingly. This means that data will have samll difference when loading at different time points. The data used for comparison in this paper are loaded on March 11 2019. The loaded wILI data are saved in Data/usflu.RData.
+    * Data/load_data.R loads wILI data through the R package [**cdcfluview**](https://cran.r-project.org/web/packages/cdcfluview/index.html). Details about this wILI data please see http://www.cdc.gov/flu/weekly/. Note that when ILINet members provide revisions or backfill reports for past weeks, the wILI data will be updated accordingly. This means that data will have samll difference when loading at different time points. The data used for comparison in this paper are loaded on March 11 2019. The loaded wILI data are saved in Data/usflu.RData.
 
     * Data/load_data_holiday.R adds necessary columns in loaded wILI data, including holidays and sin, cos terms and saves the data in Data/data_holidays.RData.
 

@@ -129,46 +129,20 @@ options(xtable.sanitize.colnames.function = two_functions,
 \subsection{Data}
 \label{subsec:Data}
 
-The Centers for Disease Control and Prevention (CDC) in the U.S. collect weekly data on the total number of patients and the number of those patients with influenza-like illness (ILI) through the U.S. Outpatient Influenza-like Illness Surveillance Network (ILINet), which consists of more than 3500 outpatient healthcare providers in the USA. The flu activity levels are based on the percent of outpatient visits with ILI compared with the average percent of ILI during non-influenza weeks. The national weighted influenza-like illness (wILI) index is the proportion of patients with ILI weighted by state population \cite{CDCoverview}.
+The Centers for Disease Control and Prevention (CDC) in the U.S. collect weekly data on the total number of patients and the number of those patients with influenza-like illness (ILI) through the U.S. Outpatient Influenza-like Illness Surveillance Network (ILINet), which consists of outpatient healthcare providers in all states of the U.S. The flu activity levels are based on the percent of outpatient visits with ILI compared with the average percent of ILI during non-influenza weeks. The national weighted influenza-like illness (wILI) index is the proportion of patients with ILI weighted by state population \cite{CDCoverview}.
 
 The Morbidity and Mortality Weekly Report (MMWR) week is used by the CDC to report disease incidence \cite{MMWR}. The MMWR week ranges from 1 to 52, sometimes to 53. The MMWR week 1 corresponds to the first week in the year, sometimes the last week in the last year. In most years flu activity begins to increase at the beginning of October, peaks between December and February, and lasts until May. Historically, flu activity in MMWR week 40 to MMWR week 20 in the next year is of interest for the disease control purpose. The MMWR week 40 is roughly at the end of September or at the beginning of October. The MMWR week 20 corresponds roughly the second or third week in May. In this paper, we index seasons from MMWR week 31 to MMWR week 30 in the next year. So, season week one corresponds to MMWR week 31.
 
-We use CDC's weekly wILI index data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}). The data can be esaily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. The last four seasons are used as test data to assess the forecast performance. Since we are focused on seasonal influenza, the two H1N1 pandemic seasons, 2008/2009 and 2009/2010 are excluded in our analysis.
+We use CDC's weekly wILI index data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}). The data can be esaily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. The last four seasons are used as test data to assess the forecast performance. Since we are focused on seasonal influenza, the two H1N1 pandemic seasons, 2008/2009 and 2009/2010 are excluded in our analysis. Since the ILINet members continuously provide backfill reports for past weeks, the prevously issued wILI may be modified \cite{osthus.etal2019a}. In this paper we ignore the backfill of the wILI data. Influence of backfilling of data and relative study will be discussed in Section \ref{sec:Diss}.
 
 
 
 \begin{figure}
-
 \includegraphics[width=\textwidth]{wILI.pdf}
 \centering
 \caption{Weekly wILI index in the USA. In early years of data collection, low-season incidence was not recorded. These missing data are indicated with vertical gray bars. The wILI index data during the excluded pandemic seasons (2008/2009 and 2009/2010) are in grey. The last four seasons (2014/2015 to 2017/2018) are held out as test data. This cutoff is indicated with a vertical dashed line.}
 \label{fig:wILI}
 \end{figure}
-
-
-
-
-
-
-
-% \subsection{Endemic-epidemic modelling}
-% Inspired by the branching process with immigration, Held et al. \cite{held.etal2005} proposed a modeling framework for infectious disease surveillance counts, the so-called HHH framework, which doesn't require information on the number of disease susceptibles. In its simple form for univariate time series, given the past observations, the number of new cases $Y_t$ in time period $t$ is assumed to follow a negative binomial distribution with mean $\mu_t$ and overdispersion parameter $\phi$
-% 
-% \begin{equation}
-% Y_t|\mathcal{F}_{t-1} \sim \operatorname{NB}(\mu_t,\phi),
-% \end{equation}
-% \begin{equation}
-% \mu_t = v_t + \lambda Y_{t-1},
-% \end{equation}
-% where $\mathcal{F}_{t-1} = \sigma(Y_1,\dots,Y_{t-1})$ represents the information up to time $t - 1$, $v_t > 0$, $\lambda > 0$, and $v_t$ is a log-linear predictor with
-% 
-% \begin{equation}
-% \log(v_t) = \alpha + \bm{\beta}^T\bm{z}_t.
-% \end{equation}
-% 
-% The expected disease incidence $\mu_t$ is decomposed into an endemic part $v_t$ and an epidemic part $\lambda Y_{t-1}$. The endemic part $v_t$ may capture seasonality and time trends via e.g. $\bm{z}_t = (t, \sin(\omega s), \cos(\omega s), \dots, \sin(S \cdot \omega s), \cos(S \cdot \omega s))^T$ \cite{held.paul2012}\cite{Salmon2016}, where $S$ is called the number of harmonics, $s$ is the corresponding week of week $t$ in the season, and $\omega = \frac{2 \pi}{s_0}$ is frequency, with $s_0$ being the total number of weeks in the season.
-% The epidemic part $\lambda Y_{t-1}$ is an autoregression on the number of cases in the previous time period and reflects disease spread from the previous time period.
-
 
 \subsection{Endemic-epidemic beta model}
 \label{subsec:beta}
@@ -233,6 +207,8 @@ We denote the predictive distribution by $F$, predictive density by $f$ and the 
 \begin{equation}
 LS(F,y) = -\log f(y).
 \end{equation}
+
+The log score in this paper is not directly comparable with the log score required by CDC in the Flusight challenge. The CDC calculates the log score of multiple bins surrounding the actual observation, which is however not a proper score \cite{ray.reich2018}. 
 
 The maximum log score is not a proper score. It is a measure of worst-case performance and should be considered as a secondary measure to characterize models with good overall performance measure by the mean log score \cite{ray.etal2017}.
 
@@ -372,6 +348,7 @@ print_2heading_xtable(res_peak,
 
 %----------------------------------------------------
 \section{Discussion}
+\label{sec:Diss}
 In this work, the predictive performance for both short-term and long-term targets of Beta(4) is compared with some commonly used models and a competitive model, the KCDE model.
 
 In short-term prediction for both subsets, Beta(4) model has the best one-week ahead forecast performance in terms of mean log score and Dawid-Sebastiani score. The KCDE model has the best model performance for higher prediction horizons and Beta(4) is the second best, while KCDE has higher model complexity and around 93 times higher run time than Beta(4) model. The forecast performance of Beta(4) decreases over prediction horizon. 

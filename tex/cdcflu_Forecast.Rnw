@@ -60,16 +60,18 @@ Erlangen, Germany}
   Using U.S. influenza-like illness surveillance data over 18 seasons,
   we assessed probabilistic forecasts by this new beta autoregressive
   model and by other readily available forecasting tools, including
-  Prophet and ARIMA.
+  Prophet and (S)ARIMA, and a competitive model, kernel
+  condition density estimation (KCDE).
   % Results:
   Short-term flu activity up to four weeks ahead was best predicted by the
-  beta model with four autoregressive lags or by more involved kernel
-  condition density estimation (KCDE), but none of the models consistently
-  outperformed another throughout all four test seasons.
+  beta model with four autoregressive lags or by more involved KCDE.
+  Non-dynamic models, Prophet and naive historical forecast, have the 
+  worst scores.
   For seasonal peak prediction, only KCDE consistently outperformed the 
   equal bin appoach which assigns equal probablity to each possible outcomes.
-  Non-dynamic Prophet ranked better for seasonal than for short-term
-  targets, but not as good as ARIMA.
+  In normal seasons, two non-dynamic models have particularly good forecast 
+  performance, while in other seasons some of the dynamic models have better scores. 
+  The beta model doesn't show any competence.
   % Conclusion:
   We conclude that the endemic-epidemic beta model is a performant and
   easy-to-implement tool to forecast flu activity a few weeks ahead.
@@ -307,9 +309,9 @@ print_2heading_xtable(res_ph1_4,
 \end{figure}
 
 
-\subsection{Long-term targets}
+\subsection{Seasonal targets}
 
-For long-term targets, we summarize the model performance for two subsets: all weeks and before week. The "all week" group summarizes the mean log score and maximum log score for all predictions in the test period. The "before peak" group summarizes the mean log score and maximum log score for predictions in weeks before the actual peak for the given season. In the FluSight challenges the forecast performance of the "all week" group is considered, while in practice accurate prediction of peak timing and peak intensity before the actual peak occurs is more relevant to health officials \cite{ray.reich2018}.
+For seasonal targets, we summarize the model performance for two subsets: all weeks and before week. The "all week" group summarizes the mean log score and maximum log score for all predictions in the test period. The "before peak" group summarizes the mean log score and maximum log score for predictions in weeks before the actual peak for the given season. In the FluSight challenges the forecast performance of the "all week" group is considered, while in practice accurate prediction of peak timing and peak intensity before the actual peak occurs is more relevant to health officials \cite{ray.reich2018}.
 
 The model performance for long-term targets is summarized in Table \ref{tab:res_peak}. In terms of mean log score, the equal bin approach has the worst predictive performance for both long-term targets and two different subsets.
 For peak intensity prediction, KCDE has the best performance in terms of mean log score for all predictions in the test period. The naive approach have the second best performance. Then follow Beta(1), Beta(4), SARIMA, ARIMA and Prophet. The rank of models is the same for the "before peak" subset.

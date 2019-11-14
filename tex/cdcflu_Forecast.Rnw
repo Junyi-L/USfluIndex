@@ -68,7 +68,7 @@ Erlangen, Germany}
   but the beta model runs much faster. Non-dynamic Prophet scored worst.
   Relative performance differed for seasonal peak prediction.
   Only KCDE and naive historical forecasts
-  consistently outperformed the equal bin reference appoach.
+  consistently outperformed the equal bin reference approach.
   %% which assigns equal probability to each possible outcome.
   In seasons with standard epidemic curves, Prophet produced the best peak
   intensity forecasts. Peak timing was best predicted by SARIMA, KCDE, or
@@ -109,8 +109,12 @@ The flu activity levels are based on the national weighted influenza-like illnes
 which is the proportion of outpatient visits with ILI reported through the ILINet weighted 
 by state population \cite{CDCoverview}.
 
-Nsoesie et al. \cite{nsoesie.etal2014} and Chretien et al. \cite{chretien.etal2014} review influenza forecasting models systematically. 
-Reich et al. \cite{Reich2019}
+Various approaches have been used in influenza forecasting \cite{nsoesie.etal2014, chretien.etal2014}.
+Reich et al. \cite{Reich2019} compare the forecast accuracy of 22 models from five different institutions.
+Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent flu activity forecast challenge.
+Some common approaches to influenza forecasting can be grouped into following categories \cite{brooks.etal2018}:
+compartmental models \cite{shaman.karspeck2012, hickmann.etal2015}, agent-based models,
+direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008, beta:theory}. 
 
 Lu and Meyer \cite{beta:theory} introduce an endemic-epidemic beta model for infectious disease proportions,
 which is an extension of the HHH modeling framework \cite{held.etal2005} for infectious disease counts.

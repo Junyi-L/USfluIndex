@@ -98,21 +98,14 @@ The Centers for Disease Control and Prevention (CDC) in the U.S. estimate that a
 population gets sick from influenza during an average season \cite{Tokars2017}. 
 Accurate prediction of flu activity provides health officials with valuable information to plan 
 disease prevention and allocate treatment resources. 
-The U.S. Outpatient Influenza-like Illness Surveillance Network (ILINet) collects weekly information on 
-outpatient visits to health care providers for influenza-like illness (ILI). 
-Here, ILI is defined as "fever (temperature of 100°F [37.8°C] or greater) and a cough and/or 
-a sore throat without a known cause other than influenza" \cite{CDCoverview}.
-Since 2013, CDC organizes the "Predict the Influenza Season Challenge" (https://predict.cdc.gov/) 
+Since 2013, CDC organizes the "Predict the Influenza Season Challenge" 
+(https://predict.cdc.gov/, a.k.a. CDC Flusight challenge) 
 for every flu season, to encourage academic and private industry researchers to forecast
-flu activity \cite{biggerstaff.etal2018}. 
-The flu activity levels are based on the national weighted influenza-like illness (wILI) index, 
-which is the proportion of outpatient visits with ILI reported through the ILINet weighted 
-by state population \cite{CDCoverview}.
-
+the national and regional flu activity.
 Various approaches have been used in influenza forecasting \cite{nsoesie.etal2014, chretien.etal2014}.
 Reich et al. \cite{Reich2019} compare the forecast accuracy of 22 models from five different institutions.
-Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent flu activity forecast challenge.
-Some common approaches to influenza forecasting can be grouped into following categories \cite{brooks.etal2018}:
+Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent Flusight challenge.
+Some common approaches can be grouped into following categories \cite{brooks.etal2018}:
 compartmental models \cite{shaman.karspeck2012, hickmann.etal2015}, agent-based models,
 direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008, beta:theory}. 
 
@@ -140,10 +133,10 @@ provided by CDC in the U.S.
 These methods are seasonal autoregressive integrated moving average (SARIMA) 
 model \cite{hyndman.khandakar2008}, harmonic regression with ARIMA errors \cite{hyndman.khandakar2008} 
 and Prophet model by Facebook \cite{Taylor2018}. 
-Furthermore, a successful competitor in the flu activity forecast challenge, 
+Furthermore, a successful competitor in the Flusight challenge, 
 the kernel conditional density estimation (KCDE) method \cite{ray.etal2017} is also included in our comparison.
 We apply these models to predict short-term and seasonal targets, which are also forecast 
-targets in the flu activity forecast challenge and relevant to public health. 
+targets in the Flusight challenge and relevant to public health. 
 The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets 
 are peak intensity and peak timing prediction. 
 Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that 
@@ -184,16 +177,16 @@ options(xtable.sanitize.colnames.function = two_functions,
 
 \subsection{Data}
 \label{subsec:Data}
-
-The Centers for Disease Control and Prevention (CDC) in the U.S. collect weekly data on
-the total number of patients and the number of those patients with influenza-like illness (ILI) 
-through the U.S. Outpatient Influenza-like Illness Surveillance Network (ILINet), 
-which consists of outpatient healthcare providers in all states of the U.S. 
-The national weighted influenza-like illness (wILI) index is the proportion of outpatient
-visits with ILI weighted by state population \cite{CDCoverview}.
+The U.S. Outpatient Influenza-like Illness Surveillance Network (ILINet) collects weekly information on
+outpatient visits to health care providers for influenza-like illness (ILI).
+Here, ILI is defined as "fever (temperature of 100°F [37.8°C] or greater) and a cough and/or
+a sore throat without a known cause other than influenza" \cite{CDCoverview}.
+The national wILI index is calculated as the proportion of outpatient visits with ILI reported 
+through the ILINet weighted by state population \cite{CDCoverview}. 
+It is a standard measure of the national-level flu activity.
 
 The Morbidity and Mortality Weekly Report (MMWR) week is used by the CDC to report
-disease incidence \cite{MMWR}. 
+the wILI data\cite{MMWR}. 
 The MMWR week ranges from 1 to 52, sometimes to 53.
 The MMWR week 1 corresponds to the first week in the year, sometimes the last week in the last year.
 In most years flu activity begins to increase at the beginning of October, 
@@ -205,9 +198,9 @@ The MMWR week 20 corresponds roughly to the second or third week in May.
 In this paper, we index seasons from MMWR week 31 to MMWR week 30 in the next year. 
 Then season week one corresponds to MMWR week 31.
 
-We use CDC's weekly wILI index data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}) 
+We use CDC's weekly national wILI data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}) 
 for our analysis. 
-The data can be easily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. 
+This data can be easily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. 
 The last four seasons are used as testing data to assess the forecast performance. 
 Since we are focused on seasonal influenza, the two H1N1 pandemic seasons, 
 2008/2009 and 2009/2010 are excluded in our analysis. 
@@ -222,7 +215,7 @@ In this paper, we ignore the backfill of the wILI data.
 \centering
 \caption{Weekly wILI index in the USA. In early years of data collection, 
 low-season incidence was not recorded. These missing data are indicated with vertical grey bars. 
-The wILI index data during the excluded pandemic seasons (2008/2009 and 2009/2010) are in grey. 
+The wILI data during the excluded pandemic seasons (2008/2009 and 2009/2010) are in grey. 
 The last four seasons (2014/2015 to 2017/2018) are held out as testing data. 
 This cutoff is indicated with a vertical dashed line.}
 \label{fig:wILI}
@@ -253,7 +246,7 @@ LS(F,y) = -\log f(y).
 \end{equation}
 
 The log score in this paper is not directly comparable with the log score required by CDC 
-in the flu activity forecast challenge. 
+in the Flusight challenge. 
 The CDC calculates the log score of multiple bins surrounding the actual observation, 
 which is however not a proper score \cite{ray.reich2018}. 
 
@@ -554,7 +547,7 @@ The "all week" group summarizes the mean log score and maximum log score for
 all predictions in the test period. 
 The "before peak" group summarizes the mean log score and maximum log score 
 for predictions in weeks before the actual peak for the given season. 
-In the flu activity forecast challenges the forecast performance of the 
+In the Flusight challenges the forecast performance of the 
 "all week" group is considered, while in practice accurate prediction of 
 peak timing and peak intensity before the actual peak occurs is more 
 relevant to health officials \cite{ray.reich2018}.
@@ -667,7 +660,7 @@ than the equal bin approach across all testing seasons and for both targets.
 The Beta(4) and Beta(1) models don't show any advantages for seasonal targets.
 
 We only choose well-documented models and KCDE in our model comparison. 
-There are some other competitive models during the flu activity forecast challenge, 
+There are some other competitive models during the Flusight challenge, 
 such as the delta density method \cite{brooks.etal2018}, 
 the empirical Bayes framework \cite{Brooks2015}, the dynamic Bayesian model \cite{osthus.etal2019}, etc.
 Some time series models for proportions are also possible in flu activity forecasting, 

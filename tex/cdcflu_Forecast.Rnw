@@ -58,13 +58,13 @@ Erlangen, Germany}
   endemic-epidemic modelling framework to time series of infectious
   disease proportions.
   Using U.S. influenza-like illness surveillance data over 18 seasons,
-  we assessed probabilistic forecasts by this new beta autoregressive
-  model and by other readily available forecasting tools, including
-  Prophet and (S)ARIMA, and a competitive model, kernel
-  condition density estimation (KCDE).
+  we assessed probabilistic forecasts of this new beta autoregressive
+  model with proper scoring rules. Other readily available forecasting
+  tools were used for comparison, including Prophet, (S)ARIMA, and kernel
+  conditional density estimation (KCDE).
   % Results:
   Short-term flu activity up to four weeks ahead was best predicted by the
-  beta model with four autoregressive lags or by more involved KCDE.
+  beta model with four autoregressive lags and KCDE.
   Non-dynamic models, Prophet and naive historical forecast, have the 
   worst scores.
   For seasonal peak prediction, only KCDE consistently outperformed the 

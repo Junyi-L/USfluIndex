@@ -107,6 +107,9 @@ The flu activity levels are based on the national weighted influenza-like illnes
 which is the proportion of outpatient visits with ILI reported through the ILINet weighted 
 by state population \cite{CDCoverview}.
 
+Nsoesie et al. \cite{nsoesie.etal2014} and Chretien et al. \cite{chretien.etal2014} review influenza forecasting models systematically. 
+Reich et al. \cite{Reich2019}
+
 Lu and Meyer \cite{beta:theory} introduce an endemic-epidemic beta model for infectious disease proportions,
 which is an extension of the HHH modeling framework \cite{held.etal2005} for infectious disease counts.
 In the HHH framework, the disease incidence is divided into two components: an endemic component 

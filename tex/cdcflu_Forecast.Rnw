@@ -451,7 +451,7 @@ points when there are more observations available.
 The overall short-term performance is summarized in Table \ref{tab:res_ph1_4_2}.
 We consider two kinds of subsets in short-term forecast performance comparison. 
 The "all weeks" subset summarizes the mean log score and the mean Dawid-Sebastiani
-score over the test period. 
+score over the testing period. 
 The "MMWR weeks 40 - 20" subset summarizes the mean log score and the mean 
 Dawid-Sebastiani score over MMWR weeks 40 - 20 in the testing period,
 which are of more interest for the disease control purpose. 
@@ -494,7 +494,7 @@ print(xtable(res_ph1_4_2, align = "ccc|rrrrrr",
              Dawid-Sebastiani score (DSS) over the testing period. 
              The "MMWR weeks 40 - 20" group summarizes the mean log score (LS) and
              the mean Dawid-Sebastiani score (DSS) over MMWR weeks 40 - 20 in the testing period.
-             The total run time for estimation, reestimation at all test weeks 
+             The total run time for estimation, reestimation
              and forecasting for all prediction horizons are given in minutes. 
              For KCDE, the total run time does not include reestimation.',
              digits = c(0,0,0,2,2,2,2,0,0),
@@ -517,7 +517,7 @@ print_2heading_xtable(res_ph1_4,
                       two-weeks, three-weeks and four-weeks ahead forecast. 
                       Ranks are shown in bracket. The "all weeks" group summarizes 
                       the mean log score (LS) and the mean Dawid-Sebastiani score (DSS)
-                      over the test period. The "MMWR week 40 - 20" group summarizes 
+                      over the testing period. The "MMWR week 40 - 20" group summarizes 
                       the mean log score (LS) and the mean Dawid-Sebastiani score (DSS)
                       over MMWR weeks 40 - 20 in the testing period.',
                       xtable.label = "tab:res_ph1_4",
@@ -544,7 +544,7 @@ The mean is indicated in dots.}
 
 For seasonal targets, we summarize the model performance for two subsets: "all weeks" and "before peak". 
 The "all week" group summarizes the mean log score and maximum log score for 
-all predictions in the test period. 
+all predictions in the testing period. 
 The "before peak" group summarizes the mean log score and maximum log score 
 for predictions in weeks before the actual peak for the given season. 
 In the Flusight challenges the forecast performance of the 
@@ -556,7 +556,7 @@ The model performance for seasonal targets is summarized in Table \ref{tab:res_p
 In terms of mean log score, the equal bin approach has the worst forecast performance
 for both seasonal targets and two different subsets.
 For peak intensity prediction, KCDE has the best performance in terms of mean 
-log score for all predictions in the test period. 
+log score for all predictions in the testing period. 
 The naive approach has the second-best performance. 
 Then follow Beta(1), Beta(4), SARIMA, ARIMA and Prophet. 
 The rank of models is the same for the "before peak" subset.
@@ -604,7 +604,7 @@ print_2heading_xtable(res_peak,
                       xtable.caption = 'Summaries of model performance for predictions of 
                       peak week intensity and peak week timing. 
                       The "all weeks" group summarizes the mean log score and maximum 
-                      log score for all predictions in the test period. 
+                      log score for all predictions in the testing period. 
                       The "before peak" group summarizes the mean log score and 
                       maximum log score for predictions in weeks before the actual 
                       peak for the given season.',

@@ -58,20 +58,22 @@ Erlangen, Germany}
   endemic-epidemic modelling framework to time series of infectious
   disease proportions.
   Using U.S. influenza-like illness surveillance data over 18 seasons,
-  we assessed probabilistic forecasts by this new beta autoregressive
-  model and by other readily available forecasting tools, including
-  Prophet and (S)ARIMA, and a competitive model, kernel
-  condition density estimation (KCDE).
+  we assessed probabilistic forecasts of this new beta autoregressive
+  model with proper scoring rules. Other readily available forecasting
+  tools were used for comparison, including Prophet, (S)ARIMA, and kernel
+  conditional density estimation (KCDE).
   % Results:
-  Short-term flu activity up to four weeks ahead was best predicted by the
-  beta model with four autoregressive lags or by more involved KCDE.
-  Non-dynamic models, Prophet and naive historical forecast, have the 
-  worst scores.
-  For seasonal peak prediction, only KCDE consistently outperformed the 
-  equal bin appoach which assigns equal probablity to each possible outcomes.
-  In normal seasons, two non-dynamic models have particularly good forecast 
-  performance, while in other seasons some of the dynamic models have better scores. 
-  The beta model doesn't show any competence.
+  Short-term flu activity up to four weeks ahead was equally well
+  predicted by the beta model with four autoregressive lags and by KCDE,
+  but the beta model runs much faster. Non-dynamic Prophet scored worst.
+  Relative performance differed for seasonal peak prediction.
+  Only KCDE and naive historical forecasts
+  consistently outperformed the equal bin reference appoach.
+  %% which assigns equal probability to each possible outcome.
+  In seasons with standard epidemic curves, Prophet produced the best peak
+  intensity forecasts. Peak timing was best predicted by SARIMA, KCDE, or
+  the Beta model, depending on the season. KCDE showed the most robust
+  and best overall performance in predicting peak timing and intensity.
   % Conclusion:
   We conclude that the endemic-epidemic beta model is a performant and
   easy-to-implement tool to forecast flu activity a few weeks ahead.

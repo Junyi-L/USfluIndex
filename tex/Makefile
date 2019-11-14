@@ -1,7 +1,7 @@
-## master tex to pdf
-cdcflu_Forecast.pdf: cdcflu_Forecast.tex references_Forecast.bib
+cdcflu_Forecast.pdf: references_Forecast.bib
+
+%.pdf: %.tex
 	R --vanilla --slave -e "tools::texi2pdf('$<', clean = TRUE)"
 
-## master Rnw to tex
-cdcflu_Forecast.tex: cdcflu_Forecast.Rnw ../*.r
+%.tex: %.Rnw
 	R --slave --no-save --no-restore -e "knitr::knit('$<')"

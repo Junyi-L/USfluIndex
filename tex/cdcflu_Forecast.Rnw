@@ -186,7 +186,7 @@ through the ILINet weighted by state population \cite{CDCoverview}.
 It is a standard measure of the national-level flu activity.
 
 The Morbidity and Mortality Weekly Report (MMWR) week is used by the CDC to report
-the wILI data\cite{MMWR}. 
+the wILI data \cite{MMWR}. 
 The MMWR week ranges from 1 to 52, sometimes to 53.
 The MMWR week 1 corresponds to the first week in the year, sometimes the last week in the last year.
 In most years flu activity begins to increase at the beginning of October, 

@@ -440,7 +440,7 @@ the observations until the specified time point in testing
 data while the structure of model is kept. 
 For KCDE, we implement the approach provided by Ray et.al \cite{ray.etal2017}, 
 which does not perform reestimation. 
-It's cumbersome to reestimate parameters for KCDE since it takes 
+It is cumbersome to reestimate parameters for KCDE since it takes 
 around 4 hours to estimate parameters.
 The structure and parameters of the Prophet model are updated 
 during the testing period since Prophet needs to updates its change 
@@ -642,7 +642,7 @@ The KCDE model has the best model performance for higher prediction horizons
 and Beta(4) is the second-best, while KCDE has higher model complexity and around
 93 times higher run time than Beta(4) model. 
 The forecast performance of Beta(4) decreases over prediction horizon. 
-Non-dynamic models, Prophet and naive, don't show any competence in the short-term forecast.
+Non-dynamic models, Prophet and naive, do not show any competence in the short-term forecast.
 
 For seasonal targets, all models have better forecast performance than equal bin
 on average in terms of mean log score. 
@@ -657,7 +657,7 @@ Some dynamic models show competence in those seasons, such as all five dynamic m
 in season 2015/2016 for peak intensity prediction and the KCDE model in season 2016/2016
 for peak timing prediction. KCDE is the only model which is consistently better
 than the equal bin approach across all testing seasons and for both targets. 
-The Beta(4) and Beta(1) models don't show any advantages for seasonal targets.
+The Beta(4) and Beta(1) models do not show any advantages for seasonal targets.
 
 We only choose well-documented models and KCDE in our model comparison. 
 There are some other competitive models during the Flusight challenge, 
@@ -670,7 +670,7 @@ Makridakis et.al. \cite{makridakis.etal2018} evaluate the performance of statist
 and machine learning forecasting methods using a large monthly time series and observe
 that machine learning methods are dominated by classical statistical methods for both
 long-term and short-term forecasts. 
-Thus we don't include machine learning methods in our comparison. 
+Thus we do not include machine learning methods in our comparison. 
 
 Forecast performance could be improved by augmentation with internet-based 
 nowcast \cite{osthus.etal2019a},  backfill models \cite{brooks.etal2018} and 
@@ -696,7 +696,7 @@ The beta model performs relatively better in short-term forecasting
 than most of the baseline models and has a simple model structure and short run time. 
 By increasing the lags of the beta model, the short-term forecast performance of 
 the beta model can be improved. 
-For seasonal forecasts, the beta model doesn't show any advantages over baseline models. 
+For seasonal forecasts, the beta model does not show any advantages over baseline models. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt}

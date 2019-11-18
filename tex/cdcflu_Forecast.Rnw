@@ -140,8 +140,8 @@ targets in the Flusight challenge and relevant to public health.
 The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets 
 are peak intensity and peak timing prediction. 
 Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that 
-probabilistic forecasts quantify the uncertainty in a prediction and 
-thus are essential for optimal decision making.
+probabilistic forecasts measure the prediction uncertainty and 
+thus are fundamental for decision making.
 In this paper, probabilistic forecasts are made for both short-term and 
 seasonal targets and evaluated by proper scoring rules, 
 such as the log score and the Dawid-Sebastiani score.
@@ -353,7 +353,7 @@ copulas are used to tie these predictive distribution into joint distributions.
 They evaluated different KCDE model specifications and in most cases in their 
 application the KCDE model with periodic kernel components and full bandwidth 
 matrix has better forecast performance than the other model specifications.
-So we use that as our third baseline model, 
+Accordingly we use that as our third baseline model, 
 following the implementation provided in \cite{ray.etal2017}.
 
 

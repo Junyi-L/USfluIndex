@@ -25,6 +25,9 @@
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \usepackage{bm}
 \graphicspath{{../Results/plots/}}
+\DeclareMathOperator{\DSS}{DSS}
+\DeclareMathOperator{\LS}{LS}
+\DeclareMathOperator{\AEE}{AE}
 %=================================================================
 % Full title of the paper (Capitalized)
 \Title{Forecasting Flu Activity in the United States: Benchmarking an Endemic-Epidemic Beta Model}
@@ -242,7 +245,7 @@ We denote the predictive distribution by $F$, predictive density by $f$ and the 
 The log score (LS) is strictly proper and defined as
 
 \begin{equation}
-LS(F,y) = -\log f(y).
+\LS(F,y) = -\log f(y).
 \end{equation}
 
 The log score in this paper is not directly comparable with the log score required by CDC 
@@ -257,14 +260,14 @@ to characterize models with good overall performance measure by the mean log sco
 The Dawid-Sebastiani score (DSS)
 
 \begin{equation}
-DSS(F,y) = 2\log \sigma_F + (y - \mu_F)^2/\sigma_F^2
+\DSS(F,y) = 2\log \sigma_F + (y - \mu_F)^2/\sigma_F^2
 \end{equation}
 is proper and depends only on the mean $\mu_F$ and variance $\sigma_F^2$ of the predictive distribution.
 
 The absolute error (AE) is the distance between the actual observation $y$ and the point forecast $\hat{y}$,
 
 \begin{equation}
-AE(y,\hat{y}) = |y - \hat{y}|.
+\AEE(y,\hat{y}) = |y - \hat{y}|.
 \end{equation}
 
 For seasonal targets, we simulate 10000 trajectories starting from each week between 
@@ -306,13 +309,13 @@ component $\nu_t$ and an epidemic component $\sum_{k = 1}^p \beta_k g(X_{t-k})$.
 The endemic component is modeled as a linear predictor,
 
 \begin{equation}
-\nu_t = \alpha^{(v)} + \bm{\beta}^{(v)^T}\bm{z}_t^{(v)}.
+\nu_t = \alpha^{(v)} + \bm{\beta}^{(v)^\top}\bm{z}_t^{(v)}.
 \end{equation}
 
 The precision parameter $\phi_t$ can also be time-varying with
 
 \begin{equation}
-\log(\phi_t) = \alpha^{(\phi)} + \bm{\beta}^{(\phi)^T}\bm{z}_t^{(\phi)}.
+\log(\phi_t) = \alpha^{(\phi)} + \bm{\beta}^{(\phi)^\top}\bm{z}_t^{(\phi)}.
 \end{equation}
 
 

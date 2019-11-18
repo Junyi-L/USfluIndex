@@ -140,8 +140,8 @@ targets in the Flusight challenge and relevant to public health.
 The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets 
 are peak intensity and peak timing prediction. 
 Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that 
-"probabilistic forecasts serve to quantify the uncertainty in a prediction, 
-and they are an essential ingredient of optimal decision making". 
+probabilistic forecasts quantify the uncertainty in a prediction and 
+thus are essential for optimal decision making.
 In this paper, probabilistic forecasts are made for both short-term and 
 seasonal targets and evaluated by proper scoring rules, 
 such as the log score and the Dawid-Sebastiani score.

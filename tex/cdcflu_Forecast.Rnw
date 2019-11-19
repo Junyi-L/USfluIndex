@@ -98,7 +98,7 @@ Erlangen, Germany}
 Influenza is a contagious respiratory illness caused by different types of influenza viruses.
 The outcomes of flu infection vary widely and serious infection can cause hospitalization or death.
 The Centers for Disease Control and Prevention (CDC) in the U.S. estimate that around 8\% of the U.S.
-population gets sick from influenza during an average season \cite{Tokars2017}.
+population become infected with influenza during an average season \cite{Tokars2017}.
 Accurate prediction of flu activity provides health officials with valuable information to plan
 disease prevention and allocate treatment resources.
 Since 2013, CDC organizes the "Predict the Influenza Season Challenge"
@@ -110,16 +110,16 @@ Reich et al. \cite{Reich2019} compare the forecast accuracy of 22 models from fi
 Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent FluSight challenge.
 Some common approaches can be grouped into following categories \cite{brooks.etal2018}:
 compartmental models \cite{shaman.karspeck2012, hickmann.etal2015}, agent-based models,
-direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008, beta:theory}.
+direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008, held.etal2005, beta:theory}.
 
-Here we focus on time-series models for routinely available public health
+Here we focus on time series models for routinely available public health
 surveillance data. A state-of-the-art approach to model infectious disease
 counts over time is the endemic-epidemic modeling framework introduced by
 Held et al. \cite[``HHH'']{held.etal2005}.
 In the HHH framework, the disease incidence is divided into two components: an endemic component
 which models seasonal variations of the background risk, and an epidemic component which
 adds autoregressive effects to capture disease spread.
-Estimation, simulation and visualization of HHH models is implemented in the
+Estimation, simulation and visualization of HHH models are implemented in the
 R package \texttt{surveillance} \cite{meyer.etal2017}, which has enabled
 a wide range of epidemiological analyses.
 However, when measuring and forecasting flu activity, the proportion of outpatient visits
@@ -146,7 +146,7 @@ kernel conditional density estimation \cite[KCDE]{ray.etal2017} is also included
 We apply these models to predict short-term and seasonal targets, which are also forecast
 targets in the FluSight challenge and relevant to public health.
 The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets
-are the intensity and the timing of the seasonal peak.
+are prediction of the intensity and the timing of the seasonal peak.
 Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that
 probabilistic forecasts measure the prediction uncertainty and
 thus are fundamental for decision making.
@@ -253,7 +253,7 @@ The log score (LS) is strictly proper and defined as
 \end{equation}
 
 The log score in this paper is not directly comparable with the log score required by CDC 
-in the Flusight challenge. 
+in the FluSight challenge. 
 The CDC calculates the log score of multiple bins surrounding the actual observation, 
 which is however not a proper score \cite{ray.reich2018}. 
 
@@ -291,7 +291,7 @@ The mean and maximum of log score of peak timing prediction and peak intensity
 prediction over each starting week and the starting week before the actual peak 
 week are used to evaluate the model performance of long-term targets.
 
-\subsection{Endemic-epidemic beta model}
+\subsection{Endemic-epidemic \emph{beta} model}
 \label{subsec:beta}
 Lu and Meyer \cite{beta:theory} propose an extension of the HHH framework 
 for infectious disease proportions, by using the beta distribution. 
@@ -554,7 +554,7 @@ The "all week" group summarizes the mean log score and maximum log score for
 all predictions in the testing period. 
 The "before peak" group summarizes the mean log score and maximum log score 
 for predictions in weeks before the actual peak for the given season. 
-In the Flusight challenges the forecast performance of the 
+In the FluSight challenges the forecast performance of the 
 "all week" group is considered, while in practice accurate prediction of 
 peak timing and peak intensity before the actual peak occurs is more 
 relevant to health officials \cite{ray.reich2018}.
@@ -667,7 +667,7 @@ than the equal bin approach across all testing seasons and for both targets.
 The Beta(4) and Beta(1) models do not show any advantages for seasonal targets.
 
 We only choose well-documented models and KCDE in our model comparison. 
-There are some other competitive models during the Flusight challenge, 
+There are some other competitive models during the FluSight challenge, 
 such as the delta density method \cite{brooks.etal2018}, 
 the empirical Bayes framework \cite{Brooks2015}, the dynamic Bayesian model \cite{osthus.etal2019}, etc.
 Some time series models for proportions are also possible in flu activity forecasting, 

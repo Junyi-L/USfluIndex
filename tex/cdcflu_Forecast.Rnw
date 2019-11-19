@@ -502,7 +502,7 @@ print(xtable(res_ph1_4_2, align = "ccc|rrrrrr",
              The "MMWR weeks 40 - 20" group summarizes the mean log score (LS) and
              the mean Dawid-Sebastiani score (DSS) over MMWR weeks 40 - 20 in the testing period.
              The total run time for estimation, reestimation
-             and forecasting for all prediction horizons are given in minutes. 
+             and forecasting at all time points for all prediction horizons is given in minutes.
              For KCDE, the total run time does not include reestimation.',
              digits = c(0,0,0,2,2,2,2,0,0),
              label = "tab:res_ph1_4_2"),

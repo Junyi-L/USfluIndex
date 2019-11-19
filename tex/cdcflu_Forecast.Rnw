@@ -96,57 +96,61 @@ Erlangen, Germany}
 \section{Introduction}
 
 Influenza is a contagious respiratory illness caused by different types of influenza viruses.
-The outcomes of flu infection can vary widely and serious infection can cause hospitalization or death.
-The Centers for Disease Control and Prevention (CDC) in the U.S. estimate that around 8\% of the U.S. 
-population gets sick from influenza during an average season \cite{Tokars2017}. 
-Accurate prediction of flu activity provides health officials with valuable information to plan 
-disease prevention and allocate treatment resources. 
-Since 2013, CDC organizes the "Predict the Influenza Season Challenge" 
-(https://predict.cdc.gov/, a.k.a. CDC Flusight challenge) 
+The outcomes of flu infection vary widely and serious infection can cause hospitalization or death.
+The Centers for Disease Control and Prevention (CDC) in the U.S. estimate that around 8\% of the U.S.
+population gets sick from influenza during an average season \cite{Tokars2017}.
+Accurate prediction of flu activity provides health officials with valuable information to plan
+disease prevention and allocate treatment resources.
+Since 2013, CDC organizes the "Predict the Influenza Season Challenge"
+(https://predict.cdc.gov/, a.k.a. CDC FluSight challenge)
 for every flu season, to encourage academic and private industry researchers to forecast
 the national and regional flu activity.
 Various approaches have been used in influenza forecasting \cite{nsoesie.etal2014, chretien.etal2014}.
 Reich et al. \cite{Reich2019} compare the forecast accuracy of 22 models from five different institutions.
-Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent Flusight challenge.
+Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent FluSight challenge.
 Some common approaches can be grouped into following categories \cite{brooks.etal2018}:
 compartmental models \cite{shaman.karspeck2012, hickmann.etal2015}, agent-based models,
-direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008, beta:theory}. 
+direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008, beta:theory}.
 
-Lu and Meyer \cite{beta:theory} introduce an endemic-epidemic beta model for infectious disease proportions,
-which is an extension of the HHH modeling framework \cite{held.etal2005} for infectious disease counts.
-In the HHH framework, the disease incidence is divided into two components: an endemic component 
-which models time trend and seasonal variations, and an epidemic (autoregressive) component which 
-describes the spread of disease over time. 
-The well-documented R package \texttt{surveillance} \cite{meyer.etal2017} offers methods 
-for visualization, likelihood inference and simulation of HHH models.
-However, when measuring and forecasting the flu activity, the proportion of outpatient visits 
-with ILI is used rather than their counts, and the total number of outpatient visits may be 
-subject to seasonal variation. 
-In the beta model, proportions are typically modeled using a conditional beta distribution, 
-which naturally keeps the boundedness of proportions and accommodates heteroskedasticity and 
-asymmetry of proportion distributions \cite{cribari-neto.zeileis2010}.
+Here we focus on time-series models for routinely available public health
+surveillance data. A state-of-the-art approach to model infectious disease
+counts over time is the endemic-epidemic modeling framework introduced by
+Held et al. \cite[``HHH'']{held.etal2005}.
+In the HHH framework, the disease incidence is divided into two components: an endemic component
+which models seasonal variations of the background risk, and an epidemic component which
+adds autoregressive effects to capture disease spread.
+Estimation, simulation and visualization of HHH models is implemented in the
+R package \texttt{surveillance} \cite{meyer.etal2017}, which has enabled
+a wide range of epidemiological analyses.
+However, when measuring and forecasting flu activity, the proportion of outpatient visits
+with ILI is used rather than their counts, and the total number of outpatient visits is
+subject to seasonal variation.
+For this purpose, Lu and Meyer \cite{beta:theory} borrowed the HHH
+approach and introduced an endemic-epidemic \emph{beta} model designed for
+time series of infectious disease proportions.
+In this model, proportions are modeled using a conditional beta distribution,
+which naturally keeps the boundedness of proportions and accommodates heteroskedasticity and
+potential asymmetry of proportion distributions. Likelihood inference is
+straightforward via the R package \texttt{betareg} \cite{cribari-neto.zeileis2010}.
+The beta model thus represents a relatively simple and fast approach to forecast proportions.
 
-
-The endemic-epidemic beta model is a relatively simple and fast approach to forecast proportions, 
-which allows for standard likelihood inference as implemented in the R package
-\texttt{betareg} \cite{cribari-neto.zeileis2010}. 
-We consider some alternative methods with well-documented implementations and available R package,
-and compare their forecast performance with the beta model using the wILI index from 1998 to 2018
-provided by CDC in the U.S. 
-These methods are seasonal autoregressive integrated moving average (SARIMA) 
-model \cite{hyndman.khandakar2008}, harmonic regression with ARIMA errors \cite{hyndman.khandakar2008} 
-and Prophet model by Facebook \cite{Taylor2018}. 
-Furthermore, a successful competitor in the Flusight challenge, 
-the kernel conditional density estimation (KCDE) method \cite{ray.etal2017} is also included in our comparison.
-We apply these models to predict short-term and seasonal targets, which are also forecast 
-targets in the Flusight challenge and relevant to public health. 
-The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets 
-are peak intensity and peak timing prediction. 
-Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that 
-probabilistic forecasts measure the prediction uncertainty and 
+The purpose of this work is to investigate the usefulness of the
+endemic-epidemic beta model as a forecasting tool.
+We benchmark the beta model against several alternative methods with
+readily available and well-documented implementations in R \cite{R:base}.
+These methods are the seasonal autoregressive integrated moving average (SARIMA)
+model \cite{hyndman.khandakar2008}, harmonic regression with ARIMA errors \cite{hyndman.khandakar2008}
+and Facebook's forecasting tool Prophet \cite{Taylor2018}.
+Furthermore, a successful competitor in the FluSight challenge,
+kernel conditional density estimation \cite[KCDE]{ray.etal2017} is also included in our comparison.
+We apply these models to predict short-term and seasonal targets, which are also forecast
+targets in the FluSight challenge and relevant to public health.
+The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets
+are the intensity and the timing of the seasonal peak.
+Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that
+probabilistic forecasts measure the prediction uncertainty and
 thus are fundamental for decision making.
-In this paper, probabilistic forecasts are made for both short-term and 
-seasonal targets and evaluated by proper scoring rules, 
+In this paper, probabilistic forecasts are evaluated by proper scoring rules,
 such as the log score and the Dawid-Sebastiani score.
 
 

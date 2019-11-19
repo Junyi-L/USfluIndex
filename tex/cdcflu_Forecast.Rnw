@@ -203,17 +203,17 @@ of interest for the disease control purpose.
 The MMWR week 40 is roughly at the end of September or at the beginning of October. 
 The MMWR week 20 corresponds roughly to the second or third week in May. 
 In this paper, we index seasons from MMWR week 31 to MMWR week 30 in the next year. 
-Then season week one corresponds to MMWR week 31.
+Accordingly season week one corresponds to MMWR week 31.
 
 We use CDC's weekly national wILI data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}) 
 for our analysis. 
 This data can be easily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. 
-The last four seasons are used as testing data to assess the forecast performance. 
-Since we are focused on seasonal influenza, the two H1N1 pandemic seasons, 
-2008/2009 and 2009/2010 are excluded in our analysis. 
-The ILINet members continuously provide backfill reports for past weeks and the previously 
+The last four seasons are taken as testing data to assess the forecast performance. 
+Two H1N1 pandemic seasons, 2008/2009 and 2009/2010 are excluded in our analysis, 
+since we are focused on seasonal influenza forecasting .
+The ILINet members continuously provide backfill reports for past weeks and consequently the previously 
 issued wILI may be modified \cite{osthus.etal2019a}. 
-In this paper, we ignore the backfill of the wILI data. 
+In this paper, however, we ignore the backfill of the wILI data. 
 
 
 
@@ -232,16 +232,16 @@ This cutoff is indicated with a vertical dashed line.}
 \subsection{Prediction targets and evaluation criteria}
 \label{subsec:targets}
 
-We use prediction targets of FluSight challenges organized by CDC \cite{biggerstaff.etal2018} 
-and used by Ray et al. \cite{ray.etal2017} for model comparison.
+We utilize prediction targets of FluSight challenges organized by CDC \cite{biggerstaff.etal2018} 
+and in \cite{ray.etal2017} for model comparison.
 They can be divided into two parts: short-term targets and seasonal targets. 
 The short-term targets are one-week, two-weeks, three-weeks and four-weeks ahead forecasts of wILI. 
 The seasonal targets consist of peak week timing and intensity prediction. 
 The peak week of an influenza season is the week which has the highest wILI during the season. 
 The peak intensity is the highest value, that the wILI reaches during the influenza season.
 
-We evaluate the model performance of short-term target by using the mean log score \cite{gneiting.etal2007},
-Dawid-Sebastiani score \cite{dawid.sebastiani1999} and the absolute error averaged over the testing period 
+We evaluate the model performance of short-term targets by the mean log score \cite{gneiting.etal2007},
+Dawid-Sebastiani score \cite{dawid.sebastiani1999} and absolute error over the testing period 
 or a subset of the testing period. 
 We also repeat the maximum log score in \cite{ray.etal2017}.
 
@@ -255,11 +255,11 @@ The log score (LS) is strictly proper and defined as
 The log score in this paper is not directly comparable with the log score required by CDC 
 in the FluSight challenge. 
 The CDC calculates the log score of multiple bins surrounding the actual observation, 
-which is however not a proper score \cite{ray.reich2018}. 
+which is nevertheless not a proper score \cite{ray.reich2018}. 
 
-The maximum log score is not proper. 
-It is a measure of worst-case performance and should be considered as a secondary measure 
-to characterize models with good overall performance measure by the mean log score \cite{ray.etal2017}.
+The maximum log score is a measure of worst-case performance and not proper. 
+It should be only considered when a model has good overall performance 
+measured by the mean log score \cite{ray.etal2017}.
 
 The Dawid-Sebastiani score (DSS)
 
@@ -279,22 +279,22 @@ season week 10 and season week 41 from each fitted model for each season in the 
 For each starting week, we obtain the empirical distribution of peak timing $\hat{F}_{Time}$ 
 from those simulated trajectories. 
 Then the log score of peak timing prediction for one starting week
-is $- \log (\hat{F}_{Time}(w) - \hat{F}_{Time}(w - 1))$, where $w$ is the actual peak week.
-For peak intensity prediction, we calculate the log score for binned incidence. 
-The bins are $[0,0.5)$, $[0.5,1)$,$\dots$, $[13,\infty]$. 
+is calculated as $- \log (\hat{F}_{Time}(w) - \hat{F}_{Time}(w - 1))$, where $w$ is the actual peak week.
+For peak intensity prediction, we calculate the log score for binned proportion. 
+The bins are $[0,0.5 \%)$, $[0.5 \%,1 \%)$,$\dots$, $[13 \%,\infty]$. 
 For each starting week, we obtain the empirical distribution of binned peak week 
 intensity $\hat{F}_{Int}$ from the simulated trajectories. 
 The log score of peak week intensity prediction is calculated
 as $- \log (\hat{F}_{Int}(I) - \hat{F}_{Int}(I - 1))$, where $I$ is the index of the
 bin where the actual peak intensity lies.
-The mean and maximum of log score of peak timing prediction and peak intensity 
+The mean and maximum log score of peak timing prediction and peak intensity 
 prediction over each starting week and the starting week before the actual peak 
 week are used to evaluate the model performance of long-term targets.
 
 \subsection{Endemic-epidemic \emph{beta} model}
 \label{subsec:beta}
 Lu and Meyer \cite{beta:theory} propose an extension of the HHH framework 
-for infectious disease proportions, by using the beta distribution. 
+for infectious disease proportions. 
 For time $t = 1,...,T$, $X_t$ is the proportion of newly infected individuals
 by a certain disease at time $t$ and is assumed to follow a beta distribution
 with mean $\mu_t$ and precision $\phi_t$ conditional on past observations,
@@ -308,7 +308,7 @@ g(\mu_t)= \nu_t + \sum_{k = 1}^p \beta_k g(X_{t-k}),
 \end{equation}
 where $g(x) = \log(\frac{x}{1 - x})$ is the logit link function, 
 $\mathcal{F}_{t-1} = \sigma(X_1,\dots,X_{t-1})$. 
-The transformed conditional mean $\mu_t$ can be decomposed into an endemic 
+The transformed conditional mean $g(\mu_t)$ can be decomposed into an endemic 
 component $\nu_t$ and an epidemic component $\sum_{k = 1}^p \beta_k g(X_{t-k})$.
 The endemic component is modeled as a linear predictor,
 
@@ -347,16 +347,17 @@ We use the \emph{auto.arima} function from the R package
 the SARIMA model by a stepwise procedure.
 
 The second baseline model is a harmonic regression model with ARIMA errors,
-where the regressors contain holiday effects via dummy variables, 
-fitted by data after logit transformation. We call this model ARIMA for short. 
+or ARIMA for short,
+with regressors containing holiday effects via dummy variables, 
+fitted by data after logit transformation. 
 The number of harmonics is chosen by AICc using the training data, 
 and the order of the ARIMA part is chosen by the \emph{auto.arima} function
 in R package \texttt{forecast} \cite{hyndman.khandakar2008}. 
 
 Ray et al. \cite{ray.etal2017} proposed an approach to generate predictions
-of disease incidence by using kernel conditional density estimation (KCDE) and copulas.
+of disease incidence by combining kernel conditional density estimation (KCDE) and copulas.
 For each prediction horizon, predictive distributions are estimated by KCDE and 
-copulas are used to tie these predictive distribution into joint distributions. 
+copulas tie these predictive distribution into joint distributions. 
 They evaluated different KCDE model specifications and in most cases in their 
 application the KCDE model with periodic kernel components and full bandwidth 
 matrix has better forecast performance than the other model specifications.
@@ -364,8 +365,8 @@ Accordingly we use that as our third baseline model,
 following the implementation provided in \cite{ray.etal2017}.
 
 
-Facebook’s Core Data Science team developed the automatic forecasting procedure Prophet, 
-which is implemented in the R package \texttt{prophet} \cite{Taylor2018}. 
+Facebook’s Core Data Science team developed the automatic forecasting procedure Prophet
+and implemented it in the R package \texttt{prophet} \cite{Taylor2018}. 
 Since the Prophet model assumes Gaussian errors, we fit data on the logit scale. 
 Same holiday effects as in the beta model and the ARIMA model are taken into account.
 
@@ -377,12 +378,12 @@ calendar week in previous seasons.
 For seasonal targets, we consider an additional reference approach which 
 assigns equal probability to all possible outcomes. 
 For prediction of peak week timing, probability is assigned equally to 
-season week 10 to 42 because historically high flu activity occurred 
-between season week 10 to 42. For prediction of peak intensity, 
-equal probability is assigned to bins $[0,0.5)$, $[0.5,1)$,$\dots$, $[13,\infty]$ percent.
+season week 10 to 42, since historically high flu activity occurred 
+between season weeks 10 and 42. For peak intensity prediction, 
+equal probability is assigned to binned proportions.
 
 The beta model, ARIMA model, SARIMA model and KCDE model are dynamic models, 
-and the Prophet model, naive approach and the equal bin approach are non-dynamic models.
+and the Prophet model, naive approach and equal bin approach are non-dynamic models.
 
 %--------------------------------------------------------------------------------
 \section{Results}

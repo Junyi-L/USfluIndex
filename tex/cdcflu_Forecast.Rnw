@@ -404,42 +404,42 @@ The peak of each season is indicated in black points.}
 \label{fig:wILIholiday}
 \end{figure}
 
-In most seasons, a peak or secondary peak occurs during season week 22, 
+In most seasons, a peak or secondary peak appears during season week 22, 
 which corresponds to the MMWR week 52 (Figure \ref{fig:wILIholiday}). 
 After season week 22, wILI decreases until the start of another peak. 
 The peak pattern on season week 22 could be explained by the fact that
-during the winter holiday patients choose not to visit the doctor for 
-less serious issues, thus reducing the number of non-ILI visits and 
+during the winter holiday patients tend not to visit the doctor for 
+less severe illness, thus reducing the number of non-ILI visits and 
 consequently increasing wILI \cite{brooks.etal2018}. 
 During the winter holidays, the transmission of ILI is hampered 
 due to a reduction of work and school contacts \cite{Hens2009}.
 Then the number of ILI visits decreases towards the end of the 
 winter holidays, and wILI drops during season week 23 \cite{brooks.etal2018}.
 Figure \ref{fig:wILI} shows no time trend or increasing/decreasing 
-variation od wILI from 1998 to 2018. 
+variation of wILI from 1998 to 2018. 
 To capture this pattern in our models, we include two dummy 
 variables $x_t$ and $y_t$ for season weeks 22 and 23 respectively
 and exclude time trend in the harmonic regression for the covariates
 $\bm{z}_t^{(v)}$ and $\bm{z}_t^{(\phi)}$ in the beta model.
-AIC is a useful criterion if prediction is the sole purpose \cite{shmueli2010}. 
+AIC is a useful criterion if prediction is the exclusive purpose \cite{shmueli2010}. 
 However, AIC causes overfitting when the sample size is small or
-the number of parameters is large. 
+the number of parameters is relatively large. 
 In this case, AICc is a more suitable criterion \cite{HURVICH1989}\cite{Burnham2002}.
-For the beta model, the number of harmonics $S_v$, $S_{\phi}$ and 
+In the beta model, the number of harmonics $S_v$, $S_{\phi}$ and 
 the order of autoregressive terms $p$ are chosen by AICc jointly 
 using the training data. This procedure resulted in a beta model 
 with $p = 4$, $S_v = 3$ and $S_{\phi} = 3$. 
 Moreover, we include the beta model with $p = 1$, $S_v = 3$ 
-and $S_{\phi} = 4$, which has the best AICc among the beta models with $p = 1$.
+and $S_{\phi} = 4$, which has the best AICc among the beta models with one autoregressive lag.
 
 We use the \emph{auto.arima} function from the R package 
 \texttt{forecast} \cite{hyndman.khandakar2008} to determine 
 the order of the SARIMA model and the ARIMA model by a stepwise procedure. 
 This procedure resulted in a SARIMA(1,0,0)(1,1,0)[52] 
-and a ARIMA(5,1,0) model with $S = 4$.
+and an ARIMA(5,1,0) model with $S = 4$.
 
 
-We implemented the beta model and baseline models in Section \ref{subsec:baselne}
+We implemented the beta model and baseline models introduced in Section \ref{subsec:baselne}
 to compare their forecast performance. For beta and (S)ARIMA, 
 training data are used to determine the structure of the model
 (e.g. order of AR and MA terms, number of harmonics). 
@@ -448,28 +448,28 @@ the observations until the specified time point in testing
 data while the structure of model is kept. 
 For KCDE, we implement the approach provided by Ray et.al \cite{ray.etal2017}, 
 which does not perform reestimation. 
-It is cumbersome to reestimate parameters for KCDE since it takes 
+Indeed, it is cumbersome to reestimate parameters for KCDE since it takes 
 around 4 hours to estimate parameters.
 The structure and parameters of the Prophet model are updated 
-during the testing period since Prophet needs to updates its change 
+through the testing period since Prophet needs to updates its change 
 points when there are more observations available. 
 
 \subsection{Short-term targets}%------------------------------------------------------
 
 The overall short-term performance is summarized in Table \ref{tab:res_ph1_4_2}.
-We consider two kinds of subsets in short-term forecast performance comparison. 
-The "all weeks" subset summarizes the mean log score and the mean Dawid-Sebastiani
+We consider two kinds of subsets in the short-term forecast performance comparison. 
+The "all weeks" subset summarizes the mean log score and mean Dawid-Sebastiani
 score over the testing period. 
-The "MMWR weeks 40 - 20" subset summarizes the mean log score and the mean 
+The "MMWR weeks 40 - 20" subset summarizes the mean log score and mean 
 Dawid-Sebastiani score over MMWR weeks 40 - 20 in the testing period,
-which are of more interest for the disease control purpose. 
+which are of more interest for disease control purpose. 
 
 For the "all weeks" subset KCDE has the best Dawid-Sebastiani score, 
 the lowest maximum log score and the lowest absolute error. 
-The Beta(4) model has the best mean log score and has second-best forecast
+The Beta(4) model has the best mean log score and second-best forecast
 performance in terms of maximum log score, absolute error and Dawid-Sebastiani score.
 Forecasting with Beta(4) is considerably faster than with KCDE and has 
-fewer parameters to estimate. Then follows Beta(1), ARIMA and SARIMA. 
+fewer parameters to estimate. Then follow Beta(1), ARIMA and SARIMA. 
 The Prophet model and naive approach have the worst short-term forecast performance. 
 When considering scores only over the MMWR weeks 40-20, 
 it results in very similar rankings. 
@@ -477,9 +477,9 @@ The Beta(4) model has better mean log score on average than the Beta(1) model fo
 
 The forecast performance of Beta(4) decreases over prediction horizons
 (Table \ref{tab:res_ph1_4}). 
-For one-week-ahead forecasts, Beta(4) outperforms all other models in terms 
+For one-week-ahead forecast, Beta(4) outperforms all other models in terms 
 of mean log score and Dawid-Sebastiani score for both subsets. 
-For higher prediction horizons and both subsets, KCDE has the best or 
+For higher prediction horizons and in both subsets, KCDE has the best or 
 close to the best mean log score and Dawid-Sebatiani score, while Beta(4)
 is always the second-best, except that for two-weeks ahead forecast
 Beta(4) has the best mean log score.
@@ -487,7 +487,7 @@ Beta(4) has the best mean log score.
 Seasonal summaries of the log score difference between Beta(4) and Beta(1),
 KCDE or ARIMA respectively in one- to four-weeks-ahead forecasts for 
 subset "MMWR weeks 40 - 20" are shown in Figure \ref{fig:STbox}. 
-For higher prediction horizons, KCDE outperforms Beta(4) in all but the last season.
+For higher prediction horizons, KCDE outperforms Beta(4) in all but the last testing season.
 
 
 
@@ -541,9 +541,9 @@ print_2heading_xtable(res_ph1_4,
 \includegraphics[width=\textwidth]{STbox.pdf}
 \centering
 \caption{A summary of the log score difference between Beta(4) and Beta(1), 
-KCDE or ARIMA for prediction horizons one to four over MMWR weeks 40-20 in the testing period. 
+KCDE or ARIMA for prediction horizons one to four in the "MMWR weeks 40-20" subset in the testing period. 
 Positive values indicate that Beta(4) outperforms baseline models. 
-The mean is indicated in dots.}
+The mean is marked with dots.}
 \label{fig:STbox}
 \end{figure}
 
@@ -551,56 +551,57 @@ The mean is indicated in dots.}
 \subsection{Seasonal targets}
 
 For seasonal targets, we summarize the model performance for two subsets: "all weeks" and "before peak". 
-The "all week" group summarizes the mean log score and maximum log score for 
+The "all week" subset summarizes the mean log score and maximum log score for 
 all predictions in the testing period. 
-The "before peak" group summarizes the mean log score and maximum log score 
+The "before peak" subset summarizes the mean log score and maximum log score 
 for predictions in weeks before the actual peak for the given season. 
 In the FluSight challenges the forecast performance of the 
-"all week" group is considered, while in practice accurate prediction of 
+"all week" subset is evaluated, while in practice accurate prediction of 
 peak timing and peak intensity before the actual peak occurs is more 
-relevant to health officials \cite{ray.reich2018}.
+meaningful to health officials \cite{ray.reich2018}.
 
 The model performance for seasonal targets is summarized in Table \ref{tab:res_peak}. 
 In terms of mean log score, the equal bin approach has the worst forecast performance
-for both seasonal targets and two different subsets.
-For peak intensity prediction, KCDE has the best performance in terms of mean 
-log score for all predictions in the testing period. 
+for both seasonal targets and in two different subsets.
+For peak intensity prediction and in "all weeks" subset, 
+KCDE has the best performance in terms of mean 
+log score. 
 The naive approach has the second-best performance. 
 Then follow Beta(1), Beta(4), SARIMA, ARIMA and Prophet. 
-The rank of models is the same for the "before peak" subset.
-For peak timing prediction, KCDE has the best mean log score for the "all weeks" subset. 
+The rank of models is the same in the "before peak" subset.
+For peak timing prediction, KCDE has the best mean log score in the "all weeks" subset. 
 Then follows Prophet, ARIMA, naive, Beta(4) and Beta(1). 
-The ARIMA model has the best forecast performance for the "before peak" subset. 
-Then follows KCDE, Prophet, naive approach and Beta(4).
+The ARIMA model has the best forecast performance in the "before peak" subset. 
+Then follow KCDE, Prophet, naive approach and Beta(4).
 
-We now focus on the forecast performance for the subset "before peak"
-for each testing seasons.
+We now focus on the forecast performance in the subset "before peak"
+during each testing seasons.
 In season 2014/2015, the peak intensity is normal and the peak timing week 
 is relatively early in comparison to the training seasons (Figure \ref{fig:wILIholiday}
-and Figure \ref{fig:Peakbox}), while in many seasons in the training seasons 
+and Figure \ref{fig:Peakbox}), while in many training seasons
 the wILI has peaked on that week.
 All models show better forecast performance than the equal bin approach 
-in both peak intensity and peak timing prediction. 
+in both peak intensity and timing prediction. 
 The Prophet model has the best peak intensity prediction, and the SARIMA model
 has the best peak timing prediction.
 In season 2015/2016, the peak intensity was lower and the peak occurred later 
-than the most training seasons. For peak timing prediction, only the KCDE model
-shows better forecast performance than the equal bin approach in this season.
-Furthermore, for peak intensity prediction Prophet and the naive approach show 
-worse forecast performance than the equal bin approach in this season. 
-The other five dynamic models have better peak intensity prediction than equal bin. 
-Season 2016/2017 is a relatively normal season. Both non-dynamic models, Prophet
+than the most training seasons. Only the KCDE model
+produces better peak timing prediction than the equal bin approach in this season.
+Furthermore, Prophet and naive provide 
+worse peak intensity prediction than equal bin in this season. 
+Five dynamic models have better peak intensity prediction than equal bin. 
+Season 2016/2017 is a relatively normal season. Two non-dynamic models, Prophet
 and naive, have better predictions for both seasonal targets than dynamic models.
 All models have better prediction than equal bin. 
-Season 2017/2018 has a relatively high peak intensity among all training seasons.
-All models but KCDE has no better forecast performance than equal bin. 
-The peak timing of this season is normal, and all models have better prediction 
-than equal bin in peak timing prediction, while SARIMA is worse than other models.
+Season 2017/2018 has a relatively high peak intensity compared to all training seasons.
+All models but KCDE has worse peak intensity prediction than equal bin. 
+The peak timing of this season is normal, and all models have better peak timing prediction 
+than equal bin, while SARIMA is worse than other models.
 For all testing seasons and both seasonal targets, only KCDE has consistently 
 better forecast performance than equal bin.
 The naive approach has better mean log score than equal bin, but it has
 a worse median log score in season 2015/2016 for both long-term targets. 
-No model is consistently better than naive. 
+Additionally, no model is consistently better than naive. 
 
 <<results="asis", echo = FALSE>>=
 res_peak <- readRDS(paste0(peak_path,"res_peak.rds"))

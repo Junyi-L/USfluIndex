@@ -627,13 +627,12 @@ print_2heading_xtable(res_peak,
 \begin{figure}
 \includegraphics[width=\textwidth]{Peakbox.pdf}
 \centering
-\caption{Each boxplot (left) summarizes predictions made by a model in a given season
-in week before the actual peak week in that season. 
+\caption{Each boxplot (top) summarizes predictions made by a model in subset "before peak".
 The vertical axis is the difference in log score between the given model 
-and the approach which assigns equal probability to each possible week or bin of the season. 
+and the equal bin approach. 
 The mean is indicated in dots. 
 Positive values indicate the case when the model outperforms the equal bin approach.
-The plot (right) shows the trajectory of incidence over each season.}
+The plot (bottom) shows the trajectory of incidence over each season.}
 \label{fig:Peakbox}
 \end{figure}
 
@@ -645,52 +644,56 @@ The plot (right) shows the trajectory of incidence over each season.}
 In this work, the forecast performance for both short-term and seasonal 
 targets of Beta(4) is compared with some commonly used models and a competitive model, the KCDE model.
 
-In short-term prediction for both subsets, Beta(4) model has the best 
+In short-term prediction for both subsets, the Beta(4) model has the best 
 one-week ahead forecast performance in terms of mean log score and Dawid-Sebastiani score. 
 The KCDE model has the best model performance for higher prediction horizons 
 and Beta(4) is the second-best, while KCDE has higher model complexity and around
 93 times higher run time than Beta(4) model. 
 The forecast performance of Beta(4) decreases over prediction horizon. 
 Non-dynamic models, Prophet and naive, do not show any competence in the short-term forecast.
+Moreover, the performance of short-term forecast of the beta model is improved by increasing the 
+number of autoregressive lags from one to four. 
 
 For seasonal targets, all models have better forecast performance than equal bin
 on average in terms of mean log score. 
-The non-dynamic models, Prophet and naive, show particularly good forecast 
-performance when the prediction targets are relatively normal in comparison to
-training seasons, such as for peak intensity prediction in season 2014/2015, 
-and both targets in season 2016/2017. 
-In a season which has unusual peak timing or peak intensity, non-dynamic models
-will have worse forecast performance than the equal bin approach, such as for 
+Depending on the epidemic curve in each season, relaive performance varies 
+with testing seasons. 
+Two non-dynamic models, Prophet and naive, show better forecast 
+performance than dynamic models when the prediction targets are relatively normal in comparison to
+training seasons, e.g. for peak intensity prediction in season 2014/2015, 
+and for both targets in season 2016/2017. 
+In a season which has an unusual peak timing or peak intensity, non-dynamic models
+have worse forecast performance than the equal bin approach, e.g. for 
 both targets in season 2015/2016 and peak intensity prediction in season 2017/2018. 
 Some dynamic models show competence in those seasons, such as all five dynamic models
 in season 2015/2016 for peak intensity prediction and the KCDE model in season 2016/2016
 for peak timing prediction. KCDE is the only model which is consistently better
-than the equal bin approach across all testing seasons and for both targets. 
+than equal bin across all testing seasons and for both targets. 
 The Beta(4) and Beta(1) models do not show any advantages for seasonal targets.
 
-We only choose well-documented models and KCDE in our model comparison. 
+We only include well-documented models and KCDE in our model comparison. 
 There are some other competitive models during the FluSight challenge, 
 such as the delta density method \cite{brooks.etal2018}, 
 the empirical Bayes framework \cite{Brooks2015}, the dynamic Bayesian model \cite{osthus.etal2019}, etc.
-Some time series models for proportions are also possible in flu activity forecasting, 
+Some time series models for proportions are also applicable to flu activity forecasting, 
 such as the $\beta$ARMA model \cite{rocha.cribari-neto2008} and the marginal beta regression
 time series model \cite{Guolo2014}. 
-Makridakis et.al. \cite{makridakis.etal2018} evaluate the performance of statistical 
-and machine learning forecasting methods using a large monthly time series and observe
+Makridakis et.al. \cite{makridakis.etal2018} evaluated the performance of statistical 
+and machine learning forecasting methods using a large monthly time series and observed
 that machine learning methods are dominated by classical statistical methods for both
 long-term and short-term forecasts. 
 Thus we do not include machine learning methods in our comparison. 
 
-Forecast performance could be improved by augmentation with internet-based 
+Forecast performance could be improved by internet-based 
 nowcast \cite{osthus.etal2019a},  backfill models \cite{brooks.etal2018} and 
 multi-model ensemble \cite{Reich2019}\cite{ray.reich2018}.
-As discussed in Section \ref{sec:Diss}, non-dynamic models have shown particularly
-good prediction performance for seasonal targets during normal seasons, 
+As discussed in Section \ref{sec:Diss}, non-dynamic models have shown relatively
+good prediction performance for seasonal targets during standard seasons, 
 while some dynamic models are more competitive during other seasons. 
 Thus multi-model ensemble with time-varying weights, e.g. \cite{ray.reich2018}, 
 is promising to combine the advantages of both kinds of models. 
 More weight could be assigned to non-dynamic models when available observations 
-indicate a normal season and vice versa. 
+indicate a standard season and vice versa. 
 
 
 %Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.

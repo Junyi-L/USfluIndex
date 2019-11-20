@@ -70,13 +70,15 @@ Erlangen, Germany}
   predicted by the beta model with four autoregressive lags and by KCDE,
   but the beta model runs much faster. Non-dynamic Prophet scored worst.
   Relative performance differed for seasonal peak prediction.
-  Only KCDE and naive historical forecasts
-  consistently outperformed the equal bin reference approach.
+  Prophet produced the best peak intensity forecasts
+  in seasons with standard epidemic curves, otherwise KCDE outperformed
+  all other methods. Peak timing was best predicted by SARIMA, KCDE, or
+  the Beta model, depending on the season. The best overall performance in
+  predicting peak timing and intensity was achieved by KCDE.
+  Only KCDE and naive historical forecasts %were robust in that these methods
+  consistently outperformed the equal bin reference approach for all test
+  seasons.
   %% which assigns equal probability to each possible outcome.
-  In seasons with standard epidemic curves, Prophet produced the best peak
-  intensity forecasts. Peak timing was best predicted by SARIMA, KCDE, or
-  the Beta model, depending on the season. KCDE showed the most robust
-  and best overall performance in predicting peak timing and intensity.
   % Conclusion:
   We conclude that the endemic-epidemic beta model is a performant and
   easy-to-implement tool to forecast flu activity a few weeks ahead.

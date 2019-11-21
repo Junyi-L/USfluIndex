@@ -645,11 +645,11 @@ The plot (bottom) shows the trajectory of incidence over each season.}
 In this work, the forecast performance for both short-term and seasonal 
 targets of Beta(4) is compared with some commonly used models and a competitive model, the KCDE model.
 
-In short-term prediction for both subsets, the Beta(4) model has the best 
+In short-term prediction for both subsets, Beta(4) has the best 
 one-week ahead forecast performance in terms of mean log score and Dawid-Sebastiani score. 
-The KCDE model has the best model performance for higher prediction horizons 
+KCDE has the best model performance for higher prediction horizons 
 and Beta(4) is the second-best, while KCDE has higher model complexity and around
-93 times higher run time than Beta(4) model. 
+93 times higher run time than Beta(4). 
 The forecast performance of Beta(4) decreases over prediction horizon. 
 Non-dynamic models, Prophet and naive, do not show any competence in the short-term forecast.
 Moreover, the performance of short-term forecast of the beta model is improved by increasing the 
@@ -659,16 +659,11 @@ For seasonal targets, all models have better forecast performance than equal bin
 on average in terms of mean log score. 
 Depending on the epidemic curve in each season, relaive performance varies 
 with test seasons. 
-Two non-dynamic models, Prophet and naive, show better forecast 
-performance than dynamic models when the prediction targets are relatively normal in comparison to
-training seasons, e.g. for peak intensity prediction in season 2014/2015, 
-and for both targets in season 2016/2017. 
-In a season which has an unusual peak timing or peak intensity, non-dynamic models
-have worse forecast performance than the equal bin approach, e.g. for 
-both targets in season 2015/2016 and peak intensity prediction in season 2017/2018. 
-Some dynamic models show competence in those seasons, such as all five dynamic models
-in season 2015/2016 for peak intensity prediction and the KCDE model in season 2016/2016
-for peak timing prediction. KCDE is the only model which is consistently better
+For peak intensity prediction, two non-dynamic models, Prophet and naive, show better forecast 
+performance in normal seasons than in the other seasons, e.g. in season 2014/2015 and season 2016/2017. 
+
+
+KCDE is the only model which is consistently better
 than equal bin across all test seasons and for both targets. 
 The Beta(4) and Beta(1) models do not show any advantages for seasonal targets.
 

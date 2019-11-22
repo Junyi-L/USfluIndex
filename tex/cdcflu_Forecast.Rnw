@@ -498,8 +498,7 @@ For higher prediction horizons, KCDE outperforms Beta(4) in all but the last tes
 res_ph1_4_2 <- readRDS(paste0(short_path,"res_ph1_4_2.rds"))
 
 print(xtable(res_ph1_4_2, align = "ccc|rrrrrr",
-             caption = 'Summaries of model performance over one-week, two-weeks, 
-             three-weeks and four-weeks ahead forecast. Ranks are shown in bracket. 
+             caption = 'Summaries of model performance for short-term targets. Ranks are shown in bracket. 
              The "all weeks" group summarizes the mean log score (LS) and the mean
              Dawid-Sebastiani score (DSS) over the test period. 
              The "MMWR weeks 40 - 20" group summarizes the mean log score (LS) and
@@ -659,13 +658,16 @@ For seasonal targets, all models have better forecast performance than equal bin
 on average in terms of mean log score. 
 Depending on the epidemic curve in each season, relaive performance varies 
 with test seasons. 
-For peak intensity prediction, two non-dynamic models, Prophet and naive, show better forecast 
-performance in normal seasons than in the other seasons, e.g. in season 2014/2015 and season 2016/2017. 
-
-
-KCDE is the only model which is consistently better
-than equal bin across all test seasons and for both targets. 
-The Beta(4) and Beta(1) models do not show any advantages for seasonal targets.
+For peak intensity prediction, two non-dynamic models, Prophet and naive, 
+have better rank in normal seasons (season 2014/2015 and season 2016/2017) 
+than in the other seasons (season 2015/2016 and season 2017/2018).
+In contrast, KCDE scores best in both unusual seasons. 
+For peak timing prediction, KCDE has the best performance in season 2015/2016,
+when wILI peaked relatively late. 
+In other seasons with normal peak timing, SARIMA, KCDE or beta(1) makes the best prediction.
+In short, KCDE has the best forecast performance for both seasonal targets 
+when the epidemic curve is unusual, and Prophet has the best peak intensity 
+prediction during standard seasons.
 
 We only include well-documented models and KCDE in our model comparison. 
 There are some other competitive models during the FluSight challenge, 
@@ -683,13 +685,14 @@ Thus we do not include machine learning methods in our comparison.
 Forecast performance could be improved by internet-based 
 nowcast \cite{osthus.etal2019a},  backfill models \cite{brooks.etal2018} and 
 multi-model ensemble \cite{Reich2019}\cite{ray.reich2018}.
-As discussed in Section \ref{sec:Diss}, non-dynamic models have shown relatively
-good prediction performance for seasonal targets during standard seasons, 
-while some dynamic models are more competitive during other seasons. 
+Forecasts of seasonal targets have usually worse scores than
+short-term forecasts (Table \ref{tab:res_ph1_4_2} and Table \ref{tab:res_peak}).  
+As discussed above, in seasonal forecasting KCDE outperforms other methods during unusual seasons and 
+Prophet has the best peak intensity prediction during standard seasons. 
 Thus multi-model ensemble with time-varying weights, e.g. \cite{ray.reich2018}, 
-is promising to combine the advantages of both kinds of models. 
-More weight could be assigned to non-dynamic models when available observations 
-indicate a standard season and vice versa. 
+is promising to combine the advantages of these models. 
+For example, when predicting peak intensity, more weight could be assigned to Prophet 
+when available observations indicate a standard season and vice versa. 
 
 
 %Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
@@ -700,11 +703,9 @@ indicate a standard season and vice versa.
 % (This section is mandatory for IJERPH... brief summary...)
 In this paper, we compare the forecast performance of the beta model with 
 some well-implemented baseline models. 
-The beta model performs relatively better in short-term forecasting 
-than most of the baseline models and has a simple model structure and short run time. 
-By increasing the lags of the beta model, the short-term forecast performance of 
-the beta model can be improved. 
-For seasonal forecasts, the beta model does not show any advantages over baseline models. 
+In conclusion, the beta model is competitive in short-term forecasting with 
+simple structure and short run time, and KCDE is a robust 
+method for seasonal forecasts. Multi-model ensemble is promising in seasonal forecasting.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt}

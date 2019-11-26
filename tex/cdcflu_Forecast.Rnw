@@ -283,7 +283,7 @@ from those simulated trajectories.
 Then the log score of peak timing prediction for one starting week
 is calculated as $- \log (\hat{F}_{Time}(w) - \hat{F}_{Time}(w - 1))$, where $w$ is the actual peak week.
 For peak intensity prediction, we calculate the log score for binned proportion. 
-The bins are $[0,0.5 \%)$, $[0.5 \%,1 \%)$,$\dots$, $[13 \%,\infty]$. 
+The bins are $[0,0.5 \%)$, $[0.5 \%,1 \%)$,$\dots$, $[13 \%, 100\%]$. 
 For each starting week, we obtain the empirical distribution of binned peak week 
 intensity $\hat{F}_{Int}$ from the simulated trajectories. 
 The log score of peak week intensity prediction is calculated

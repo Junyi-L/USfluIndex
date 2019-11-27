@@ -421,12 +421,12 @@ Figure \ref{fig:wILI} shows no time trend or increasing/decreasing
 variation of wILI from 1998 to 2018. 
 To capture this pattern in our models, we include two dummy 
 variables $x_t$ and $y_t$ for season weeks 22 and 23 respectively
-and exclude time trend in the harmonic regression for the covariates
-$\bm{z}_t^{(v)}$ and $\bm{z}_t^{(\phi)}$ in the beta model.
+for the covariate $\bm{z}_t^{(v)}$ and 
+exclude time trend in the harmonic regression in the beta model.
 AIC is a useful criterion if prediction is the exclusive purpose \cite{shmueli2010}. 
 However, AIC causes overfitting when the sample size is small or
 the number of parameters is relatively large. 
-In this case, AICc is a more suitable criterion \cite{HURVICH1989}\cite{Burnham2002}.
+In this case, AICc is a more suitable criterion \cite{HURVICH1989, Burnham2002}.
 In the beta model, the number of harmonics $S_v$, $S_{\phi}$ and 
 the order of autoregressive terms $p$ are chosen by AICc jointly 
 using the training data. This procedure resulted in a beta model 
@@ -684,7 +684,7 @@ Thus we do not include machine learning methods in our comparison.
 
 Forecast performance could be improved by internet-based 
 nowcast \cite{osthus.etal2019a},  backfill models \cite{brooks.etal2018} and 
-multi-model ensemble \cite{Reich2019}\cite{ray.reich2018}.
+multi-model ensemble \cite{Reich2019, ray.reich2018}.
 Forecasts of seasonal targets have usually worse scores than
 short-term forecasts (Table \ref{tab:res_ph1_4_2} and Table \ref{tab:res_peak}).  
 As discussed above, in seasonal forecasting KCDE outperforms other methods during unusual seasons and 

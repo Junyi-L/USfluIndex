@@ -21,9 +21,9 @@ Seven models are compared in this paper,
 
 Two kinds of prediction targets are scored,
 
-* Short-term forecast for prediction horizon 1-4,
+* Short-term forecasts for prediction horizon 1-4,
 
-* Peak prediction, including peak intensity and peak timing prediction. 
+* Seasonal targets, including peak intensity and peak timing prediction. 
 
 ## This repository is organized as follows:
 
@@ -37,13 +37,13 @@ Two kinds of prediction targets are scored,
 
     * Code/Short-term/ contains code to estimate and make short-term forecast.
     
-        * Code/Short-term/Beta.R selects a Beta model with 1 lag based on AICc, estimates parameters and perform short-term forecasts, and scores of forecast are calculated are saved in Results/Forecast_ph1-4/Beta.rds.
-        * Code/Short-term/Beta_lags.R selects a Beta model with more lags based on AICc, estimates parameters and performs short-term forecasts, and scores of forecast are calculated are saved in Results/Forecast_ph1-4/Beta_lag4.rds.
-        * Code/Short-term/ARIMA_model_choice.R selects an ARIMA model using training data based on AICc. Code/Short-term/ARIMA.R performs estimation and short-term forecasts, and scores of forecast are calculated are saved in Results/Forecast_ph1-4/ArimaResults.rds.
+        * Code/Short-term/Beta.R selects a Beta model with 1 lag based on AICc, estimates parameters and perform short-term forecasts, and scores of forecast are saved in Results/Forecast_ph1-4/Beta.rds.
+        * Code/Short-term/Beta_lags.R selects a Beta model with more lags based on AICc, estimates parameters and performs short-term forecasts, and scores of forecast are saved in Results/Forecast_ph1-4/Beta_lag4.rds.
+        * Code/Short-term/ARIMA_model_choice.R selects an ARIMA model using training data based on AICc. Code/Short-term/ARIMA.R performs estimation and short-term forecasts, and scores of forecast are saved in Results/Forecast_ph1-4/ArimaResults.rds.
         * Code/Short-term/SARIMA.R selects a SARIMA model and performs estimation and short-term forecasts, and saves scores of forecast in Results/Forecast_ph1-4/SARIMAResults.rds.
-        * Code/Short-term/naive.R performs estimation and short-term forecasts of the naive approach, and saves scores of forecast in Results/Forecast_ph1-4/NaiveResults.rds.
-        * Code/Short-term/prophet.R performs estimation and short-term forecasts of the Prophet model, and saves scores of forecast in Results/Forecast_ph1-4/ProphetResults.rds.
-        * Code/Short-term/KCDE_step_estimation.R estimates parameters for the KCDE model, and saves them in Results/Forecast_ph1-4/KCDEResults. Code/Short-term/KCDE_step_prediction.R performs short-term forecasts, and saves scores of forecast in Results/Forecast_ph1-4/KCDEResults/.
+        * Code/Short-term/naive.R performs estimation and short-term forecasts from the naive approach, and saves scores of forecast in Results/Forecast_ph1-4/NaiveResults.rds.
+        * Code/Short-term/prophet.R performs estimation and short-term forecasts from the Prophet model, and saves scores of forecast in Results/Forecast_ph1-4/ProphetResults.rds.
+        * Code/Short-term/KCDE_step_estimation.R estimates parameters from the KCDE model, and saves them in Results/Forecast_ph1-4/KCDEResults. Code/Short-term/KCDE_step_prediction.R performs short-term forecasts, and saves scores of forecast in Results/Forecast_ph1-4/KCDEResults/.
         
     * Code/Peak/ contains code to predict the peak timing and the peak intensity.
     
@@ -55,11 +55,11 @@ Two kinds of prediction targets are scored,
         * Code/Peak/KCDE_copula_estimation.R estimates the corresponding copulas of the KCDE model and saves the estimated parameters in Code/USfluIndex/Results/Peak/copula-estimation-results/. Code/Peak/Prophet_peak.R predicts the peak timing and intensity using the fitted copulas and estimated KCDE, and saves the prediction and scores in Results/Peak/peak-week-KCDE.rds.
         * Code/Peak/naive_peak.R predicts the peak timing and intensity using the naive approach and saves the prediction and scores in Results/Peak/peak-week-naive.rds.
   
-    * Code/Beta_forecast_p.R defines a function `Beta_Forecast_p` to simulate trajectories from a given Beta model for a given prediction horizon. This function is used for both short-term forecast and peak prediction of the Beta model. A function `cal_log_score` is defined here, which calculates the log score of short-term forecast, based on the averaged predictive distribution of each trajectory. 
+    * Code/Beta_forecast_p.R defines a function `Beta_Forecast_p` to simulate trajectories from a given Beta model for a given prediction horizon. This function is used for both short-term forecast and seasonal prediction from the Beta model. A function `cal_log_score` is defined here, which calculates the log score of short-term forecast, based on the averaged predictive distribution of each trajectory. 
     
-    * Code/summary_ph1-4.R summarizes the short-term forecast and saves the summary tables in Results/Forecast_ph1-4/res_ph1_4.rds and Results/Forecast_ph1-4/res_ph1_4_2.rds.
+    * Code/summary_ph1-4.R summarizes the short-term forecasts and saves the summary tables in Results/Forecast_ph1-4/res_ph1_4.rds and Results/Forecast_ph1-4/res_ph1_4_2.rds.
     
-    * Code/summary_peak.R summarizes the peak prediction and saves the summary table in Results/Peak/res_peak.rds.
+    * Code/summary_peak.R summarizes the seasonal targets and saves the summary table in Results/Peak/res_peak.rds.
     
     * Code/plots_paper.R generates some plots for the paper and saves them in Results/plots/.
     

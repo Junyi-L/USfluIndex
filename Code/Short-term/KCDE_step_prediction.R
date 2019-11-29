@@ -1,3 +1,6 @@
+## the setup is derived from the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/kcde-prediction.R
+
 library(kcde)
 library(pdtmvn)
 library(plyr)
@@ -6,24 +9,21 @@ library(lubridate)
 library(doMC)
 library(here)
 
-#options(error = recover)
 
 all_data_sets <- "ili_national"
-#all_prediction_horizons <- seq_len(4) # make predictions at every horizon from 1 to 52 weeks ahead
-all_prediction_horizons <- 1 : 4 # make predictions at every horizon from 1 to 52 weeks ahead
+all_prediction_horizons <- 1 : 4 # make predictions at every horizon from 1 to 4 weeks ahead
 
 all_max_lags <- 1L # use incidence at times t^* and t^* - 1 to predict incidence after t^*
 all_max_seasonal_lags <- 0L # not used
 all_filtering_values <- FALSE # not used
 all_differencing_values <- FALSE # not used
 all_seasonality_values <- TRUE # specifications without and with periodic kernel
-#all_bw_parameterizations <- "diagonal" # specifications with diagonal and full bandwidth
 all_bw_parameterizations <-  "full" # specifications with diagonal and full bandwidth
 
 num_cores <- 3L
 registerDoMC(cores = num_cores)
 results_path <- file.path(
- here( "./Results/Forecast_ph1-4/KCDEresults"))
+  here( "./Results/Forecast_ph1-4/KCDEresults"))
 
 load(file = here("./Data/data_holidays.RData"))
 
@@ -122,10 +122,6 @@ for(prediction_horizon in all_prediction_horizons){
                 
                 
                 ## fix rkernel_fn for pdtmvn-based kernel functions
-                ## I supplied a buggy version of this in the call to the estimation routine
-                ## that did not ensure that variables were supplied in a consistent order.
-                ## This did not affect estimation as rkernel_fn is not called there
-                ## But it does need to be fixed here.
                 for(kernel_component_ind in seq(from = (as.logical(seasonality) + 1), to = length(kcde_fit$kcde_control$kernel_components))) {
                   kcde_fit$kcde_control$kernel_components[[kernel_component_ind]]$rkernel_fn <-
                     function(n,
@@ -231,6 +227,7 @@ for(prediction_horizon in all_prediction_horizons){
                 #     prediction_type = "quantile"
                 #   )
                 
+                # Simulate samples to calculate the empirical variance for Dawid-Sebastiani score.
                 samples <-
                   kcde_predict(
                     n = 100000,
@@ -254,6 +251,7 @@ for(prediction_horizon in all_prediction_horizons){
                 
                 ph_results[results_row_ind,"vari"] <- var(samples)
                 
+                # Compute Dawid-Sebastiani score
                 ph_results[results_row_ind,"DS_score"] <- log(ph_results[results_row_ind,"vari"]) + 
                   ((observed_prediction_target - ph_results[results_row_ind,"pt_pred"])^2)/ph_results[results_row_ind,"vari"]
                 
@@ -268,7 +266,7 @@ for(prediction_horizon in all_prediction_horizons){
                 ## Compute absolute error of point prediction
                 ph_results$AE[results_row_ind] <-
                   as.numeric(abs(ph_results$pt_pred[results_row_ind] -
-                        observed_prediction_target))
+                                   observed_prediction_target))
                 
                 ## Increment results row
                 results_row_ind <- results_row_ind + 1L
@@ -283,7 +281,7 @@ for(prediction_horizon in all_prediction_horizons){
   run_time <- proc.time() - ptm
   
   saveRDS(ph_results, file = file.path(
-   here( "./Results/Forecast_ph1-4/KCDEresults"),
+    here( "./Results/Forecast_ph1-4/KCDEresults"),
     paste0("kcde-predictions-ph_", prediction_horizon, ".rds")))
   saveRDS(run_time, file = file.path(
     here("./Results/Forecast_ph1-4/KCDEresults"),

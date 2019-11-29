@@ -1,5 +1,13 @@
-load(file = "./Data/data_holidays.RData")
+# Prophet model after logit transform
+
+## the design is based on the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
+
 library(logitnorm)
+library(here)
+
+load(file = here("./Data/data_holidays.RData"))
 logit_FUN <- function(x){
   qlogis(x/100)
 }
@@ -119,4 +127,4 @@ run_time <- proc.time() - ptm
 NaiveResults <- list(result = data_set_results,
                      quantile_matrix = quantile_matrix,
                      run_time = run_time)
-saveRDS(NaiveResults, file = "./Results/Forecast_ph1-4/NaiveResults.rds")
+saveRDS(NaiveResults, file = here("./Results/Forecast_ph1-4/NaiveResults.rds"))

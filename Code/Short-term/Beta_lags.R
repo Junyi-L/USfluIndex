@@ -1,3 +1,8 @@
+# Beta model with lags
+
+## the design is based on the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
 library(betareg)
 library(data.table)
 library(lubridate)
@@ -6,6 +11,7 @@ library(here)
 load(file = here("./Data/data_holidays.RData"))
 source(file = here("./Code/Beta_forecast_p.R"))
 
+# Choose best number of lags and number of harmonics jointly based on AICc 
 lags <- 5
 data <- data.table(data)
 for (i in 1 : lags){
@@ -30,6 +36,7 @@ Try_BetaReg5 <- function(S_mean, S_Precision, lags, data){
 }
 
 train_data <- data[data$train == TRUE, ]
+# Ignore obserations with missing lagged values.
 train_data[is.na(p1 + p2 + p3 + p4 + p5), ] <- NA
 
 n <- sum(is.na(train_data$weighted_ili) != 1)

@@ -1,3 +1,11 @@
+
+# Prophet model after logit transform
+
+## the design is based on the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
+
+
 library(prophet)
 library(data.table)
 library(lubridate)

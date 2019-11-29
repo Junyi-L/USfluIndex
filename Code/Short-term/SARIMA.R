@@ -1,4 +1,8 @@
 # SARIMA model after logit transform
+
+## the setup is derived from the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
 library(lubridate)
 library(forecast)
 library(logitnorm)
@@ -33,14 +37,14 @@ sarima_fit <-
 saveRDS(sarima_fit,file = here("./Results/Peak/sarima_fit.rds"))
 model_order <- sarima_fit$arma[c(1, 6, 2, 3, 7, 4, 5)]
 
-# check whether Arima return same fitting with auto.arima
-check_fit <- Arima(
-  logit_prediction_target_train,
-  order = model_order[1:3],
-  seasonal = list(order = model_order[4:6], period = model_order[7]),
-  include.mean = "intercept" %in% names(sarima_fit$coef),
-  include.drift = "drift" %in% names(sarima_fit$coef),
-  lambda = sarima_fit$lambda)
+# check whether Arima function return same fitting with auto.arima
+# check_fit <- Arima(
+#   logit_prediction_target_train,
+#   order = model_order[1:3],
+#   seasonal = list(order = model_order[4:6], period = model_order[7]),
+#   include.mean = "intercept" %in% names(sarima_fit$coef),
+#   include.drift = "drift" %in% names(sarima_fit$coef),
+#   lambda = sarima_fit$lambda)
 
 #######################################################################
 ptm <- proc.time()

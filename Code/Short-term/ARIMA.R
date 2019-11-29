@@ -1,3 +1,9 @@
+# ARIMA model after logit transform
+
+## the setup is derived from the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
+
 library(lubridate)
 library(forecast)
 library(data.table)
@@ -19,6 +25,7 @@ missing <- is.na(data$weighted_ili)
 firstnonmiss <- head(which(!missing), 1)
 data <- data[firstnonmiss : dim(data)[1], ]
 
+# number of harmonics is chosen in ARIMA_model_choice.R
 sarima_cov_total <- data[, .(sin_InPeriod1, 
                              cos_InPeriod1, 
                              sin_InPeriod2, 
@@ -42,6 +49,8 @@ arima_fit <-
 saveRDS(arima_fit, file = here("./Results/Peak/arima.rds"))
 
 model_order <- arima_fit$arma[c(1, 6, 2, 3, 7, 4, 5)]
+
+# check whether Arima function return same fitting with auto.arima
 
 # check_fit <- Arima(
 #   logit_prediction_target_train,
@@ -110,6 +119,9 @@ for(prediction_horizon in all_prediction_horizons) {
     
     new_sarima_cov <- sarima_cov_total[
       seq_len(max(0, analysis_time_ind)), ]
+    
+    # Reestimate model at each step.
+    # If error or warning occurs, use the estimation result at previous successful step and update new data.
     
     updated_sarima_fit_try <- try(Arima(
       new_data,

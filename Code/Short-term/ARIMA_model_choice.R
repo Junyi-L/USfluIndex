@@ -1,3 +1,4 @@
+# Choose the number of harmonics for ARIMA model based on AICc.
 library(data.table)
 library(xtable)
 library(lubridate)

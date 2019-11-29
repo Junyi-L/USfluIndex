@@ -1,3 +1,8 @@
+## the setup is derived from the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/estimation/kcde-estimation-step.R
+
+
+
 library(lubridate)
 library(plyr)
 library(dplyr)
@@ -6,60 +11,16 @@ library(kcde)
 library(doMC)
 library(here)
 
-### Get command line arguments
-args <- commandArgs(trailingOnly=TRUE)
-
-## ILI, Dengue, or simulated data?
-data_set <- args[1]
-
-## Prediction horizon -- integer number of steps ahead to predict
-prediction_horizon <- as.integer(args[2])
-
-## Maximum number of non-seasonal lagged observations to explore using for prediction
-max_lag <- as.integer(args[3])
-
-## Maximum number of seasonally lagged observations to explore using for prediction
-max_seasonal_lag <- as.integer(args[4])
-
-## Include filtered cases as predictive variables?
-filtering <- as.logical(args[5])
-
-## Perform seasonal differencing?
-differencing <- as.logical(args[6])
-
-## Include terms capturing seasonality?
-seasonality <- as.logical(args[7])
-
-## Parameterization of bandwidth -- "diagonal" or "full"
-bw_parameterization <- args[8]
-
-## Path to save results in
-save_path <- args[9]
-
-## Sample size for simulation study
-sim_n <- as.integer(args[10])
-
-## Family to sample from for simulation study
-sim_family <- args[11]
-
-
 ## Initialization rule -- "cov" or "scott" for covariance or scott's rule, respectively
 bw_init_rule <- "scott"
-
-
-# Manually set values for testing purposes
 data_set <- "ili_national"
-#prediction_horizon <- 1L
 max_lag <- 1L
 max_seasonal_lag <- 0L
 filtering <- FALSE
 differencing <- FALSE
 seasonality <- TRUE
 bw_parameterization <- "full"
-#bw_parameterization <- "diagonal"
 save_path <- here( "./Results/Forecast_ph1-4/KCDEresults/")
-
-
 
 load(file = here("./Data/data_holidays.RData"))
 
@@ -429,33 +390,7 @@ for (prediction_horizon in 1:32) {
     "-bw_parameterization_", bw_parameterization
   )
   
-  # if(identical(data_set, "ili_national")) {
-  #   prev_Rout_file <- file.path(
-  #     #       "/media/evan/data/Reich/infectious-disease-prediction-with-kcde/inst/results",
-  #     #       data_set,
-  #     #       "estimation-output",
-  #     "/home/er71a/kcde-applied-paper/R/application-influenza-scott-rule-start/estimation-scripts-first-pass",
-  #     paste0("output-kde-estimation-step-",
-  #            case_descriptor,
-  #            ".Rout")
-  #   )
-  # } 
-  
-  # if(file.exists(prev_Rout_file)) {
-  #   Rout_lines <- readLines(prev_Rout_file)
-  #   first_params_line <- which(Rout_lines == "Scalable Robust Estimators with High Breakdown Point (version 1.3-8)") + 2
-  #   num_param_values <- length(Rout_lines) - first_params_line + 1
-  #   best_param_value_ind <- which.min(as.numeric(Rout_lines[
-  #     seq(from = first_params_line + 1, length = num_param_values, by = 3)
-  #     ]))
-  #   init_theta_vector <- as.numeric(strsplit(
-  #     Rout_lines[first_params_line + 3 * (best_param_value_ind - 1) ],
-  #     " ")[[1]])
-  #   init_phi_vector <- NULL # assumes filtering == FALSE, which is the case for everything I'm doing.
-  # } else {
-  #   init_theta_vector <- NULL
-  #   init_phi_vector <- NULL
-  # }
+ 
   init_theta_vector <- NULL
   init_phi_vector <- NULL
   library("doMC")

@@ -1,3 +1,8 @@
+# Beta model with one lag
+
+## the design is based on the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
 library(betareg)
 library(data.table)
 library(lubridate)
@@ -12,7 +17,7 @@ for (i in 1 : lags){
   data[, paste0("p", i) := logit_FUN(shift(weighted_ili,n = i, type = "lag"))]
 }
 
-
+# Choose the number of harmonics based on AICc.
 Try_BetaReg5 <- function(S_mean, S_Precision, lags, data){
   mean_covar1 <- paste0(c(rep("sin_InPeriod",S_mean),rep("cos_InPeriod",S_mean)),1 : S_mean)
   mean_covar2 <- c("x", "y")

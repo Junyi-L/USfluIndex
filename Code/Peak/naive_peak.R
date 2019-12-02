@@ -1,3 +1,8 @@
+# Naive model, peak prediction
+
+## the design is based on the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-peak-prediction.R
+
 
 library(lubridate)
 library(plyr)

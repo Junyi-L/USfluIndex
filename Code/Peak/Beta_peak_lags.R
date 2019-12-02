@@ -1,3 +1,9 @@
+# Beta model with lags, peak prediction
+
+## the design is based on the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-peak-prediction.R
+
+
 library(betareg)
 library(data.table)
 library(lubridate)
@@ -9,7 +15,7 @@ library(doMC)
 library(here)
 source(file = here("./Code/Beta_forecast_p.R"))
 load(file = here("./Data/data_holidays.RData"))
-
+# The number of lags and number of harmonics are chosen in Beta_lags.R
 data <- data.table(data)
 lags <- 4
 for (i in 1 : lags){

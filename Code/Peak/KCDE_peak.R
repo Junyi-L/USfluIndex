@@ -1,3 +1,7 @@
+# KCDE peak prediction
+## the setup is derived from the "ili_national" example in
+## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/kcde-peak-prediction.R
+
 library(lubridate)
 library(plyr)
 library(dplyr)

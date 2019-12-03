@@ -1,7 +1,17 @@
 # ARIMA model after logit transform, peak prediction
+# Author: Evan Ray, modified by Junyi Lu.
+# Code comes from 
+# https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-peak-prediction.R
 
-## the setup is derived from the "ili_national" example in
-## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-peak-prediction.R
+# Modifications:
+# - Adapt to harmonic regression with ARIMA errors.
+# - Data are modelled after logit transform instad of log transform,
+# - For each analysis_time_ind, refit the model using available observations, 
+# if error or warning occurs, the previous fitted model will be used. 
+# - The saving file path is changed. 
+# - Remove some unused arguments in function sample_predictive_trajectories_arima, 
+# force bootsrap = TRUE, add xreg argument in simulate function.
+
 
 library(lubridate)
 library(plyr)
@@ -25,9 +35,8 @@ logistic_FUN <- function(x){
   plogis(x) * 100
 }
 
-sample_predictive_trajectories_arima <- function (object, h = ifelse(object$arma[5] > 1, 2 * object$arma[5], 
-                                                                     10), level = c(80, 95), fan = FALSE, xreg = NULL, lambda = object$lambda, 
-                                                  npaths = 5000, ...) 
+sample_predictive_trajectories_arima <- function (object, h , xreg = NULL, 
+                                                  npaths, ...) 
 {
   sim <- matrix(NA, nrow = npaths, ncol = h)
   
@@ -139,7 +148,7 @@ for(analysis_time_season in analysis_seasons) {
       }else   updated_sarima_fit <- updated_sarima_fit_try
     }
     
-    ## simulate n_sims trajectories recursively from sarima
+    ## simulate n_sims trajectories recursively from arima
     max_prediction_horizon <-
       last_analysis_time_season_week + 1 -
       analysis_time_season_week

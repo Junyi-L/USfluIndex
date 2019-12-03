@@ -2,7 +2,14 @@ library(cdcfluview)
 library(lubridate)
 library(dplyr)
 library(here)
+#-------------------------------------------------------------------------------------------
+# Functions MMWRweekday, start_date, MMWRweek2Date are from package MMWRweek
+# Version: 0.1.2
+# Date: 2015-11-24
+# Author: Jarad Niemi <niemi@iastate.edu>
+# https://github.com/jarad/MMWRweek
 
+# Weekday is modified by Sebastian Meyer for non-English locales.
 MMWRweekday <- function(date) {
   factor(strftime(as.Date(date), "%w"), # Sunday is 0
          levels = 0:6,
@@ -28,7 +35,7 @@ MMWRweek2Date <- function(MMWRyear, MMWRweek, MMWRday = NULL) {
   return(jan1 + (MMWRweek - 1) * 7 + MMWRday - 1)
   
 }
-
+#-----------------------------------------------------------------------------------
 usflu <- ilinet(region = "national", years = 1997:2018)
 # load data date: 11.03.2019
 usflu <- as.data.frame(usflu)

@@ -1,6 +1,11 @@
 # KCDE peak prediction
-## the setup is derived from the "ili_national" example in
-## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/kcde-peak-prediction.R
+# Author: Evan Ray, modified by Junyi Lu.
+# Date: 16 Aug 2017
+# Code comes from 
+# https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/kcde-peak-prediction.R
+
+# Modification:
+# - The loading data and saving file path are changed. 
 
 library(lubridate)
 library(plyr)

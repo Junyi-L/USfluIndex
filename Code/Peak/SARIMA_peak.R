@@ -1,5 +1,6 @@
 # SARIMA model after logit transform, peak prediction
 # Author: Evan Ray, modified by Junyi Lu.
+# Date: 16 Aug 2017
 # Code comes from 
 # https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-peak-prediction.R
 
@@ -7,7 +8,7 @@
 # - Data are modelled after logit transform instad of log transform,
 # - For each analysis_time_ind, refit the model using available observations, 
 # if error or warning occurs, the previous fitted model will be used. 
-# - The saving file path is changed. 
+# - The loading data and saving file path are changed. 
 # - Remove some unused arguments in function sample_predictive_trajectories_arima, 
 # force bootsrap = TRUE, add xreg argument in simulate function.
 

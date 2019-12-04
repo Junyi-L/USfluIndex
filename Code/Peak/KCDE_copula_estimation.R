@@ -1,3 +1,13 @@
+# KCDE copula estimation
+# Author: Evan Ray, modified by Junyi Lu.
+# Date: 16 Aug 2017
+# Code comes from 
+# https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/estimation/copula-estimation-step.R
+
+# Modification:
+# - The loading data and saving file path are changed. 
+
+
 library(lubridate)
 library(plyr)
 library(dplyr)

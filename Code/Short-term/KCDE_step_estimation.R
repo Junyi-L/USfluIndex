@@ -1,7 +1,11 @@
-## the setup is derived from the "ili_national" example in
-## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/estimation/kcde-estimation-step.R
+# KCDE short-term estimation
+# Author: Evan Ray, modified by Junyi Lu.
+# Date: 16 Aug 2017
+# Code comes from 
+# https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/estimation/kcde-estimation-step.R
 
-
+# Modification:
+# - The loading data and saving file path are changed. 
 
 library(lubridate)
 library(plyr)

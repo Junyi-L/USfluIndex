@@ -1,7 +1,17 @@
 # SARIMA model after logit transform
-
-## the setup is derived from the "ili_national" example in
+# Author: Evan Ray, modified by Junyi Lu.
+# Date: 16 Aug 2017
+# Code comes from 
 ## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/sarima-prediction.R
+
+# Modifications:
+# - Data are modelled after logit transform instad of log transform.
+# - Correspodingly log score is calculated using dlogitnorm.
+# - Dawid-Sebastiani score is additionally calculated. 
+# - For each analysis_time_ind, refit the model using available observations, 
+# if error or warning occurs, the previous fitted model will be used. 
+# - The loading data and saving file path are changed. 
+# - For one-week ahead forecast, predictive quantiles are saved in quantile_matrix.
 
 library(lubridate)
 library(forecast)

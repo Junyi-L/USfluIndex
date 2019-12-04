@@ -1,5 +1,15 @@
-## the setup is derived from the "ili_national" example in
+# KCDE short-term forecast
+# Author: Evan Ray, modified by Junyi Lu.
+# Date: 16 Aug 2017
+# Code comes from 
 ## https://github.com/reichlab/article-disease-pred-with-kcde/blob/master/inst/code/prediction/kcde-prediction.R
+
+# Modifications:
+# - The loading data and saving file path are changed. 
+# - Forecasts up to four-weeks ahead are made.
+# - In order to calculate Dawid-Sabastiani score for each forecast, 
+# 100000 samples are made to calculate the empirical variance.
+# - For one-week ahead forecast, predictive quantiles are saved in quantile_matrix.
 
 library(kcde)
 library(pdtmvn)

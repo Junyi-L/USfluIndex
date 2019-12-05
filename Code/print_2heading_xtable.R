@@ -1,3 +1,15 @@
+
+# Author: Hugh Parsonage, modified by Junyi Lu.
+# Date: 20 May 2018
+# Code comes from 
+# https://github.com/HughParsonage/grattanCharts/blob/a03088d26a7300970dbd50c4e951edb77135ee03/R/print_2heading_xtable.R
+
+# Modifications:
+# - add xtable.caption, xtable.digits and xtable.label in 
+# arguments of function print_2heading_xtable. 
+# - remove the argument xtable.dots from function print_2heading_xtable.
+# - add dplyr. 
+
 # grattanCharts package
 #' Print LaTeX tables with headings over two lines
 #' 
@@ -115,7 +127,8 @@ print_2heading_xtable <- function(.data,
   addtorow$command <- 
     paste0(paste0(c(for_latex_top_row, for_latex_between_row, for_latex_second_row)), "\n")
   
-  xtable::print.xtable(xtable::xtable(.data, align = xtable.align,caption  = xtable.caption,digits = xtable.digits, label = xtable.label), 
+  
+  xtable::print.xtable(xtable::xtable(.data, align = xtable.align, caption  = xtable.caption,digits = xtable.digits, label = xtable.label), 
                        type = "latex",
                        add.to.row = addtorow, 
                        include.colnames = FALSE, 

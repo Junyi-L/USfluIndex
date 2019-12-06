@@ -456,6 +456,9 @@ The structure and parameters of the Prophet model are updated
 through the test period since Prophet needs to updates its change 
 points when there are more observations available. 
 
+Source code and data are available on GitHub \cite{ForecastCode}. 
+The code for KCDE method comes from \cite{reichlab}.
+
 \subsection{Short-term targets}%------------------------------------------------------
 
 The overall short-term performance is summarized in Table \ref{tab:res_ph1_4_2}.

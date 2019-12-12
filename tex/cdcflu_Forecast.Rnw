@@ -63,12 +63,12 @@ Erlangen, Germany}
   Using U.S. influenza-like illness surveillance data over 18 seasons,
   we assessed probabilistic forecasts of this new beta autoregressive
   model with proper scoring rules. Other readily available forecasting
-  tools were used for comparison, including Prophet, (S)ARIMA, and kernel
+  tools were used for comparison, including Prophet, (S)ARIMA and kernel
   conditional density estimation (KCDE).
   % Results:
-  Short-term flu activity up to four weeks ahead was equally well
-  predicted by the beta model with four autoregressive lags and by KCDE,
-  but the beta model runs much faster. Non-dynamic Prophet scored worst.
+  Short-term flu activity was equally well predicted up to four weeks ahead 
+  by the beta model with four autoregressive lags and by KCDE,
+  however the beta model runs much faster. Non-dynamic Prophet scored worst.
   Relative performance differed for seasonal peak prediction.
   Prophet produced the best peak intensity forecasts
   in seasons with standard epidemic curves, otherwise KCDE outperformed
@@ -98,9 +98,9 @@ Erlangen, Germany}
 \section{Introduction}
 
 Influenza is a contagious respiratory illness caused by different types of influenza viruses.
-The outcomes of flu infection vary widely and serious infection can cause hospitalization or death.
-The Centers for Disease Control and Prevention (CDC) in the U.S. estimate that around 8\% of the U.S.
-population become infected with influenza during an average season \cite{Tokars2017}.
+The outcomes of flu infections vary widely and serious infections can cause hospitalization or death.
+The Centers for Disease Control and Prevention (CDC) in the U.S. estimated that around 8\% of the U.S.
+population became infected with influenza during an average season \cite{Tokars2017}.
 Accurate prediction of flu activity provides health officials with valuable information to plan
 disease prevention and allocate treatment resources.
 Since 2013, CDC organizes the "Predict the Influenza Season Challenge"
@@ -108,9 +108,9 @@ Since 2013, CDC organizes the "Predict the Influenza Season Challenge"
 for every flu season, to encourage academic and private industry researchers to forecast
 the national and regional flu activity.
 Various approaches have been used in influenza forecasting \cite{nsoesie.etal2014, chretien.etal2014}.
-Reich et al. \cite{Reich2019} compare the forecast accuracy of 22 models from five different institutions.
-Biggerstaff et al. \cite{biggerstaff.etal2018} present the result of a recent FluSight challenge.
-Some common approaches can be grouped into following categories \cite{brooks.etal2018}:
+Reich et al. \cite{Reich2019} compared the forecast accuracy of 22 models from five different institutions.
+Biggerstaff et al. \cite{biggerstaff.etal2018} presented the result of a recent FluSight challenge.
+Some of the most common approaches can be grouped into following categories \cite{brooks.etal2018}:
 compartmental models \cite{shaman.karspeck2012, hickmann.etal2015}, agent-based models,
 direct regression models \cite{ray.etal2017, Brooks2015} and time series models \cite{hyndman.khandakar2008,dunsmuir.scott2015, held.etal2005, beta:theory}.
 
@@ -119,7 +119,7 @@ surveillance data. A state-of-the-art approach to model infectious disease
 counts over time is the endemic-epidemic modeling framework introduced by
 Held et al. \cite[``HHH'']{held.etal2005}.
 In the HHH framework, the disease incidence is divided into two components: an endemic component
-which models seasonal variations of the background risk, and an epidemic component which
+which models seasonal variations of the background risk and an epidemic component which
 adds autoregressive effects to capture disease spread.
 Estimation, simulation and visualization of HHH models are implemented in the
 R package \texttt{surveillance} \cite{meyer.etal2017}, which has enabled
@@ -143,13 +143,13 @@ readily available and well-documented implementations in R \cite{R:base}.
 These methods are the seasonal autoregressive integrated moving average (SARIMA)
 model \cite{hyndman.khandakar2008}, harmonic regression with ARIMA errors \cite{hyndman.khandakar2008}
 and Facebook's forecasting tool Prophet \cite{Taylor2018}.
-Furthermore, a successful competitor in the FluSight challenge,
-kernel conditional density estimation \cite[KCDE]{ray.etal2017} is also included in our comparison.
+Furthermore, kernel conditional density estimation \cite[KCDE]{ray.etal2017},
+a successful competitor in the FluSight challenge, is also included in our comparison.
 We apply these models to predict short-term and seasonal targets, which are also forecast
 targets in the FluSight challenge and relevant to public health.
 The short-term targets consist of one- to four-weeks-ahead forecasts, and the seasonal targets
 are prediction of the intensity and the timing of the seasonal peak.
-Gneiting and Katzfuss \cite{gneiting.katzfuss2014} state that
+Gneiting and Katzfuss \cite{gneiting.katzfuss2014} stated that
 probabilistic forecasts measure the prediction uncertainty and
 thus are fundamental for decision making.
 In this paper, probabilistic forecasts are evaluated by proper scoring rules,
@@ -191,27 +191,26 @@ outpatient visits to health care providers for influenza-like illness (ILI).
 Here, ILI is defined as "fever (temperature of 100°F [37.8°C] or greater) and a cough and/or
 a sore throat without a known cause other than influenza" \cite{CDCoverview}.
 The national wILI index is calculated as the proportion of outpatient visits with ILI reported 
-through the ILINet weighted by state population \cite{CDCoverview}. 
+through the ILINet, weighted by state population \cite{CDCoverview}. 
 It is a standard measure of the national-level flu activity.
 
 The Morbidity and Mortality Weekly Report (MMWR) week is used by the CDC to report
 the wILI data \cite{MMWR}. 
-The MMWR week ranges from 1 to 52, sometimes to 53.
+The MMWR weeks range from 1 to 52, sometimes to 53.
 The MMWR week 1 corresponds to the first week in the year, sometimes the last week in the last year.
-In most years flu activity begins to increase at the beginning of October, 
+In most years, flu activity begins to increase at the beginning of October, 
 peaks between December and February and lasts until May.
-Historically, flu activity in MMWR week 40 to MMWR week 20 in the next year is 
-of interest for the disease control purpose. 
-The MMWR week 40 is roughly at the end of September or at the beginning of October. 
+Historically, flu activity in MMWR week 40 to MMWR week 20 of the following year is of interest to the disease control purpose. 
+The MMWR week 40 is roughly at the end of September or at the beginning of October.
 The MMWR week 20 corresponds roughly to the second or third week in May. 
-In this paper, we index seasons from MMWR week 31 to MMWR week 30 in the next year. 
-Accordingly season week one corresponds to MMWR week 31.
+In this paper we index seasons from MMWR week 31 to MMWR week 30 of the following year. 
+Accordingly, season week one corresponds to MMWR week 31.
 
 We use CDC's weekly national wILI data from season 1998/1999 to season 2017/2018 (Figure \ref{fig:wILI}) 
 for our analysis. 
 This data can be easily downloaded via the R package \texttt{cdcfluview} \cite{R:cdcfluview}. 
 The last four seasons are taken as test data to assess the forecast performance. 
-Two H1N1 pandemic seasons, 2008/2009 and 2009/2010 are excluded in our analysis, 
+Two H1N1 pandemic seasons, 2008/2009 and 2009/2010, are excluded from our analysis,
 since we are focused on seasonal influenza forecasting .
 The ILINet members continuously provide backfill reports for past weeks and consequently the previously 
 issued wILI may be modified \cite{osthus.etal2019a}. 
@@ -236,16 +235,15 @@ This cutoff is indicated with a vertical dashed line.}
 
 We utilize prediction targets of FluSight challenges organized by CDC \cite{biggerstaff.etal2018} 
 and in \cite{ray.etal2017} for model comparison.
-They can be divided into two parts: short-term targets and seasonal targets. 
-The short-term targets are one-week, two-weeks, three-weeks and four-weeks ahead forecasts of wILI. 
+They can be divided into two categories: short-term targets and seasonal targets. 
+The short-term targets are one-week, two-weeks, three-weeks and four-weeks ahead forecasts of the wILI. 
 The seasonal targets consist of peak week timing and intensity prediction. 
-The peak week of an influenza season is the week which has the highest wILI during the season. 
-The peak intensity is the highest value, that the wILI reaches during the influenza season.
+The peak week of an influenza season is the week which has the highest wILI of the season. 
+The peak intensity is the highest value that the wILI reaches during the influenza season.
 
 We evaluate the model performance of short-term targets by the mean log score \cite{gneiting.etal2007},
-Dawid-Sebastiani score \cite{dawid.sebastiani1999} and absolute error over the test period 
-or a subset of the test period. 
-We also repeat the maximum log score in \cite{ray.etal2017}.
+Dawid-Sebastiani score \cite{dawid.sebastiani1999} and absolute error of the test period or a subset of the test period. 
+We also repeat the calculation of the maximum log score in \cite{ray.etal2017}.
 
 We denote the predictive distribution by $F$, predictive density by $f$ and the actual observation by $y$. 
 The log score (LS) is strictly proper and defined as
@@ -257,11 +255,11 @@ The log score (LS) is strictly proper and defined as
 The log score in this paper is not directly comparable with the log score required by CDC 
 in the FluSight challenge. 
 The CDC calculates the log score of multiple bins surrounding the actual observation, 
-which is nevertheless not a proper score \cite{ray.reich2018}. 
+which is, however, not a proper score \cite{ray.reich2018}. 
 
 The maximum log score is a measure of worst-case performance and not proper. 
-It should be only considered when a model has good overall performance 
-measured by the mean log score \cite{ray.etal2017}.
+It should only be considered when a model has good overall performance, 
+as measured by the mean log score \cite{ray.etal2017}.
 
 The Dawid-Sebastiani score (DSS)
 
@@ -295,7 +293,7 @@ week are used to evaluate the model performance of long-term targets.
 
 \subsection{Endemic-epidemic \emph{beta} model}
 \label{subsec:beta}
-Lu and Meyer \cite{beta:theory} propose an extension of the HHH framework 
+Lu and Meyer \cite{beta:theory} proposed an extension of the HHH framework 
 for infectious disease proportions. 
 For time $t = 1,...,T$, $X_t$ is the proportion of newly infected individuals
 by a certain disease at time $t$ and is assumed to follow a beta distribution
@@ -329,7 +327,7 @@ The endemic component $\nu_t$ and the precision parameter $\phi_t$ could
 be modeled by harmonic regression plus time trends and potential holiday
 effects via dummy variables \cite{held.paul2012}. 
 The parameters $\bm{\beta}^{(v)}$ and $\beta_k$ can be interpreted in
-terms of odds ratio \cite{beta:theory}.
+terms of the odds ratio \cite{beta:theory}.
 
 This extended model is denoted by Beta($p$), where $p$ is the maximum 
 order of the autoregressive terms. 
@@ -354,34 +352,34 @@ with regressors containing holiday effects via dummy variables,
 fitted by data after logit transformation. 
 The number of harmonics is chosen by AICc using the training data, 
 and the order of the ARIMA part is chosen by the \emph{auto.arima} function
-in R package \texttt{forecast} \cite{hyndman.khandakar2008}. 
+in the R package \texttt{forecast} \cite{hyndman.khandakar2008}. 
 
 Ray et al. \cite{ray.etal2017} proposed an approach to generate predictions
 of disease incidence by combining kernel conditional density estimation (KCDE) and copulas.
 For each prediction horizon, predictive distributions are estimated by KCDE and 
 copulas tie these predictive distribution into joint distributions. 
-They evaluated different KCDE model specifications and in most cases in their 
-application the KCDE model with periodic kernel components and full bandwidth 
-matrix has better forecast performance than the other model specifications.
-Accordingly we use that as our third baseline model, 
+They evaluated different KCDE model specifications and in most cases of their 
+application, the KCDE model with periodic kernel components and a full bandwidth 
+matrix has a better forecast performance than the other model specifications.
+Accordingly, we use that as our third baseline model, 
 following the implementation provided in \cite{ray.etal2017}.
 
 
 Facebook’s Core Data Science team developed the automatic forecasting procedure Prophet
 and implemented it in the R package \texttt{prophet} \cite{Taylor2018}. 
-Since the Prophet model assumes Gaussian errors, we fit data on the logit scale. 
-Same holiday effects as in the beta model and the ARIMA model are taken into account.
+Since the Prophet model assumes Gaussian errors, we fit the data on the logit scale. 
+The same holiday effects as included in the beta model and the ARIMA model are taken into account.
 
-The fifth baseline model is a naive approach: for each test season, 
-we estimate a logitnormal distribution of wILI based on the same 
-calendar week in previous seasons.
+The fifth baseline model is a naive approach: for each test season
+we estimate a logitnormal distribution of the wILI based on the same 
+calendar week in the previous seasons.
 
 
-For seasonal targets, we consider an additional reference approach which 
-assigns equal probability to all possible outcomes. 
-For prediction of peak week timing, probability is assigned equally to 
+For seasonal targets we consider an additional reference approach which 
+assigns equal probabilities to all possible outcomes. 
+For prediction of peak week timing, probabilities are assigned equally to 
 season week 10 to 42, since historically high flu activity occurred 
-between season weeks 10 and 42. For peak intensity prediction, 
+between season weeks 10 and 42. For peak intensity prediction
 equal probability is assigned to binned proportions.
 
 The beta model, ARIMA model, SARIMA model and KCDE model are dynamic models, 
@@ -412,7 +410,7 @@ After season week 22, wILI decreases until the start of another peak.
 The peak pattern on season week 22 could be explained by the fact that
 during the winter holiday patients tend not to visit the doctor for 
 less severe illness, thus reducing the number of non-ILI visits and 
-consequently increasing wILI \cite{brooks.etal2018}. 
+consequently increasing the wILI \cite{brooks.etal2018}. 
 During the winter holidays, the transmission of ILI is hampered 
 due to a reduction of work and school contacts \cite{Hens2009}.
 Then the number of ILI visits decreases towards the end of the 
@@ -447,17 +445,17 @@ training data are used to determine the structure of the model
 (e.g. order of AR and MA terms, number of harmonics). 
 In the test period, parameters are reestimated given 
 the observations until the specified time point in test
-data while the structure of model is kept. 
+data, while the structure of model is kept. 
 For KCDE, we implement the approach provided by Ray et.al \cite{ray.etal2017}, 
 which does not perform reestimation. 
-Indeed, it is cumbersome to reestimate parameters for KCDE since it takes 
+Indeed, it is cumbersome to reestimate parameters for KCDE, since it takes 
 around 4 hours to estimate parameters.
 The structure and parameters of the Prophet model are updated 
-through the test period since Prophet needs to updates its change 
+through the test period, since Prophet needs to updates its change 
 points when there are more observations available. 
 
 Source code and data are available on GitHub \cite{ForecastCode}. 
-The code for KCDE method comes from \cite{reichlab}.
+The code for the KCDE method comes from \cite{reichlab}.
 
 \subsection{Short-term targets}%------------------------------------------------------
 
@@ -490,7 +488,7 @@ is always the second-best, except that for two-weeks ahead forecast
 Beta(4) has the best mean log score.
 
 Seasonal summaries of the log score difference between Beta(4) and Beta(1),
-KCDE or ARIMA respectively in one- to four-weeks-ahead forecasts for 
+KCDE or ARIMA respectively in one- to four-weeks-ahead forecasts in 
 subset "MMWR weeks 40 - 20" are shown in Figure \ref{fig:STbox}. 
 For higher prediction horizons, KCDE outperforms Beta(4) in all but the last test season.
 
@@ -501,7 +499,7 @@ For higher prediction horizons, KCDE outperforms Beta(4) in all but the last tes
 res_ph1_4_2 <- readRDS(paste0(short_path,"res_ph1_4_2.rds"))
 
 print(xtable(res_ph1_4_2, align = "ccc|rrrrrr",
-             caption = 'Summaries of model performance for short-term targets. Ranks are shown in bracket. 
+             caption = 'Summaries of model performance for short-term targets. Ranks are shown in brackets. 
              The "all weeks" group summarizes the mean log score (LS) and the mean
              Dawid-Sebastiani score (DSS) over the test period. 
              The "MMWR weeks 40 - 20" group summarizes the mean log score (LS) and
@@ -527,7 +525,7 @@ print_2heading_xtable(res_ph1_4,
                       xtable.align = "ccc|rr|rr|rr|rr",
                       xtable.caption = 'Summaries of model performance for one-week, 
                       two-weeks, three-weeks and four-weeks ahead forecast. 
-                      Ranks are shown in bracket. The "all weeks" group summarizes 
+                      Ranks are shown in brackets. The "all weeks" group summarizes 
                       the mean log score (LS) and the mean Dawid-Sebastiani score (DSS)
                       over the test period. The "MMWR week 40 - 20" group summarizes 
                       the mean log score (LS) and the mean Dawid-Sebastiani score (DSS)
@@ -545,7 +543,7 @@ print_2heading_xtable(res_ph1_4,
 \includegraphics[width=\textwidth]{STbox.pdf}
 \centering
 \caption{A summary of the log score difference between Beta(4) and Beta(1), 
-KCDE or ARIMA for prediction horizons one to four in the "MMWR weeks 40-20" subset in the test period. 
+KCDE or ARIMA for prediction horizons one to four in the "MMWR weeks 40-20" subset of the test period. 
 Positive values indicate that Beta(4) outperforms baseline models. 
 The mean is marked with dots.}
 \label{fig:STbox}
@@ -558,7 +556,7 @@ For seasonal targets, we summarize the model performance for two subsets: "all w
 The "all week" subset summarizes the mean log score and maximum log score for 
 all predictions in the test period. 
 The "before peak" subset summarizes the mean log score and maximum log score 
-for predictions in weeks before the actual peak for the given season. 
+for predictions in weeks before the actual peak of the given season. 
 In the FluSight challenges the forecast performance of the 
 "all week" subset is evaluated, while in practice accurate prediction of 
 peak timing and peak intensity before the actual peak occurs is more 
@@ -566,7 +564,7 @@ meaningful to health officials \cite{ray.reich2018}.
 
 The model performance for seasonal targets is summarized in Table \ref{tab:res_peak}. 
 In terms of mean log score, equal bin has the worst forecast performance
-for both seasonal targets and in two different subsets.
+for both seasonal targets and in both subsets.
 For peak intensity prediction and in "all weeks" subset, 
 KCDE has the best performance in terms of mean log score. 
 Naive has the second-best performance. 
@@ -575,7 +573,7 @@ The rank of models is the same in the "before peak" subset.
 For peak timing prediction, KCDE has the best mean log score in the "all weeks" subset. 
 Then follow Prophet, ARIMA, naive, Beta(4) and Beta(1). 
 In the "before peak" subset, ARIMA has the best forecast performance and
-KCDE follows close behind. The rank of other models is similar.
+KCDE follows closely behind. The rank of other models is similar.
 
 We now focus on the forecast performance in the subset "before peak"
 during each test seasons.
@@ -587,19 +585,19 @@ Prophet has the best peak intensity prediction, and SARIMA
 has the best peak timing prediction.
 
 In season 2015/2016, the peak intensity was lower and the peak occurred later 
-than the most training seasons.
+than in most training seasons.
 For peak intensity prediction, KCDE scores best and only Prophet is worse than equal bin.
 The peak timing prediction is more difficult in this season. 
-KCDE ranks the first and is followed by naive. Only these two models are better than equal bin.
+KCDE ranks first and is followed by naive. Only these two models are better than equal bin.
 
 Season 2016/2017 is a relatively normal season. 
-All models have better prediction than equal bin for both targets. 
+All models provide better predictions than equal bin for both targets. 
 Two non-dynamic models, Prophet and naive, have better peak intensity predictions than other models.
-For peak timing prediction, KCDE has the best score and is close followed by prophet and naive. 
+For peak timing prediction, KCDE has the best score and is closely followed by prophet and naive. 
 
 Season 2017/2018 has a normal peak timing and relatively high peak intensity.
 KCDE has the best peak intensity prediction. Then follow Beta(1), ARIMA and naive. 
-Other models have worse score than equal bin. 
+Other models have worse scores than equal bin. 
 All models have better peak timing prediction 
 than equal bin and Beta(1) ranks first.
 For all test seasons and both seasonal targets, only KCDE and naive have consistently 
@@ -619,7 +617,7 @@ print_2heading_xtable(res_peak,
                       log score for all predictions in the test period. 
                       The "before peak" group summarizes the mean log score and 
                       maximum log score for predictions in weeks before the actual 
-                      peak for the given season.',
+                      peak of the given season.',
                       xtable.label = "tab:res_peak",
                       hline.after = c(-1, 0, 8, 16)
 )
@@ -630,11 +628,11 @@ print_2heading_xtable(res_peak,
 \begin{figure}
 \includegraphics[width=\textwidth]{Peakbox.pdf}
 \centering
-\caption{Each boxplot (top) summarizes predictions made by a model in subset "before peak".
+\caption{Each boxplot (top) summarizes predictions made by a model in the subset "before peak".
 The vertical axis is the difference in log score between the given model 
 and the equal bin approach. 
 The mean is indicated in dots. 
-Positive values indicate the case when the model outperforms the equal bin approach.
+Positive values indicate the case in which the model outperforms the equal bin approach.
 The plot (bottom) shows the trajectory of incidence over each season.}
 \label{fig:Peakbox}
 \end{figure}
@@ -644,16 +642,16 @@ The plot (bottom) shows the trajectory of incidence over each season.}
 %----------------------------------------------------
 \section{Discussion}
 \label{sec:Diss}
-In this work, the forecast performance for both short-term and seasonal 
+In this paper, the forecast performance for both short-term and seasonal 
 targets of Beta(4) is compared with some commonly used models and a competitive model, the KCDE model.
 
-In short-term prediction for both subsets, Beta(4) has the best 
+Regarding to short-term prediction for both subsets, Beta(4) has the best 
 one-week ahead forecast performance in terms of mean log score and Dawid-Sebastiani score. 
 KCDE has the best model performance for higher prediction horizons 
 and Beta(4) is the second-best, while KCDE has higher model complexity and around
-93 times higher run time than Beta(4). 
+93 times the run time of Beta(4). 
 The forecast performance of Beta(4) decreases over prediction horizon. 
-Non-dynamic models, Prophet and naive, do not show any competence in the short-term forecast.
+The non-dynamic models, Prophet and naive, do not show any competence in the short-term forecast.
 Moreover, the performance of short-term forecast of the beta model is improved by increasing the 
 number of autoregressive lags from one to four. 
 
@@ -666,14 +664,14 @@ have better rank in normal seasons (season 2014/2015 and season 2016/2017)
 than in the other seasons (season 2015/2016 and season 2017/2018).
 In contrast, KCDE scores best in both unusual seasons. 
 For peak timing prediction, KCDE has the best performance in season 2015/2016,
-when wILI peaked relatively late. 
-In other seasons with normal peak timing, SARIMA, KCDE or beta(1) makes the best prediction.
+when the wILI peaked relatively late. 
+In other seasons with normal peak timing, SARIMA, KCDE or beta(1) make the best prediction.
 In short, KCDE has the best forecast performance for both seasonal targets 
 when the epidemic curve is unusual, and Prophet has the best peak intensity 
 prediction during standard seasons.
 
 We only include well-documented models and KCDE in our model comparison. 
-There are some other competitive models during the FluSight challenge, 
+There are some other competitive models presented in the FluSight challenge, 
 such as the delta density method \cite{brooks.etal2018}, 
 the empirical Bayes framework \cite{Brooks2015}, the dynamic Bayesian model \cite{osthus.etal2019}, etc.
 Some time series models for proportions are also applicable to flu activity forecasting, 
@@ -683,17 +681,17 @@ Makridakis et.al. \cite{makridakis.etal2018} evaluated the performance of statis
 and machine learning forecasting methods using a large monthly time series and observed
 that machine learning methods are dominated by classical statistical methods for both
 long-term and short-term forecasts. 
-Thus we do not include machine learning methods in our comparison. 
+Thus we do not include machine learning methods into our comparison. 
 
 Forecast performance could be improved by internet-based 
 nowcast \cite{osthus.etal2019a},  backfill models \cite{brooks.etal2018} and 
 multi-model ensemble \cite{Reich2019, ray.reich2018}.
-Forecasts of seasonal targets have usually worse scores than
+Forecasts of seasonal targets usually have worse scores than
 short-term forecasts (Table \ref{tab:res_ph1_4_2} and Table \ref{tab:res_peak}).  
 As discussed above, in seasonal forecasting KCDE outperforms other methods during unusual seasons and 
 Prophet has the best peak intensity prediction during standard seasons. 
-Thus multi-model ensemble with time-varying weights, e.g. \cite{ray.reich2018}, 
-is promising to combine the advantages of these models. 
+Thus multi-model ensembles with time-varying weights, e.g. \cite{ray.reich2018}, 
+are promising method to combine the advantages of these models. 
 For example, when predicting peak intensity, more weight could be assigned to Prophet 
 when available observations indicate a standard season and vice versa. 
 
@@ -708,7 +706,7 @@ In this paper, we compare the forecast performance of the beta model with
 some well-implemented baseline models. 
 In conclusion, the beta model is competitive in short-term forecasting with 
 simple structure and short run time, and KCDE is a robust 
-method for seasonal forecasts. Multi-model ensemble is promising in seasonal forecasting.
+method for seasonal forecasts. A multi-model ensemble is promising regards to seasonal forecasting.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt}

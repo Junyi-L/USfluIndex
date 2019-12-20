@@ -123,9 +123,10 @@ which models seasonal variations of the background risk and an epidemic componen
 adds autoregressive effects to capture disease spread.
 Estimation, simulation and visualization of HHH models are implemented in the
 R package \texttt{surveillance} \cite{meyer.etal2017}, which has enabled
-a wide range of epidemiological analyses.
+a wide range of epidemiological analyses, including forecasts of
+infectious disease counts \cite{held.meyer2019}.
 However, when measuring and forecasting flu activity, the proportion of outpatient visits
-with ILI is used rather than their counts, and the total number of outpatient visits is
+with ILI is often used rather than surveillance counts, and the total number of outpatient visits is
 subject to seasonal variation.
 For this purpose, Lu and Meyer \cite{beta:theory} borrowed the HHH
 approach and introduced an endemic-epidemic \emph{beta} model designed for

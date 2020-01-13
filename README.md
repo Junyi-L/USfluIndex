@@ -1,7 +1,7 @@
 # USfluIndex
 
 ## Description
-This repository contains code and data to reproduce the model comparison result in the paper "Forecasting Flu Activity in the United States: Benchmarking an Endemic-Epidemic Beta Model". 
+This repository contains code and data to reproduce the model comparison result in the paper "Forecasting Flu Activity in the United States: Benchmarking an Endemic-Epidemic Beta Model". R version: 3.4.4.
 
 Seven models are compared in this paper,
 

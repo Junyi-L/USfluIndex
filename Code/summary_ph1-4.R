@@ -119,6 +119,7 @@ Subset <- c("All weeks",
             "MMWR week 40 - 20",
             rep(" ",(length(Model_name) - 1)))
 
+pvalue <- readRDS(file = here("./Results/ST_pvalue.rds"))
 log_score_ph1 <- 
   paste0(formatC(round(log_score_ph1, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph1), ")")
 log_score_ph1_sub <- 
@@ -155,16 +156,7 @@ DSS_ph4 <-
 DSS_ph4_sub <- 
   paste0(formatC(round(DSS_ph4_sub, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph4_sub), ")")
   
-res_ph1_4 <- data.frame(Model = Model_name,
-                        Subset = Subset,
-                        ph1__LS = c(log_score_ph1, log_score_ph1_sub),
-                        ph1__DSS = c(DSS_ph1, DSS_ph1_sub),
-                        ph2__LS = c(log_score_ph2, log_score_ph2_sub),
-                        ph2__DSS = c(DSS_ph2, DSS_ph2_sub),
-                        ph3__LS = c(log_score_ph3, log_score_ph3_sub),
-                        ph3__DSS = c(DSS_ph3, DSS_ph3_sub),
-                        ph4__LS = c(log_score_ph4, log_score_ph4_sub),
-                        ph4__DSS = c(DSS_ph4, DSS_ph4_sub))
+
 
 res_ph1_4 <- data.frame(Model = Model_name,
                         Subset = Subset,
@@ -208,6 +200,12 @@ total_time <-
 npar <- 
   paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), "(",rank(npar), ")")
 
+STpvalue <- round(pvalue, digits = 2)
+STpvalue <- as.character(STpvalue)
+for(i in 1 : length(STpvalue)){
+  if ((is.na(pvalue[i]) == FALSE) & (pvalue[i] < 10^(-3))) STpvalue[i] <- "$< 10^{-3}$"
+}
+
 res_ph1_4_2 <- data.frame(Model = Model_name,
                           Subset = Subset,
                           LS = gsub("-","--",c(log_score, log_score_sub)),
@@ -215,7 +213,8 @@ res_ph1_4_2 <- data.frame(Model = Model_name,
                           DSS = gsub("-","--",c(DSS, DSS_sub)),
                           AE = gsub("-","--",c(AE, AE_sub)),
                           Time = c(total_time, rep(NA, length(Model_name))),
-                          npar = c(npar, rep(NA, length(Model_name))))
+                          npar = c(npar, rep(NA, length(Model_name))),
+                          pvalue = STpvalue)
 
 saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # ################# fanplots

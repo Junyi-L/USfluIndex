@@ -200,8 +200,7 @@ total_time <-
 npar <- 
   paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), "(",rank(npar), ")")
 
-STpvalue <- round(pvalue, digits = 2)
-STpvalue <- as.character(STpvalue)
+
 for(i in 1 : length(STpvalue)){
   if ((is.na(pvalue[i]) == FALSE) & (pvalue[i] < 10^(-3))) STpvalue[i] <- "$< 10^{-3}$"
 }
@@ -209,12 +208,12 @@ for(i in 1 : length(STpvalue)){
 res_ph1_4_2 <- data.frame(Model = Model_name,
                           Subset = Subset,
                           LS = gsub("-","--",c(log_score, log_score_sub)),
+                          pvalue = pvalue,
                           maxLS = gsub("-","--",c(max_log_score, max_log_score_sub)),
                           DSS = gsub("-","--",c(DSS, DSS_sub)),
                           AE = gsub("-","--",c(AE, AE_sub)),
                           Time = c(total_time, rep(NA, length(Model_name))),
-                          npar = c(npar, rep(NA, length(Model_name))),
-                          pvalue = STpvalue)
+                          npar = c(npar, rep(NA, length(Model_name))))
 
 saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # ################# fanplots

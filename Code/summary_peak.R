@@ -140,18 +140,28 @@ peak_week_log_score_max <-
 peak_week_log_score_BP_max <- 
   paste0(formatC(round(peak_week_log_score_BP_max, digits = 2), format='f', digits=2 ), "(",rank(peak_week_log_score_BP_max), ")")
 
+pvalue <- readRDS(file = here("./Results/LT_pvalue.rds"))
+
+
 res_peak <- data.frame(Model = c(model_name,model_name),
                        Subset = Subset,
                        Peak.intensity__LS = c(peak_height_log_score,
                                               peak_height_log_score_BP),
+                       Peak.intensity__p = pvalue$pvalue_I,
                        Peak.intensity__maxLS = c(peak_height_log_score_max,
                                                  peak_height_log_score_BP_max),
                        Peak.timing__LS = c(peak_week_log_score,peak_week_log_score_BP),
+                       Peak.timing__p = pvalue$pvalue_T,
                        Peak.timing__maxLS = c(peak_week_log_score_max,peak_week_log_score_BP_max))
 colnames(res_peak)[3] <- "Peak intensity__LS"
-colnames(res_peak)[4] <- "Peak intensity__maxLS"
+colnames(res_peak)[4] <- "Peak intensity__pvalue"
 
-colnames(res_peak)[5] <- "Peak timing__LS"
-colnames(res_peak)[6] <- "Peak timing__maxLS"
+colnames(res_peak)[5] <- "Peak intensity__maxLS"
+
+
+colnames(res_peak)[6] <- "Peak timing__LS"
+colnames(res_peak)[7] <- "Peak timing__pvalue"
+
+colnames(res_peak)[8] <- "Peak timing__maxLS"
 saveRDS(res_peak, file = here("./Results/Peak/res_peak.rds"))
 

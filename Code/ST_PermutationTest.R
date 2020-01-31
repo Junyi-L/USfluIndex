@@ -21,20 +21,7 @@ Beta_lag4 <- readRDS(file = here("./Results/Forecast_ph1-4/Beta_lag.rds"))
 ProphetResults <- readRDS(file = here("./Results/Forecast_ph1-4/ProphetResults.rds"))
 NaiveResults <- readRDS(file = here("./Results/Forecast_ph1-4/NaiveResults.rds"))
 
-Model_name <- c("Beta(1)",
-                "Beta(4)",
-                "KCDE",
-                "ARIMA",
-                "SARIMA",
-                "Prophet",
-                "Naive")
-result_table <- list( Beta$result,
-                      NA,
-                      kcde_prediction,
-                      ARIMA$result,
-                      SARIMA$result,
-                      ProphetResults$result,
-                      NaiveResults$result)
+
 
 
 Per_Beta <- permutationTest(Beta$result$log_score, 

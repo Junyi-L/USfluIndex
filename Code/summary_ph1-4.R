@@ -8,13 +8,13 @@ kcde_predictions_ph_4 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde
 kcde_prediction <- rbind(kcde_predictions_ph_1,kcde_predictions_ph_2,kcde_predictions_ph_3,kcde_predictions_ph_4)
 
 
-kcde_time_fit_ph_1 <- 
+kcde_time_fit_ph_1 <-
   readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
-kcde_time_fit_ph_2 <- 
+kcde_time_fit_ph_2 <-
   readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
-kcde_time_fit_ph_3 <- 
+kcde_time_fit_ph_3 <-
   readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
-kcde_time_fit_ph_4 <- 
+kcde_time_fit_ph_4 <-
   readRDS(here("./Results/Forecast_ph1-4/KCDEresults/fit_time-ili_national-prediction_horizon_1-max_lag_1-max_seasonal_lag_0-filtering_FALSE-differencing_FALSE-seasonality_TRUE-bw_parameterization_full.rds"))
 kcde_time_fit <- sum(kcde_time_fit_ph_1[3],kcde_time_fit_ph_2[3],kcde_time_fit_ph_3[3],kcde_time_fit_ph_4[4])
 
@@ -99,7 +99,7 @@ for(i in 1:length(result_table)){
   DSS_ph4[i] <- mean(target$DS_score[target$prediction_horizon == 4])
   DSS[i] <- mean(target$DS_score)
   AE[i] <- mean(target$AE)
-  
+
   log_score_ph1_sub[i] <- - mean(target$log_score[target$prediction_horizon == 1 & target$data_set.InSeason == TRUE])
   log_score_ph2_sub[i] <- - mean(target$log_score[target$prediction_horizon == 2 & target$data_set.InSeason == TRUE])
   log_score_ph3_sub[i] <- - mean(target$log_score[target$prediction_horizon == 3 & target$data_set.InSeason == TRUE])
@@ -119,42 +119,42 @@ Subset <- c("All weeks",
             "weeks 40--20",
             rep(" ",(length(Model_name) - 1)))
 
-log_score_ph1 <- 
-  paste0(formatC(round(log_score_ph1, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph1), ")")
-log_score_ph1_sub <- 
-  paste0(formatC(round(log_score_ph1_sub, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph1_sub), ")")
-DSS_ph1 <- 
-  paste0(formatC(round(DSS_ph1, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph1), ")")
-DSS_ph1_sub <- 
-  paste0(formatC(round(DSS_ph1_sub, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph1_sub), ")")
+log_score_ph1 <-
+  paste0(formatC(round(log_score_ph1, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph1), "]")
+log_score_ph1_sub <-
+  paste0(formatC(round(log_score_ph1_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph1_sub), "]")
+DSS_ph1 <-
+  paste0(formatC(round(DSS_ph1, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph1), "]")
+DSS_ph1_sub <-
+  paste0(formatC(round(DSS_ph1_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph1_sub), "]")
 
-log_score_ph2 <- 
-  paste0(formatC(round(log_score_ph2, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph2), ")")
-log_score_ph2_sub <- 
-  paste0(formatC(round(log_score_ph2_sub, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph2_sub), ")")
-DSS_ph2 <- 
-  paste0(formatC(round(DSS_ph2, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph2), ")")
-DSS_ph2_sub <- 
-  paste0(formatC(round(DSS_ph2_sub, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph2_sub), ")")
+log_score_ph2 <-
+  paste0(formatC(round(log_score_ph2, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph2), "]")
+log_score_ph2_sub <-
+  paste0(formatC(round(log_score_ph2_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph2_sub), "]")
+DSS_ph2 <-
+  paste0(formatC(round(DSS_ph2, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph2), "]")
+DSS_ph2_sub <-
+  paste0(formatC(round(DSS_ph2_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph2_sub), "]")
 
-log_score_ph3 <- 
-  paste0(formatC(round(log_score_ph3, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph3), ")")
-log_score_ph3_sub <- 
-  paste0(formatC(round(log_score_ph3_sub, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph3_sub), ")")
-DSS_ph3 <- 
-  paste0(formatC(round(DSS_ph3, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph3), ")")
-DSS_ph3_sub <- 
-  paste0(formatC(round(DSS_ph3_sub, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph3_sub), ")")
+log_score_ph3 <-
+  paste0(formatC(round(log_score_ph3, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph3), "]")
+log_score_ph3_sub <-
+  paste0(formatC(round(log_score_ph3_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph3_sub), "]")
+DSS_ph3 <-
+  paste0(formatC(round(DSS_ph3, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph3), "]")
+DSS_ph3_sub <-
+  paste0(formatC(round(DSS_ph3_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph3_sub), "]")
 
-log_score_ph4 <- 
-  paste0(formatC(round(log_score_ph4, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph4), ")")
-log_score_ph4_sub <- 
-  paste0(formatC(round(log_score_ph4_sub, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph4_sub), ")")
-DSS_ph4 <- 
-  paste0(formatC(round(DSS_ph4, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph4), ")")
-DSS_ph4_sub <- 
-  paste0(formatC(round(DSS_ph4_sub, digits = 2), format='f', digits=2 ), "(",rank(DSS_ph4_sub), ")")
-  
+log_score_ph4 <-
+  paste0(formatC(round(log_score_ph4, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph4), "]")
+log_score_ph4_sub <-
+  paste0(formatC(round(log_score_ph4_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph4_sub), "]")
+DSS_ph4 <-
+  paste0(formatC(round(DSS_ph4, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph4), "]")
+DSS_ph4_sub <-
+  paste0(formatC(round(DSS_ph4_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph4_sub), "]")
+
 
 
 res_ph1_4 <- data.frame(Model = Model_name,
@@ -173,31 +173,31 @@ saveRDS(res_ph1_4, file = here("./Results/Forecast_ph1-4/res_ph1_4.rds"))
 
 npar <- c(19,20,28,16,3, 50,106)
 
-log_score <- 
-  paste0(formatC(round(log_score, digits = 2), format='f', digits=2 ), "(",rank(log_score), ")")
-log_score_sub <- 
-  paste0(formatC(round(log_score_sub, digits = 2), format='f', digits=2 ), "(",rank(log_score_sub), ")")
+log_score <-
+  paste0(formatC(round(log_score, digits = 2), format='f', digits=2 ), " [",rank(log_score), "]")
+log_score_sub <-
+  paste0(formatC(round(log_score_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_sub), "]")
 
-max_log_score <- 
-  paste0(formatC(round(max_log_score, digits = 2), format='f', digits=2 ), "(",rank(max_log_score), ")")
-max_log_score_sub <- 
-  paste0(formatC(round(max_log_score_sub, digits = 2), format='f', digits=2 ), "(",rank(max_log_score_sub), ")")
+max_log_score <-
+  paste0(formatC(round(max_log_score, digits = 2), format='f', digits=2 ), " [",rank(max_log_score), "]")
+max_log_score_sub <-
+  paste0(formatC(round(max_log_score_sub, digits = 2), format='f', digits=2 ), " [",rank(max_log_score_sub), "]")
 
-DSS <- 
-  paste0(formatC(round(DSS, digits = 2), format='f', digits=2 ), "(",rank(DSS), ")")
-DSS_sub <- 
-  paste0(formatC(round(DSS_sub, digits = 2), format='f', digits=2 ), "(",rank(DSS_sub), ")")
+DSS <-
+  paste0(formatC(round(DSS, digits = 2), format='f', digits=2 ), " [",rank(DSS), "]")
+DSS_sub <-
+  paste0(formatC(round(DSS_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_sub), "]")
 
-AE <- 
-  paste0(formatC(round(AE, digits = 2), format='f', digits=2 ), "(",rank(AE), ")")
-AE_sub <- 
-  paste0(formatC(round(AE_sub, digits = 2), format='f', digits=2 ), "(",rank(AE_sub), ")")
+AE <-
+  paste0(formatC(round(AE, digits = 2), format='f', digits=2 ), " [",rank(AE), "]")
+AE_sub <-
+  paste0(formatC(round(AE_sub, digits = 2), format='f', digits=2 ), " [",rank(AE_sub), "]")
 
-total_time <- 
-  paste0(formatC(round(total_time/60, digits = 2), format='f', digits=2 ), "(",rank(total_time), ")")
+total_time <-
+  paste0(formatC(round(total_time/60, digits = 2), format='f', digits=2 ), " [",rank(total_time), "]")
 
-npar <- 
-  paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), "(",rank(npar), ")")
+npar <-
+  paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), " [",rank(npar), "]")
 
 pvalue <- readRDS(file = here("./Results/ST_pvalue.rds"))
 
@@ -213,7 +213,7 @@ res_ph1_4_2 <- data.frame(Model = Model_name,
 
 saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # ################# fanplots
-# # General setting 
+# # General setting
 # library("surveillance")
 # library("HIDDA.forecasting")
 # pal <- colorRampPalette(c("darkgreen", "gray93"))
@@ -221,14 +221,14 @@ saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # width <- 14
 # height <- 7
 # ylimi <- c(0,9)
-# 
+#
 # # KCDE
 # kcde_quantile <- readRDS("./Forecast_ph1-4/KCDEresults/quantile_matrix.rds")
 # means <- kcde_predictions_ph_1$pt_pred
 # y <- obs_data$weighted_ili
 # probs <- (1:99)/100
 # quantiles <- kcde_quantile
-# 
+#
 # pdf(file = "./Forecast_ph1-4/kcde_fan.pdf",width = width,height = height)
 # osaplot(
 #   quantiles = quantiles, probs = 1:99/100,
@@ -243,14 +243,14 @@ saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # )
 # abline(v = 2.2)
 # dev.off()
-# 
+#
 # # ARIMA
 # ARIMA_quantile <- ARIMA$quantile_matrix
 # means <- ARIMA$result$pt_pred[ARIMA$result$prediction_horizon == 1]
 # y <- obs_data$weighted_ili
 # probs <- (1:99)/100
 # quantiles <- ARIMA_quantile
-# 
+#
 # pdf(file = "./Forecast_ph1-4/ARIMA_fan.pdf",width = 14,height = 7)
 # osaplot(
 #   quantiles = quantiles, probs = 1:99/100,
@@ -263,16 +263,16 @@ saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 #   key.args = list(space = 1),
 #   las = TRUE
 # )
-# 
+#
 # dev.off()
-# 
+#
 # # Beta
 # Beta_quantile <- Beta$quantile_matrix
 # means <- Beta$result$pt_pred[Beta$result$prediction_horizon == 1]
 # y <- obs_data$weighted_ili
 # probs <- (1:99)/100
 # quantiles <- Beta_quantile
-# 
+#
 # pdf(file = "./Forecast_ph1-4/Beta_fan.pdf",width = 14,height = 7)
 # par(mar =  c(5.1, 5.1, 4.1, 2.1))
 # osaplot(
@@ -286,9 +286,9 @@ saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 #   key.args = list(space = 1),
 #   las = TRUE
 # )
-# 
+#
 # dev.off()
-# 
+#
 # # Beta
 # Beta_quantile <- Beta_lag4$quantile_matrix
 # means <- Beta_lag4$result$pt_pred[Beta_lag4$result$prediction_horizon == 1]
@@ -309,6 +309,6 @@ saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 #   key.args = list(space = 1),
 #   las = TRUE
 # )
-# 
+#
 # dev.off()
-# 
+#

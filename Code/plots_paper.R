@@ -201,19 +201,18 @@ p <- ggplot(data = PT_table, aes(x = Model, y = LS_diff)) +
   scale_x_discrete(limits = model_name) +
   stat_summary(fun.y = mean, geom="point", position=position_dodge(width=0.75), shape=18)  +  
   theme_bw() +
-  theme(axis.text.x = element_text(angle=90))
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.5))
 
 x1 <- p + facet_grid(rows = vars( group), cols = vars(season), scales="free_x" , as.table=TRUE) + xlab("Model") +
-  ylab("Log score difference") + 
-  guides(fill=guide_legend(title="Season"))
+  ylab("Log score difference") 
 
 q <- ggplot(data = data[data$train == FALSE & data$season_week %in% 10:42,], aes(x = season_week, y = weighted_ili)) +
   geom_line() +
   xlab("Season week") +
   ylab("wILI (%)")
 x2 <- q + facet_grid(cols = vars(season), scales="free_x" , as.table=TRUE) + xlab("Season week") +
-  ylab("wILI (%)") + 
-  guides(fill=guide_legend(title="Season")) + theme_bw()
+  ylab("wILI (%)") +
+  theme_bw()
 
 grid.arrange(x1, x2, nrow = 2, ncol = 1, heights = c(2, 1))
 dev.off()

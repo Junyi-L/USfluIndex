@@ -120,40 +120,40 @@ Subset <- c("All weeks",
             rep(" ",(length(Model_name) - 1)))
 
 log_score_ph1 <-
-  paste0(formatC(round(log_score_ph1, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph1), "]")
+  paste0(formatC(round(log_score_ph1, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph1), ")")
 log_score_ph1_sub <-
-  paste0(formatC(round(log_score_ph1_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph1_sub), "]")
+  paste0(formatC(round(log_score_ph1_sub, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph1_sub), ")")
 DSS_ph1 <-
-  paste0(formatC(round(DSS_ph1, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph1), "]")
+  paste0(formatC(round(DSS_ph1, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph1), ")")
 DSS_ph1_sub <-
-  paste0(formatC(round(DSS_ph1_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph1_sub), "]")
+  paste0(formatC(round(DSS_ph1_sub, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph1_sub), ")")
 
 log_score_ph2 <-
-  paste0(formatC(round(log_score_ph2, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph2), "]")
+  paste0(formatC(round(log_score_ph2, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph2), ")")
 log_score_ph2_sub <-
-  paste0(formatC(round(log_score_ph2_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph2_sub), "]")
+  paste0(formatC(round(log_score_ph2_sub, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph2_sub), ")")
 DSS_ph2 <-
-  paste0(formatC(round(DSS_ph2, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph2), "]")
+  paste0(formatC(round(DSS_ph2, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph2), ")")
 DSS_ph2_sub <-
-  paste0(formatC(round(DSS_ph2_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph2_sub), "]")
+  paste0(formatC(round(DSS_ph2_sub, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph2_sub), ")")
 
 log_score_ph3 <-
-  paste0(formatC(round(log_score_ph3, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph3), "]")
+  paste0(formatC(round(log_score_ph3, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph3), ")")
 log_score_ph3_sub <-
-  paste0(formatC(round(log_score_ph3_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph3_sub), "]")
+  paste0(formatC(round(log_score_ph3_sub, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph3_sub), ")")
 DSS_ph3 <-
-  paste0(formatC(round(DSS_ph3, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph3), "]")
+  paste0(formatC(round(DSS_ph3, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph3), ")")
 DSS_ph3_sub <-
-  paste0(formatC(round(DSS_ph3_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph3_sub), "]")
+  paste0(formatC(round(DSS_ph3_sub, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph3_sub), ")")
 
 log_score_ph4 <-
-  paste0(formatC(round(log_score_ph4, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph4), "]")
+  paste0(formatC(round(log_score_ph4, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph4), ")")
 log_score_ph4_sub <-
-  paste0(formatC(round(log_score_ph4_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_ph4_sub), "]")
+  paste0(formatC(round(log_score_ph4_sub, digits = 2), format='f', digits=2 ), " (",rank(log_score_ph4_sub), ")")
 DSS_ph4 <-
-  paste0(formatC(round(DSS_ph4, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph4), "]")
+  paste0(formatC(round(DSS_ph4, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph4), ")")
 DSS_ph4_sub <-
-  paste0(formatC(round(DSS_ph4_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_ph4_sub), "]")
+  paste0(formatC(round(DSS_ph4_sub, digits = 2), format='f', digits=2 ), " (",rank(DSS_ph4_sub), ")")
 
 
 
@@ -174,37 +174,37 @@ saveRDS(res_ph1_4, file = here("./Results/Forecast_ph1-4/res_ph1_4.rds"))
 npar <- c(19,20,28,16,3, 50,106)
 
 log_score <-
-  paste0(formatC(round(log_score, digits = 2), format='f', digits=2 ), " [",rank(log_score), "]")
+  paste0(formatC(round(log_score, digits = 2), format='f', digits=2 ), " (",rank(log_score), ")")
 log_score_sub <-
-  paste0(formatC(round(log_score_sub, digits = 2), format='f', digits=2 ), " [",rank(log_score_sub), "]")
+  paste0(formatC(round(log_score_sub, digits = 2), format='f', digits=2 ), " (",rank(log_score_sub), ")")
 
 max_log_score <-
-  paste0(formatC(round(max_log_score, digits = 2), format='f', digits=2 ), " [",rank(max_log_score), "]")
+  paste0(formatC(round(max_log_score, digits = 2), format='f', digits=2 ), " (",rank(max_log_score), ")")
 max_log_score_sub <-
-  paste0(formatC(round(max_log_score_sub, digits = 2), format='f', digits=2 ), " [",rank(max_log_score_sub), "]")
+  paste0(formatC(round(max_log_score_sub, digits = 2), format='f', digits=2 ), " (",rank(max_log_score_sub), ")")
 
 DSS <-
-  paste0(formatC(round(DSS, digits = 2), format='f', digits=2 ), " [",rank(DSS), "]")
+  paste0(formatC(round(DSS, digits = 2), format='f', digits=2 ), " (",rank(DSS), ")")
 DSS_sub <-
-  paste0(formatC(round(DSS_sub, digits = 2), format='f', digits=2 ), " [",rank(DSS_sub), "]")
+  paste0(formatC(round(DSS_sub, digits = 2), format='f', digits=2 ), " (",rank(DSS_sub), ")")
 
 AE <-
-  paste0(formatC(round(AE, digits = 2), format='f', digits=2 ), " [",rank(AE), "]")
+  paste0(formatC(round(AE, digits = 2), format='f', digits=2 ), " (",rank(AE), ")")
 AE_sub <-
-  paste0(formatC(round(AE_sub, digits = 2), format='f', digits=2 ), " [",rank(AE_sub), "]")
+  paste0(formatC(round(AE_sub, digits = 2), format='f', digits=2 ), " (",rank(AE_sub), ")")
 
 total_time <-
-  paste0(formatC(round(total_time/60, digits = 2), format='f', digits=2 ), " [",rank(total_time), "]")
+  paste0(formatC(round(total_time/60, digits = 2), format='f', digits=2 ), " (",rank(total_time), ")")
 
 npar <-
-  paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), " [",rank(npar), "]")
+  paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), " (",rank(npar), ")")
 
 pvalue <- readRDS(file = here("./Results/ST_pvalue.rds"))
 
 res_ph1_4_2 <- data.frame(Model = Model_name,
                           Subset = Subset,
                           LS = gsub("-","--",c(log_score, log_score_sub)),
-                          pvalue = surveillance::formatPval(pvalue, na.form = ""),
+                          pvalue = pvalue,
                           maxLS = gsub("-","--",c(max_log_score, max_log_score_sub)),
                           DSS = gsub("-","--",c(DSS, DSS_sub)),
                           AE = gsub("-","--",c(AE, AE_sub)),

@@ -24,7 +24,8 @@ Seven models are compared in this paper:
 
 * A naive approach.
 
-Two kinds of prediction targets are scored,
+
+Two kinds of prediction targets are scored:
 
 * Short-term forecasts for prediction horizon 1-4,
 
@@ -33,13 +34,14 @@ Two kinds of prediction targets are scored,
 
 ## Structure
 
-* Data/ contains the downloaded and prepared datasets and associated R scripts:
+* `Data/` contains the downloaded and prepared datasets and associated R scripts:
 
     * Data/load_data.R loads wILI data through the R package [**cdcfluview**](https://cran.r-project.org/web/packages/cdcfluview/index.html). Details about this wILI data please see http://www.cdc.gov/flu/weekly/. Note that when ILINet members provide revisions or backfill reports for past weeks, the wILI data will be updated accordingly. This means that data will have samll difference when loading at different time points. The data used for comparison in this paper are loaded on March 11 2019. The loaded wILI data are saved in Data/usflu.RData.
 
     * Data/load_data_holiday.R adds necessary columns in loaded wILI data, including holidays and sin, cos terms and saves the data in Data/data_holidays.RData.
 
-* Code/ contains code used to estimate and make forecasts:
+
+* `Code/` contains code used to estimate and make forecasts:
 
     * Code/Short-term/ contains code to estimate and make short-term forecast.
     
@@ -71,5 +73,5 @@ Two kinds of prediction targets are scored,
 
 
 * `Results/` have been produced in R 3.4.4 using the following versions of
-  the modelling packages: **betareg** 3.1-2, **forecast** 8.5,
-  **prophet** 0.4, **kcde** 0.0.0.9000.
+  the modelling packages: betareg 3.1-2, forecast 8.5, prophet 0.4,
+  kcde 0.0.0.9000.

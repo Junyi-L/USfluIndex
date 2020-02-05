@@ -1,6 +1,7 @@
 
 RNGkind(sample.kind="Rounding")
-library(xtable)
+set.seed(20200202)
+
 library(here)
 library(surveillance)
 

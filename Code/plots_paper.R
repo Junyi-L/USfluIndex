@@ -201,7 +201,7 @@ p <- ggplot(data = PT_table, aes(x = Model, y = LS_diff)) +
   scale_x_discrete(limits = model_name) +
   stat_summary(fun.y = mean, geom="point", position=position_dodge(width=0.75), shape=18)  +  
   theme_bw() +
-  theme(axis.text.x = element_text(angle=40))
+  theme(axis.text.x = element_text(angle=90))
 
 x1 <- p + facet_grid(rows = vars( group), cols = vars(season), scales="free_x" , as.table=TRUE) + xlab("Model") +
   ylab("Log score difference") + 

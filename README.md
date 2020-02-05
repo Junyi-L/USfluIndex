@@ -1,9 +1,14 @@
 # USfluIndex
 
 ## Description
-This repository contains code and data to reproduce the model comparison result in the paper "Forecasting Flu Activity in the United States: Benchmarking an Endemic-Epidemic Beta Model". R version: 3.4.4.
 
-Seven models are compared in this paper,
+This repository contains code and data to reproduce the model comparison
+results of the paper
+"Forecasting Flu Activity in the United States:
+Benchmarking an Endemic-Epidemic Beta Model"
+by Junyi Lu and Sebastian Meyer.
+
+Seven models are compared in this paper:
 
 * Beta model with 1 lag, using [**betareg**](https://CRAN.R-project.org/package=betareg)`::betareg()`,
 
@@ -25,15 +30,16 @@ Two kinds of prediction targets are scored,
 
 * Seasonal targets, including peak intensity and peak timing prediction. 
 
-## This repository is organized as follows:
 
-* Data/ contains code to load data and the loaded data.
+## Structure
+
+* Data/ contains the downloaded and prepared datasets and associated R scripts:
 
     * Data/load_data.R loads wILI data through the R package [**cdcfluview**](https://cran.r-project.org/web/packages/cdcfluview/index.html). Details about this wILI data please see http://www.cdc.gov/flu/weekly/. Note that when ILINet members provide revisions or backfill reports for past weeks, the wILI data will be updated accordingly. This means that data will have samll difference when loading at different time points. The data used for comparison in this paper are loaded on March 11 2019. The loaded wILI data are saved in Data/usflu.RData.
 
     * Data/load_data_holiday.R adds necessary columns in loaded wILI data, including holidays and sin, cos terms and saves the data in Data/data_holidays.RData.
 
-* Code/ contains code used to estimate and make forecasts.
+* Code/ contains code used to estimate and make forecasts:
 
     * Code/Short-term/ contains code to estimate and make short-term forecast.
     
@@ -62,13 +68,8 @@ Two kinds of prediction targets are scored,
     * Code/summary_peak.R summarizes the seasonal targets and saves the summary table in Results/Peak/res_peak.rds.
     
     * Code/plots_paper.R generates some plots for the paper and saves them in Results/plots/.
-    
-* tex/ contains tex/cdcflu_Forecast.Rnw and related files for the article.
 
-        
 
-        
-
-        
-
- 
+* `Results/` have been produced in R 3.4.4 using the following versions of
+  the modelling packages: **betareg** 3.1-2, **forecast** 8.5,
+  **prophet** 0.4, **kcde** 0.0.0.9000.

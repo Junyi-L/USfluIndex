@@ -204,12 +204,13 @@ pvalue <- readRDS(file = here("./Results/ST_pvalue.rds"))
 res_ph1_4_2 <- data.frame(Model = Model_name,
                           Subset = Subset,
                           LS = gsub("-","--",c(log_score, log_score_sub)),
-                          pvalue = pvalue,
+                          "p-value" = pvalue,
                           maxLS = gsub("-","--",c(max_log_score, max_log_score_sub)),
                           DSS = gsub("-","--",c(DSS, DSS_sub)),
                           AE = gsub("-","--",c(AE, AE_sub)),
                           Time = c(total_time, rep(NA, length(Model_name))),
-                          npar = c(npar, rep(NA, length(Model_name))))
+                          npar = c(npar, rep(NA, length(Model_name))),
+                          check.names = FALSE, stringsAsFactors = FALSE)
 
 saveRDS(res_ph1_4_2, file = here("./Results/Forecast_ph1-4/res_ph1_4_2.rds"))
 # ################# fanplots

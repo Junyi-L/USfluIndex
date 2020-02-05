@@ -154,13 +154,13 @@ res_peak <- data.frame(Model = c(model_name,model_name),
                        Peak.timing__p = pvalue$pvalue_T,
                        Peak.timing__maxLS = c(peak_week_log_score_max,peak_week_log_score_BP_max))
 colnames(res_peak)[3] <- "Peak intensity__LS"
-colnames(res_peak)[4] <- "Peak intensity__pvalue"
+colnames(res_peak)[4] <- "Peak intensity__p-value"
 
 colnames(res_peak)[5] <- "Peak intensity__maxLS"
 
 
 colnames(res_peak)[6] <- "Peak timing__LS"
-colnames(res_peak)[7] <- "Peak timing__pvalue"
+colnames(res_peak)[7] <- "Peak timing__p-value"
 
 colnames(res_peak)[8] <- "Peak timing__maxLS"
 saveRDS(res_peak, file = here("./Results/Peak/res_peak.rds"))

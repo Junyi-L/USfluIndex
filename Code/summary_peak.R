@@ -5,7 +5,7 @@ peak_sarima <- readRDS(file = here("./Results/Peak/peak-week-sarima.rds"))
 peak_Beta <- readRDS(file = here("./Results/Peak/peak-week-beta3-4.rds"))
 peak_Beta_lags <- readRDS(file = here("./Results/Peak/peak-week-beta-lags.rds"))
 
-# 
+#
 peak_prophet <- readRDS(file = here("./Results/Peak/peak-week-prophet.rds"))
 peak_naive <- readRDS(file = here("./Results/Peak/peak-week-naive.rds"))
 peak_KCDE <- readRDS(file = here("./Results/Peak/peak-week-KCDE.rds"))
@@ -48,7 +48,7 @@ peak_week_log_score_BP_max <- numeric()
 peak_height_log_score_BP_max <- numeric()
 
 ########################################################################################
-# indicator for weeks before peak 
+# indicator for weeks before peak
 analysis_seasons <- c("2014/2015","2015/2016", "2016/2017", "2017/2018")
 observed_peak_week <- numeric(length(analysis_seasons))
 observed_peak_height <- numeric(length(analysis_seasons))
@@ -77,7 +77,7 @@ for(i in 1: length(model_name)){
   peak_height_log_score[i] <- -mean(target$peak_height_log_score)
   peak_week_log_score_max[i] <- max(- target$peak_week_log_score)
   peak_height_log_score_max[i] <- max(- target$peak_height_log_score)
-  
+
   sum_peak_week_log_score_BP <- 0
   sum_peak_height_log_score_BP <- 0
   peak_week_log_score_BP_max[i] <- 0
@@ -88,8 +88,8 @@ for(i in 1: length(model_name)){
     BP_idx <- target$analysis_time_season == season & (target$analysis_time_season_week < observed_peak_week[j])
     sum_peak_week_log_score_BP <- sum(target$peak_week_log_score[BP_idx]) + sum_peak_week_log_score_BP
     sum_peak_height_log_score_BP <- sum(target$peak_height_log_score[BP_idx]) + sum_peak_height_log_score_BP
-    max_week_log_scorej <- max(-target$peak_week_log_score[BP_idx]) 
-    max_height_log_scorej <- max(-target$peak_height_log_score[BP_idx]) 
+    max_week_log_scorej <- max(-target$peak_week_log_score[BP_idx])
+    max_height_log_scorej <- max(-target$peak_height_log_score[BP_idx])
     if(max_week_log_scorej > peak_week_log_score_BP_max[i]) peak_week_log_score_BP_max[i] <- max_week_log_scorej
     if(max_height_log_scorej > peak_height_log_score_BP_max[i]) peak_height_log_score_BP_max[i] <- max_height_log_scorej
   }
@@ -119,26 +119,26 @@ Subset <- c("All weeks",
             rep(" ",(length(model_name) - 1)))
 
 
-peak_height_log_score <- 
-  paste0(formatC(round(peak_height_log_score, digits = 2), format='f', digits=2 ), "(",rank(peak_height_log_score), ")")
+peak_height_log_score <-
+  paste0(formatC(round(peak_height_log_score, digits = 2), format='f', digits=2 ), " (",rank(peak_height_log_score), ")")
 
-peak_height_log_score_BP <- 
-  paste0(formatC(round(peak_height_log_score_BP, digits = 2), format='f', digits=2 ), "(",rank(peak_height_log_score_BP), ")")
+peak_height_log_score_BP <-
+  paste0(formatC(round(peak_height_log_score_BP, digits = 2), format='f', digits=2 ), " (",rank(peak_height_log_score_BP), ")")
 
-peak_height_log_score_max <- 
-  paste0(formatC(round(peak_height_log_score_max, digits = 2), format='f', digits=2 ), "(",rank(peak_height_log_score_max), ")")
-peak_height_log_score_BP_max <- 
-  paste0(formatC(round(peak_height_log_score_BP_max, digits = 2), format='f', digits=2 ), "(",rank(peak_height_log_score_BP_max), ")")
+peak_height_log_score_max <-
+  paste0(formatC(round(peak_height_log_score_max, digits = 2), format='f', digits=2 ), " (",rank(peak_height_log_score_max), ")")
+peak_height_log_score_BP_max <-
+  paste0(formatC(round(peak_height_log_score_BP_max, digits = 2), format='f', digits=2 ), " (",rank(peak_height_log_score_BP_max), ")")
 
-peak_week_log_score <- 
-  paste0(formatC(round(peak_week_log_score, digits = 2), format='f', digits=2 ), "(",rank(peak_week_log_score), ")")
-peak_week_log_score_BP <- 
-  paste0(formatC(round(peak_week_log_score_BP, digits = 2), format='f', digits=2 ), "(",rank(peak_week_log_score_BP), ")")
+peak_week_log_score <-
+  paste0(formatC(round(peak_week_log_score, digits = 2), format='f', digits=2 ), " (",rank(peak_week_log_score), ")")
+peak_week_log_score_BP <-
+  paste0(formatC(round(peak_week_log_score_BP, digits = 2), format='f', digits=2 ), " (",rank(peak_week_log_score_BP), ")")
 
-peak_week_log_score_max <- 
-  paste0(formatC(round(peak_week_log_score_max, digits = 2), format='f', digits=2 ), "(",rank(peak_week_log_score_max), ")")
-peak_week_log_score_BP_max <- 
-  paste0(formatC(round(peak_week_log_score_BP_max, digits = 2), format='f', digits=2 ), "(",rank(peak_week_log_score_BP_max), ")")
+peak_week_log_score_max <-
+  paste0(formatC(round(peak_week_log_score_max, digits = 2), format='f', digits=2 ), " (",rank(peak_week_log_score_max), ")")
+peak_week_log_score_BP_max <-
+  paste0(formatC(round(peak_week_log_score_BP_max, digits = 2), format='f', digits=2 ), " (",rank(peak_week_log_score_BP_max), ")")
 
 pvalue <- readRDS(file = here("./Results/LT_pvalue.rds"))
 

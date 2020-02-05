@@ -1,4 +1,4 @@
-library(xtable)
+
 library(here)
 
 kcde_predictions_ph_1 <- readRDS(here("./Results/Forecast_ph1-4/KCDEresults/kcde-predictions-ph_1.rds"))
@@ -116,10 +116,9 @@ for(i in 1:length(result_table)){
 
 Subset <- c("All weeks",
             rep(" ",(length(Model_name) - 1)),
-            "MMWR week 40 - 20",
+            "weeks 40--20",
             rep(" ",(length(Model_name) - 1)))
 
-pvalue <- readRDS(file = here("./Results/ST_pvalue.rds"))
 log_score_ph1 <- 
   paste0(formatC(round(log_score_ph1, digits = 2), format='f', digits=2 ), "(",rank(log_score_ph1), ")")
 log_score_ph1_sub <- 
@@ -200,15 +199,12 @@ total_time <-
 npar <- 
   paste0(formatC(round(npar, digits = 0), format='f', digits=0 ), "(",rank(npar), ")")
 
-
-for(i in 1 : length(STpvalue)){
-  if ((is.na(pvalue[i]) == FALSE) & (pvalue[i] < 10^(-3))) STpvalue[i] <- "$< 10^{-3}$"
-}
+pvalue <- readRDS(file = here("./Results/ST_pvalue.rds"))
 
 res_ph1_4_2 <- data.frame(Model = Model_name,
                           Subset = Subset,
                           LS = gsub("-","--",c(log_score, log_score_sub)),
-                          pvalue = pvalue,
+                          pvalue = surveillance::formatPval(pvalue, na.form = ""),
                           maxLS = gsub("-","--",c(max_log_score, max_log_score_sub)),
                           DSS = gsub("-","--",c(DSS, DSS_sub)),
                           AE = gsub("-","--",c(AE, AE_sub)),

@@ -7,7 +7,7 @@ Forecasting Flu Activity in the United States:
 Benchmarking an Endemic-Epidemic Beta Model.
 *International Journal of Environmental Research and Public Health*,
 **17**(4), 1381.
-doi:[10.3390/ijerph17041381](https://doi.org/10.3390/ijerph17041381)
+https://doi.org/10.3390/ijerph17041381
 
 
 ## Forecasting approaches
@@ -24,16 +24,16 @@ Seven models are compared in this paper:
 
 * Prophet, using [**prophet**](https://CRAN.R-project.org/package=prophet)`::prophet()`,
 
-* KCDE, using [**kcde**](https://github.com/reichlab/kcde)`::kcde()` and code in [**article-disease-pred-with-kcde**](https://github.com/reichlab/article-disease-pred-with-kcde),
+* KCDE, using [**kcde**](https://github.com/reichlab/kcde)`::kcde()` and code from the [Reich Lab](https://github.com/reichlab/article-disease-pred-with-kcde),
 
 * A naive approach.
 
 
 Two kinds of prediction targets are scored:
 
-* Short-term forecasts for prediction horizon 1-4,
+* Short-term forecasts for prediction horizons 1 to 4 weeks,
 
-* Seasonal targets, including peak intensity and peak timing prediction. 
+* Seasonal forecasts: peak intensity and peak timing.
 
 
 ## Repository structure

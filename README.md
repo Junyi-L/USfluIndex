@@ -1,12 +1,16 @@
-# USfluIndex
 
-## Description
+This repository contains code and data to reproduce the models
+and the forecast assessments of
 
-This repository contains code and data to reproduce the model comparison
-results of the paper
-"Forecasting Flu Activity in the United States:
-Benchmarking an Endemic-Epidemic Beta Model"
-by Junyi Lu and Sebastian Meyer.
+Lu, J. and Meyer, S. (2020).
+Forecasting Flu Activity in the United States:
+Benchmarking an Endemic-Epidemic Beta Model.
+*International Journal of Environmental Research and Public Health*,
+**17**(4), 1381.
+doi:[10.3390/ijerph17041381](https://doi.org/10.3390/ijerph17041381)
+
+
+## Forecasting approaches
 
 Seven models are compared in this paper:
 
@@ -32,7 +36,7 @@ Two kinds of prediction targets are scored:
 * Seasonal targets, including peak intensity and peak timing prediction. 
 
 
-## Structure
+## Repository structure
 
 * `Data/` contains the downloaded and prepared datasets and associated R scripts:
 
